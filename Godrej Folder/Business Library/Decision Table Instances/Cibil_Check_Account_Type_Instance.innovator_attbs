@@ -1,0 +1,17 @@
+#Extended attributes for Innovator file-based repository (directory: 'Cibil_Check_Account_Type_Instance')
+#Thu Mar 23 13:32:48 UTC 2023
+contentType=Instance
+guid=En9Xi8zDdjDtFvppZoJc5igiG5T
+innovatorDisplayName=Cibil_Check_Account_Type_Instance
+innovatorLastModifiedUser=admin
+innovatorTemplateRef=5NfFIDv7CEka8QvIPq86mU2A4Ap
+managementProperty.Predictive\ Model\ Type=NotApplicable
+managementProperty.Source\ Reference.filterVH=
+managementProperty.Source\ Reference.locationVH=
+managementProperty.Source\ Reference.releaseDateVH=
+managementProperty.Source\ Reference.repositoryAccessVH=
+managementProperty.Source\ Reference.repositoryNameVH=
+managementProperty.Source\ Reference.versionVH=
+subType=Decision Table
+target=SRL
+type=SRL Ruleset

@@ -1,0 +1,599 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<instantiation xmlns='http://www.blazesoft.com/instantiation' template='Q8jH6kHdOYIZ1uG0WKXqvvejqv0' name='fn_Perfios_CustomerSupplierConcentration'>
+ <instantiation xmlns='http://www.blazesoft.com/instantiation' template='1VBfZr8g32Q2FnSWcWO9txQWwEE' name='Instance' id='Instance'>
+ </instantiation>
+ <instantiation xmlns='http://www.blazesoft.com/instantiation' template='18uqQPJXnTmKrAiLEOVcQMUAFmD' name='Entry' id='Entry'>
+  <instance ref='Source Reference'>
+   <instance ref='value'>
+    <instance ref='locationVH'>
+     <value></value>
+    </instance>
+    <instance ref='repositoryNameVH'>
+     <value></value>
+    </instance>
+    <instance ref='versionVH'>
+     <value></value>
+    </instance>
+    <instance ref='filterVH'>
+     <value></value>
+    </instance>
+    <instance ref='releaseDateVH'>
+     <value></value>
+    </instance>
+    <instance ref='repositoryAccessVH'>
+     <value></value>
+    </instance>
+   </instance>
+  </instance>
+  <instance ref='Predictive Model Type'>
+   <instance ref='value'>
+    <value>NotApplicable</value>
+   </instance>
+  </instance>
+ </instantiation>
+ <instance ref='__ENTITY_PROPERTIES__VH__'>
+  <instance ref='Test Role'>
+   <instance ref='value'>
+    <value>None</value>
+   </instance>
+  </instance>
+  <instance ref='Test Case'>
+   <instance ref='value'>
+    <value></value>
+   </instance>
+  </instance>
+ </instance>
+ <instance ref='InstanceName'>
+  <value></value>
+ </instance>
+ <instance ref='UniqueInstanceNameVH'>
+  <value>fn_Customer_Supplier_Concentration1</value>
+ </instance>
+ <instance ref='FunctionNameVH'>
+  <value>fn_Perfios_CustomerSupplierConcentration</value>
+ </instance>
+ <instance ref='FunctionReturnType'>
+  <value>void</value>
+ </instance>
+ <instance ref='FunctionBodyVH'>
+  <value><![CDATA[print("");
+print("++++> Entering function :: fn_Perfios_CustomerSupplierConcentration");
+
+aBlazeApplication is some BlazeApplication initially BTCommonVar.termInput.blazeApplication as a BlazeApplication;
+applicantId is a string;
+applicantType is a string;
+applicantId = aBlazeApplicant.customerCif as a string;
+applicantType = aBlazeApplicant.applicantType; 
+productCode is a string;
+productCode = message.invocation.decisionService;
+
+try{
+	print("aBlazeApplication.businessErrorsFlag---------------> "aBlazeApplication.businessErrorsFlag);
+	
+	if(aBlazeApplication.businessErrorsFlag = false) then{
+		
+		//Creating BlazeData Object 
+		blazeData is some BlazeData initially a BlazeData;
+		
+		//Entering AccountAnalysis loop
+		print("---------------------Entering AccountAnalysis loop---------------------");
+		for each AccountAnalysis in perfiosData.data.accountAnalysis do{
+			//AccountAnalysis Object
+			AccountAnalysis is some AccountAnalysis initially it as a AccountAnalysis;
+			
+			//Creating BlazeAccountAnalysis Object before Account Loop so append this object onto blazeAccountAnalysisArray
+			blazeAccountAnalysis is some BlazeAccountAnalysis initially a BlazeAccountAnalysis;
+			
+			//Creating BlazeCreditors LocalArray to later append it on global one
+			blazeCreditorsTempArr is some array of BlazeCreditor initially an array of BlazeCreditor;
+			blazeDebtorTempArr is some array of BlazeDebtor initially an array of BlazeDebtor;
+			
+			//initialising counter for monthlyData
+			i is an integer initially 0;
+			
+			
+			//Entering Top10PaymentsmadeMonthwise loop
+			print("---------------------Entering Top10PaymentsmadeMonthwise loop---------------------");
+			for each Top10PaymentsmadeMonthwise in it.top10PaymentsmadeMonthwise such that (it<>null and it<>unknown)
+			do{
+				//Creating Top10PaymentsmadeMonthwise iterative object for loop
+				aTop10PaymentsmadeMonthwise is some Top10PaymentsmadeMonthwise initially it as a Top10PaymentsmadeMonthwise;
+				
+				//Creating BlazeCreditors local object inside the loop to append it on localArray and then initialising it again
+				blazeCreditorsObj is some BlazeCreditor initially a BlazeCreditor;
+				
+				//Creating a flag that specifies if the party name has appeared for the first time in loop or has been appeared before
+				isRepeated is a boolean initially false;
+				
+				if(blazeCreditorsTempArr.count=0)then{
+					blazeCreditorsObj.party =aTop10PaymentsmadeMonthwise.party;
+					blazeCreditorsObj.amount =aTop10PaymentsmadeMonthwise.amount;
+				}
+				//else condition will be triggered for every single loop except for the first one where initialisation will take place for array
+				else{
+					//initialising a counter for while loop which gives index to blazeCreditorsTempArr inside the loop
+					counter is an integer initially 0;
+					
+					//Entering while loop to check if the party name has appeared before or not
+					print("---->counter ::"counter);
+					print("---->blazeCreditorsTempArr.count ::"blazeCreditorsTempArr.count);
+					while (counter<blazeCreditorsTempArr.count)
+						do{
+							if(aTop10PaymentsmadeMonthwise.party =blazeCreditorsTempArr[counter].party)then{
+								blazeCreditorsTempArr[counter].amount =blazeCreditorsTempArr[counter].amount +aTop10PaymentsmadeMonthwise.amount;
+								isRepeated =true;
+							}
+						
+						counter = counter +1;
+						//Exiting while loop
+					}
+					
+					//if the party name is repeated then flag will be true and condition wont be triggered 
+					if(isRepeated =false)then{
+						blazeCreditorsObj.party =aTop10PaymentsmadeMonthwise.party;
+						blazeCreditorsObj.amount =aTop10PaymentsmadeMonthwise.amount;
+					}
+				}
+				
+				//if the party name is repeated the object wont be appended to the array as there is already an object in the array with the same party name
+				if(isRepeated =false)then{
+					blazeCreditorsTempArr.append(blazeCreditorsObj);
+				}
+				
+			}
+			print("---------------------Exiting Top10PaymentsmadeMonthwise loop---------------------");
+			//Exiting Top10PaymentsmadeMonthwise loop
+			
+			//Appending temporary blazeCreditorsArray to Global blazeCreditorsArray
+			if(blazeCreditorsTempArr is not equal to null and blazeCreditorsTempArr is not unknown) then {
+				blazeAccountAnalysis.blazeCreditorsArray = blazeCreditorsTempArr;
+				
+				
+			}else {
+				print("----> blazeCreditorsArray is null");
+			}
+			
+			//+++++++++++++++++++++++++++++++++++++++Debtor Concentration Logic++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+		
+			//entering loop of top10PaymentsReceivedMonthwise
+			print("---------------------Enter in Top10PaymentsReceivedMonthwise loop---------------------");
+			for each Top10PaymentsReceivedMonthwise in it.top10PaymentsReceivedMonthwise such that (it<>null and it<>unknown)
+			do{
+				//Creating Top10PaymentsReceivedMonthwise literative object for loop
+				aTop10PaymentsReceivedMonthwise is some Top10PaymentsReceivedMonthwise initially it as a Top10PaymentsReceivedMonthwise;
+		
+				//Creating BlazeCreditors local object inside the loop to append it on localArray and then initialising it again
+				blazeDebtorObj is some BlazeDebtor initially a BlazeDebtor;
+		
+				//Creating a flag that specifies if the party name has appeared for the first time in loop or has been appeared before
+				isRepeated is a boolean initially false;
+		
+				//Check to trigger for first loop in which blazeDebtorTempArr will be initialised with its first object
+				if(blazeDebtorTempArr.count=0)then{
+					blazeDebtorObj.party =aTop10PaymentsReceivedMonthwise.party;
+					blazeDebtorObj.amount =aTop10PaymentsReceivedMonthwise.amount;
+				}
+				//else condition will be triggered for every single loop except for the first one where initilisation happens for array
+				else{
+					
+					//initialising a counter for while loop which gives index to blazeDebtorTempArr inside the loop
+					counter1 is an integer initially 0;
+					
+					//Entering while loop to check if the party name has appeared before or not
+					while (counter1<blazeDebtorTempArr.count)
+						do{
+							if(aTop10PaymentsReceivedMonthwise.party =blazeDebtorTempArr[counter1].party)then{
+								blazeDebtorTempArr[counter1].amount =blazeDebtorTempArr[counter1].amount +aTop10PaymentsReceivedMonthwise.amount;
+								isRepeated =true;
+							}
+							counter1 = counter1+1;
+						}
+					//Exiting while loop
+					
+					//if the party name is repeated then flag will be true and condition wont be triggered 
+					if(isRepeated =false)then{
+						blazeDebtorObj.party =aTop10PaymentsReceivedMonthwise.party;
+						blazeDebtorObj.amount =aTop10PaymentsReceivedMonthwise.amount;
+					}
+				}
+				//if the party name is repeated the object wont be appended to the array as there is already an object in the array with the same party name
+				if(isRepeated =false)then{
+					blazeDebtorTempArr.append(blazeDebtorObj);
+				}
+			}
+			print("---------------------Exiting Top10PaymentsReceivedMonthwise loop---------------------");
+			//exiting loop of top10PaymentsReceivedMonthwise
+			
+			//Appending temporary blazeCreditorsArray to Global blazeCreditorsArray
+			if(blazeDebtorTempArr is not equal to null and blazeDebtorTempArr is not unknown) then {
+				blazeAccountAnalysis.blazeDebtorsArray = blazeDebtorTempArr;
+			} else {
+				print("----> blazeDebtorsArray is null");
+			}
+			
+			//Initialising Variables
+			blazeAccountAnalysis.sumOfTotalCashWithdrawalsInL12M =0;
+			blazeAccountAnalysis.sumOfTotalCashDepositInL12M =0;
+			blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =0;//create these two variables in dev server
+			blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =0;
+			
+			//Initialsing a buffer month variable that will find out the number of extra month present in array -months other than last 12Months
+			bufferMonthCounter is an integer initially 0;
+			
+			//Initialising a variable to iterate through months in MonthlyData1 and MonthlyDetails
+			monthsCounterLocal is an integer initially 0;
+			
+			//Calculating buffer months
+			bufferMonthCounter =perfiosData.data.accountAnalysis[0].monthlyDetails.count -12;
+			if(bufferMonthCounter<0)then{
+				bufferMonthCounter =0
+			}
+			
+			for each MonthlyDetail in it.monthlyDetails do{
+				aMonthlyDetails is some MonthlyDetail initially it as a MonthlyDetail;
+				
+				//Skipping buffer months
+				if(monthsCounterLocal>=bufferMonthCounter)then{
+					blazeAccountAnalysis.sumOfTotalCashWithdrawalsInL12M =blazeAccountAnalysis.sumOfTotalCashWithdrawalsInL12M +aMonthlyDetails.totalCashWithdrawal;
+					blazeAccountAnalysis.sumOfTotalCashDepositInL12M =blazeAccountAnalysis.sumOfTotalCashDepositInL12M +aMonthlyDetails.totalCashDeposit;
+				}
+				
+				//Incrementing months
+				monthsCounterLocal =monthsCounterLocal+1;
+			}
+			//Exiting Loop for MonthlyDetails
+			
+			//Reinitialising buffer month variable to use it for another loop
+			bufferMonthCounter =0;
+			
+			//Reinitialising monthCounter
+			monthsCounterLocal =0;
+			
+			//Checking for which monthlyDetail array to enter
+			if(i =0 and perfiosData.data.additionalMonthlyDetails.monthlyData1 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData1.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData1 do{
+					//initialising MonthlyData1 object
+					aMonthlyData1 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData1.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData1.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for monthlyData1
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =1 and perfiosData.data.additionalMonthlyDetails.monthlyData2 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData2.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData2 do{
+					//initialising MonthlyData2 object
+					aMonthlyData2 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData2.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData2.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for monthlyData2
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =2 and perfiosData.data.additionalMonthlyDetails.monthlyData3 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData3.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData3 do{
+					//initialising MonthlyData3 object
+					aMonthlyData3 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData3.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData3.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for monthlyData3
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =3 and perfiosData.data.additionalMonthlyDetails.monthlyData4 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData4.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData4 do{
+					//initialising aMonthlyData4 object
+					aMonthlyData4 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData4.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData4.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for aMonthlyData4
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =4 and perfiosData.data.additionalMonthlyDetails.monthlyData5 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData5.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData5 do{
+					//initialising MonthlyData object
+					aMonthlyData5 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData5.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData5.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for monthlyData5
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =5 and perfiosData.data.additionalMonthlyDetails.monthlyData6 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData6.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData6 do{
+					//initialising MonthlyData object
+					aMonthlyData6 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData6.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData6.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for aMonthlyData6
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =6 and perfiosData.data.additionalMonthlyDetails.monthlyData6 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData6.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData6 do{
+					//initialising MonthlyData1 object
+					aMonthlyData6 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData6.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData6.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for monthlyData6
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =6 and perfiosData.data.additionalMonthlyDetails.monthlyData7 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData7.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData7 do{
+					//initialising MonthlyData7 object
+					aMonthlyData7 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData7.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData7.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for monthlyData7
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =7 and perfiosData.data.additionalMonthlyDetails.monthlyData8 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData8.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData8 do{
+					//initialising MonthlyData8 object
+					aMonthlyData8 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData8.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData8.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for monthlyData8
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =8 and perfiosData.data.additionalMonthlyDetails.monthlyData9 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData9.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData9 do{
+					//initialising MonthlyData9 object
+					aMonthlyData9 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData9.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData9.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for monthlyData9
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =9 and perfiosData.data.additionalMonthlyDetails.monthlyData10 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData10.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData10 do{
+					//initialising MonthlyData object
+					aMonthlyData10 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData10.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData10.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for monthlyData1
+			}
+
+			//Checking for which monthlyDetail array to enter
+			if(i =10 and perfiosData.data.additionalMonthlyDetails.monthlyData11 is known)then{
+				//Calculating buffer months
+				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData11.count -12;
+				if(bufferMonthCounter<0)then{
+					bufferMonthCounter =0
+				}
+				
+				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData11 do{
+					//initialising MonthlyData1 object
+					aMonthlyData11 is some MonthlyData initially it as a MonthlyData;
+					
+					//skipping buffer months
+					if(monthsCounterLocal>=bufferMonthCounter)then{
+						//Adding all totalBusinessDebitTxns to a single variable
+						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData11.totalBusinessDebitTxns;
+						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData11.totalBusinessCreditTxns;	
+					}
+					//Incrementing months
+					monthsCounterLocal =monthsCounterLocal+1;
+				}
+				//Exiting loop for monthlyData11
+			}
+
+			
+			if(blazeAccountAnalysis is not null and blazeAccountAnalysis is known)then{
+				blazeData.blazeAccountAnalysisArray.append(blazeAccountAnalysis);
+			}
+			i =i+1;
+		}
+		print("--------------------Exiting in AccountAnalysis loop--------------------");
+		//Exiting AccountAnalysis loop
+		
+			
+
+
+				
+				// Incrementing months
+				// monthsCounterLocal =monthsCounterLocal+1;
+				// Exiting Loop for MonthlyData1
+			// }
+			// i =i+1;
+		// }
+	}
+}
+catch an Exception with {
+  aBlazeApplication.fn_Perfios_CustomerSupplierConcentration  = true;  
+  print("\n***Exception :: \n>>@@@<<\n" evaluationException().toString()"\n>>@@@<<\n");
+}
+print("++++> Exiting function :: fn_Perfios_CustomerSupplierConcentration");
+print("");]]></value>
+ </instance>
+ <instance ref='CommentsVH'>
+  <value></value>
+ </instance>
+ <instance ref='FunctionParametersVH'>
+  <instance-list ref='ParametersVH'>
+   <item template='DRNZKQyw5rcjBd4Yxo6FN649lWN.template1' id='aLyWgm'>
+    <instance ref='ParameterNameVH'>
+     <value>message</value>
+    </instance>
+    <instance ref='ParameterTypeVH'>
+     <value>Message</value>
+    </instance>
+   </item>
+   <item template='DRNZKQyw5rcjBd4Yxo6FN649lWN.template1' id='LNaB1C'>
+    <instance ref='ParameterNameVH'>
+     <value>perfiosData</value>
+    </instance>
+    <instance ref='ParameterTypeVH'>
+     <value>PerfiosData</value>
+    </instance>
+   </item>
+   <item template='DRNZKQyw5rcjBd4Yxo6FN649lWN.template1' id='CZyhg7'>
+    <instance ref='ParameterNameVH'>
+     <value>aBlazeApplicant</value>
+    </instance>
+    <instance ref='ParameterTypeVH'>
+     <value>BlazeApplicant</value>
+    </instance>
+   </item>
+  </instance-list>
+ </instance>
+</instantiation>
