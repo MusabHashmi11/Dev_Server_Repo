@@ -74,6 +74,7 @@ try{
 		
 		//Creating BlazeData Object 
 		blazeData is some BlazeData initially a BlazeData;
+		blazeData.blazeAccountAnalysisArray =an array of BlazeAccountAnalysis;
 		
 		//Entering AccountAnalysis loop
 		print("---------------------Entering AccountAnalysis loop---------------------");
@@ -536,7 +537,13 @@ try{
 				}
 				//Exiting loop for monthlyData11
 			}
-
+			
+			blazeAccountAnalysis.netDebitAmount =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M -blazeAccountAnalysis.sumOfTotalCashWithdrawalsInL12M;
+			blazeAccountAnalysis.netCreditAmount =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M -blazeAccountAnalysis.sumOfTotalCashDepositInL12M;
+			
+			print("---->blazeData ::"blazeData);
+			print("---->blazeData.blazeAccountAnalysisArray ::"blazeData.blazeAccountAnalysisArray);
+			print("---->blazeAccountAnalysis ::"blazeAccountAnalysis);
 			
 			if(blazeAccountAnalysis is not null and blazeAccountAnalysis is known)then{
 				blazeData.blazeAccountAnalysisArray.append(blazeAccountAnalysis);
@@ -546,16 +553,103 @@ try{
 		print("--------------------Exiting in AccountAnalysis loop--------------------");
 		//Exiting AccountAnalysis loop
 		
+		for each BlazeAccountAnalysis in blazeData.blazeAccountAnalysisArray such that(it<>null) do{
 			
-
-
+			aBlazeAccountAnalysis is some BlazeAccountAnalysis initially it as a BlazeAccountAnalysis;
+			
+			//Bubble sorting Debtiors array
+			i is a integer initially 0;
+			n is a integer initially 0;
+			
+			if(aBlazeAccountAnalysis.blazeDebtorsArray is known and aBlazeAccountAnalysis.blazeDebtorsArray is not null)then{
+				n=aBlazeAccountAnalysis.blazeDebtorsArray.count;
+				while(i < n-1)do {
+					if(((aBlazeAccountAnalysis.blazeDebtorsArray[i].amount) < aBlazeAccountAnalysis.blazeDebtorsArray[i+1].amount)) then {
+						tempAllocationDetails is some BlazeDebtor initially a BlazeDebtor;
+						tempAllocationDetails = aBlazeAccountAnalysis.blazeDebtorsArray[i+1];
+						aBlazeAccountAnalysis.blazeDebtorsArray[i+1] = aBlazeAccountAnalysis.blazeDebtorsArray[i];
+						aBlazeAccountAnalysis.blazeDebtorsArray[i] = tempAllocationDetails;
+						
+						// reinitiallizing i
+						i = -1;
+					}
+					i = i+1;
+				}
+				i=0;
+				for each BlazeDebtor in aBlazeAccountAnalysis.blazeDebtorsArray do {
+					print("amount["i"]------------------------------------------------->"it.amount);
+					i=i+1;
+				}
+			}
+			  
+			//Bubble sorting Creditors Array
+			i = 0;
+			if(aBlazeAccountAnalysis.blazeCreditorsArray is known and aBlazeAccountAnalysis.blazeCreditorsArray is not null)then{
+				n = aBlazeAccountAnalysis.blazeCreditorsArray.count;
+				while(i < n-1)do {
+					if(((aBlazeAccountAnalysis.blazeCreditorsArray[i].amount) < aBlazeAccountAnalysis.blazeCreditorsArray[i+1].amount)) then {
+						tempAllocationDetails is some BlazeCreditor initially a BlazeCreditor;
+						tempAllocationDetails = aBlazeAccountAnalysis.blazeCreditorsArray[i+1];
+						aBlazeAccountAnalysis.blazeCreditorsArray[i+1] = aBlazeAccountAnalysis.blazeCreditorsArray[i];
+						aBlazeAccountAnalysis.blazeCreditorsArray[i] = tempAllocationDetails;
+						
+						// reinitiallizing i
+						i = -1;
+					}
+					i = i+1;
+				}
+				i=0;
+				for each BlazeCreditor in aBlazeAccountAnalysis.blazeCreditorsArray do {
+					print("amount["i"]------------------------------------------------->"it.amount);
+					i=i+1;
+				}
+			}
+			
+			
+			//Counter to get top 10 Amount in creditor and Debtior
+			blazeTop10Counter is an integer initially 0;
+	
+			//Initialising loop to add creditorConcentration
+			for each BlazeCreditor in aBlazeAccountAnalysis.blazeCreditorsArray such that(it<>null and blazeTop10Counter<10)do{
 				
-				// Incrementing months
-				// monthsCounterLocal =monthsCounterLocal+1;
-				// Exiting Loop for MonthlyData1
-			// }
-			// i =i+1;
-		// }
+				aBlazeCreditor is some BlazeCreditor initially it as a BlazeCreditor;
+				
+				//Calculating Creditors Conditors for each Creditor
+				aBlazeCreditor.creditorPercent =(aBlazeCreditor.amount/aBlazeAccountAnalysis.netDebitAmount)*100;
+				
+				      //setting flag for each creditor
+				if(aBlazeCreditor.creditorPercent > 25) then{
+					aBlazeCreditor.creditorFlag = "Red";
+				}else{
+					aBlazeCreditor.creditorFlag = "Green";
+			   }
+			  
+			   fn_AppendCalculatedVariable(message, "CreditorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeCreditor.party","aBlazeCreditor.creditorFlag);
+			   blazeTop10Counter = blazeTop10Counter +1;
+			}
+			
+			//reinitallizing BlazeCounter  For Debtors Array
+			blazeTop10Counter = 0;
+			
+			//Initialising loop to add DebtorConcentration 
+			for each BlazeDebtor in aBlazeAccountAnalysis.blazeDebtorsArray such that(it<>null and blazeTop10Counter < 10) do{
+				aBlazeDebtor is some BlazeDebtor initially it as a BlazeDebtor;
+				
+				//Calculating Creditors Conditors for each Creditor
+				aBlazeDebtor.debtorPercent =(aBlazeDebtor.amount/aBlazeAccountAnalysis.netCreditAmount)*100;
+			  
+				//setting flag for each creditor
+				if(aBlazeDebtor.debtorPercent > 25) then{
+				   aBlazeDebtor.debtorFlag = "Red";
+				}
+				else{
+				   aBlazeDebtor.debtorFlag = "Green";
+				}
+				blazeTop10Counter = blazeTop10Counter +1;
+				fn_AppendCalculatedVariable(message, "DebtorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeDebtor.party","aBlazeDebtor.debtorFlag);
+			}
+			print("blazeDebtorsArray.count-------------------------"aBlazeAccountAnalysis.blazeDebtorsArray.count);
+		}
 	}
 }
 catch an Exception with {

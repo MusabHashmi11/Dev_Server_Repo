@@ -133,10 +133,10 @@ if(perfiosData.data.accountAnalysis is known and perfiosData.data.accountAnalysi
 	accAnalysisArrCount = perfiosData.data.accountAnalysis.count;
 }
 
-
+	i is an integer initially 0;
 if(perfiosData.data.accountAnalysis is known and perfiosData.data.additionalMonthlyDetails is known) then{
 	
-	i is an integer initially 0;
+
 	j is an integer initially 0;
 	
 	// ----------------------- Account Analysis Loop Start ------------------------  
@@ -3220,7 +3220,7 @@ if(perfiosData.data.accountAnalysis is known and perfiosData.data.additionalMont
 	// ----------------------- Account Analysis Loop End ---------------------------
 }
 	
-	
+	if(i <> 0)then{
 	
 	for each BlazeMonthlyDetail in blazeAccountAnalysis.blazeMonthlyDetailArray such that(it <> unknown and it is not null)
 	do{
@@ -3426,6 +3426,8 @@ if(perfiosData.data.accountAnalysis is known and perfiosData.data.additionalMont
   print("finalCircularXnsAmountPer--------------------------------->"finalCircularXnsAmountPer);
   print("finalCircularXnsCount--------------------------------->"finalCircularXnsCount);
   print("finalCircularXnsCountPer--------------------------------->"finalCircularXnsCountPer);
+  
+	}
 	
 }catch an Exception with{
 	aBlazeApplication.fn_Perfios_TransactionAnalytics = true;  

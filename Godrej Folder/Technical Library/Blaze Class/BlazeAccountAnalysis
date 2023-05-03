@@ -85,6 +85,14 @@
      <name>sumOfTotalBusinessCreditTxnsinL12M</name>
      <type>real</type>
     </property>
+    <property>
+     <name>netDebitAmount</name>
+     <type>real</type>
+    </property>
+    <property>
+     <name>netCreditAmount</name>
+     <type>real</type>
+    </property>
    </properties>
   </class></template:content>
 </template>

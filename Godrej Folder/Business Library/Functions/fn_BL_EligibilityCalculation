@@ -622,8 +622,8 @@ emiPerLakh is a real initially 0;
   print("---->eligLoAmtGSTProgram1OD ::"eligLoAmtGSTProgram1OD);
   
   finalEligLoAmtGSTProgramOD is a real;
-  if(finalEligLoAmtIncMethod<>(unknown and unavailable))then{
-	 finalEligLoAmtGSTProgramOD = math().min(eligLoAmtGSTProgram1OD,math().min(maxPermissibleLoAmountOD,(finalEligLoAmtIncMethod*2)));
+  if(finalEligLoAmtIncMethodOD<>(unknown and unavailable))then{
+	 finalEligLoAmtGSTProgramOD = math().min(eligLoAmtGSTProgram1OD,math().min(maxPermissibleLoAmountOD,(finalEligLoAmtIncMethodOD*2)));
   }
   print("---->finalEligLoAmtGSTProgramOD ::"finalEligLoAmtGSTProgramOD);
 if(finalEligLoAmtGSTProgramOD is known)then
