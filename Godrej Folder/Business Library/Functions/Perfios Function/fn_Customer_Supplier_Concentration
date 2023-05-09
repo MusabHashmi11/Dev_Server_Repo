@@ -553,10 +553,64 @@ try{
 		print("--------------------Exiting in AccountAnalysis loop--------------------");
 		//Exiting AccountAnalysis loop
 		
+		//Initialising finalCreditorsArray with first array of BazeCreditors
+		//blazeData.combinedCreditorsArray =blazeData.blazeAccountAnalysisArray[0].blazeCreditorsArray;
+		finalCreditor is some BlazeCreditor initially a BlazeCreditor;
 		for each BlazeAccountAnalysis in blazeData.blazeAccountAnalysisArray such that(it<>null) do{
 			
+			//Creating BlazeAccountAnalysis iterative object
 			aBlazeAccountAnalysis is some BlazeAccountAnalysis initially it as a BlazeAccountAnalysis;
 			
+			//Creating a flag that specifies if the party name has appeared for the first time in loop or has been appeared before
+			isRepeated is a boolean initially false;
+			
+
+			print(">>>Entering BlazeCreditorsArray");
+			//it<>blazeData.blazeAccountAnalysisArray[0].blazeCreditorsArray
+			for each BlazeCreditor in aBlazeAccountAnalysis.blazeCreditorsArray such that(it<>null)do{
+				aBlazeCreditor is some BlazeCreditor initially it as a BlazeCreditor;
+				
+				//Checking if the object with party name exist in the combinedCreditorsArray, if it exists then adding its amount to the existing one
+				for each BlazeCreditor in blazeData.combinedCreditorsArray such that(it<>null)do{
+					finalCreditorObj is some BlazeCreditor initially it as a BlazeCreditor;
+					print("---->aBlazeCreditor.party ::"aBlazeCreditor.party);
+					print("---->aBlazeCreditor.amount ::"aBlazeCreditor.amount);
+				
+					if(finalCreditorObj.party =aBlazeCreditor.party)then{
+						finalCreditorObj.amount = finalCreditorObj.amount +aBlazeCreditor.amount;
+						isRepeated =true;
+					}
+				}
+				
+				//Appending the object into the array if the object with correspondding party does not exist
+				if(not isRepeated)then{
+					blazeData.combinedCreditorsArray.append(aBlazeCreditor);
+				}	
+			}
+			print(">>>Exiting BlazeCreditorsArray");
+			
+			
+			print(">>>Entering BlazeDebtorsArray");
+			for each BlazeDebtor in aBlazeAccountAnalysis.blazeDebtorsArray such that(it<>null)do{
+				aBlazeDebtor is some BlazeDebtor initially it as a BlazeDebtor;
+				
+				//Checking if the object with party name exist in the combinedDebtorsArray, if it exists then adding its amount to the existing one
+				for each BlazeDebtor in blazeData.combinedDebtorsArray such that(it<>null)do{
+				finalDebtorObj is some BlazeDebtor initially it as a BlazeDebtor;
+				
+					if(finalDebtorObj.party =aBlazeDebtor.party)then{
+						finalDebtorObj.amount = finalDebtorObj.amount +aBlazeDebtor.amount;
+						isRepeated =true;
+					}
+				}
+				print("---->aBlazeDebtor.party ::"aBlazeDebtor.party);
+				print("---->aBlazeDebtor.amount ::"aBlazeDebtor.amount);
+				//Appending the object into the array if the object with correspondding party does not exist
+				if(not isRepeated)then{
+					blazeData.combinedDebtorsArray.append(aBlazeDebtor);
+				}	
+			}
+			print(">>>Exiting BlazeDebtosArray");
 			//Bubble sorting Debtiors array
 			i is a integer initially 0;
 			n is a integer initially 0;

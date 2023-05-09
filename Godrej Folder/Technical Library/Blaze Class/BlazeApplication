@@ -435,6 +435,10 @@
      <name>finalEligLoAmtBankingSur_HT</name>
      <type>string</type>
     </property>
+    <property>
+     <name>isScoreReject</name>
+     <type>boolean</type>
+    </property>
    </properties>
    <initializer>cityCheck=false,<template:br/>isSingleSalariedApplicant=false,<template:br/>isSorp=false,<template:br/>isNonSorp=false</initializer>
   </class></template:content>

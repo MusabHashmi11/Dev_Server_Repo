@@ -1174,6 +1174,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 // ----------------------- Account Analysis Loop End --------------------------
 
 if(accAnalysisArrCount>1) then{
+	print("In Final if loop accAnalysisArrCount--------> "accAnalysisArrCount);
 // ---------------------- BlazeMonthlyDetail loop Start -----------------------
 for each BlazeMonthlyDetail in blazeAccountAnalysis.blazeMonthlyDetailArray such that(it <> unknown and it is not null) do{
 		ablazeMonthlyDetailArr is some BlazeMonthlyDetail initially it as a BlazeMonthlyDetail;
@@ -1198,9 +1199,12 @@ for each BlazeMonthlyDetail in blazeAccountAnalysis.blazeMonthlyDetailArray such
 	if(emiAmount is known and emiAmount>0)then{
 		abbRateTotal = math().round((avgBBTotal/emiAmount), -2);
 	}
+	
 // Calculate inward Cheque Bounce rate for final
-	if(blazeAccountAnalysis.inwChqBounces is known and blazeAccountAnalysis.chqIssues is known) then{
-		inwardChqBncRateTotal = math().round(blazeAccountAnalysis.inwChqBounces / blazeAccountAnalysis.chqIssues, -2);
+	if(blazeAccountAnalysis.inwChqBounces is known and (blazeAccountAnalysis.chqIssues is known and blazeAccountAnalysis.chqIssues > 0)) then{
+		print("blazeAccountAnalysis.inwChqBounces--------------> "blazeAccountAnalysis.inwChqBounces);
+		print("blazeAccountAnalysis.chqIssues--------------> "blazeAccountAnalysis.chqIssues);
+		inwardChqBncRateTotal = math().round((blazeAccountAnalysis.inwChqBounces / blazeAccountAnalysis.chqIssues), -2);
 	}
 	
 // ---------------------- BlazeMonthlyData loop Start -----------------------

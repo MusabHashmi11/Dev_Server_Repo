@@ -77,6 +77,7 @@ try {
         serviceITValue is a real;
         serviceNonITValue is a real;
         officeSelfOwnedorRented is a string initially "";
+		aBlazeApplication.isScoreReject =false;
 		someScore is a real;
         for each BlazeApplicant in BTCommonVar.termInput.blazeApplication.blazeApplicantArray
         do {
@@ -378,8 +379,7 @@ try {
                 }
 
                 scoreCardDetail.scorecardName = jugdementalMondelDecision_CIBIL.scoreModelName;
-                print("Final Score Card Name  ---> "
-                    scoreCardDetail.scorecardName);
+                print("Final Score Card Name  --->"scoreCardDetail.scorecardName);
                 scoreCardDetail.scorecardScore = jugdementalMondelDecision_CIBIL.score;
                 scoreCardDetail.characteristicCount = jugdementalMondelDecision_CIBIL.characteristicCount;
                 scoreCardDetail.scorecardKey = "appScore";
@@ -390,7 +390,10 @@ try {
 				
 				jugdementalMondelDecision_CRIF is some NdScoreModelReturnInfo;
 				print("helloScore ::"someScore);
-				jugdementalMondelDecision_CRIF = BL_Judgemental_Score_Card_CRIF_Instance(businessVintage, turnoverRatio, officeSelfOwnedorRented, Last12mthBankStatementBal, agePrimaryApplicant, someScore, manufacturerValue, retailTraderValue, wholesaleTraderValue, serviceITValue, serviceNonITValue);
+				jugdementalMondelDecision_CRIF = BL_Judgemental_Score_Card_CRIF_Instance(businessVintage, turnoverRatio, officeSelfOwnedorRented,
+				Last12mthBankStatementBal, agePrimaryApplicant, someScore, manufacturerValue, retailTraderValue, wholesaleTraderValue,
+				serviceITValue, serviceNonITValue,aBlazeApplicant.noOfUnsecuredEnqInL3m);
+				
 				judgementalScore_CRIF is a real initially 0;
 				judgementalScore_CRIF = jugdementalMondelDecision_CRIF.score;
 				
@@ -421,11 +424,16 @@ try {
                 scoreCardDetail1.entityType = aBlazeApplicant.applicantType;
                 scoreCardDetail1.entityId = aBlazeApplicant.customerCif as a string;
                 
-                  
+                BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.referenceDetails.reference1.pincode =scoreCardDetail1.scorecardScore as a string;
                 print("---->aBlazeApplicant.CRIF_score ::"aBlazeApplicant.CRIF_score);
 				print("---->scoreCardDetail1.scorecardScore ::"scoreCardDetail.scorecardScore);
                 print("---->scoreCardDetail1.scorecardScore1 ::"scoreCardDetail1.scorecardScore);
-
+               
+				//Setting Flag for Deviation in case of JudgmentalCrif ScoreReject
+				if(scoreCardDetail1.scorecardScore<=45)then{
+					aBlazeApplication.isScoreReject =true;
+				}
+               //message1.request.application.loanBasicDetail.keyDetails.=BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore);
 				if(isCrif)then{
 					//aBlazeApplication.riskSegment = BL_Judgemental_Score(scoreCardDetail1.scorecardScore);
                    aBlazeApplication.riskSegment =BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore);
@@ -434,7 +442,7 @@ try {
 					aBlazeApplication.riskSegment = BL_Judgemental_Score(scoreCardDetail.scorecardScore);
 				}
 				if(BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore) <>(unknown and unavailable))then
-					scoreCardDetail1.scorecardName = portable().concat(jugdementalMondelDecision_CRIF.scoreModelName,BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore));
+					scoreCardDetail1.scorecardName = portable().concat(jugdementalMondelDecision_CRIF.scoreModelName,portable().concat("," , BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore)));
 			scoreCardDetailArray.append(scoreCardDetail1);
                 print("aBlazeApplication.riskSegment  (total) ::"aBlazeApplication.riskSegment);
                 message1.request.application.loanBasicDetail.keyDetails.stepLoan = aBlazeApplication.riskSegment;

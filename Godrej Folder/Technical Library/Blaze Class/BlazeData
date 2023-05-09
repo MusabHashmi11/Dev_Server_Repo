@@ -43,6 +43,18 @@
       <type>BlazeAccountAnalysis</type>
      </array>
     </property>
+    <property>
+     <name>combinedCreditorsArray</name>
+     <array>
+      <type>BlazeCreditor</type>
+     </array>
+    </property>
+    <property>
+     <name>combinedDebtorsArray</name>
+     <array>
+      <type>BlazeDebtor</type>
+     </array>
+    </property>
    </properties>
   </class></template:content>
 </template>

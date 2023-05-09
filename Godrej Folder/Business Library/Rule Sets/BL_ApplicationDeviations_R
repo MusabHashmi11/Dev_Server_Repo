@@ -946,6 +946,44 @@ itrDiff=((buffer21Date).subtractInMonths(buffer18Date).months);
   </instance>
  </instance>
  <instance-list ref='newRules'>
+  <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.Generic Rule Template' id='GR3npQ'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance ref='name'>
+    <value>NEWBL_SEG1</value>
+   </instance>
+   <instance ref='startDate'>
+    <value></value>
+   </instance>
+   <instance ref='endDate'>
+    <value></value>
+   </instance>
+   <instance ref='comment'>
+    <value></value>
+   </instance>
+   <instance ref='styleSheet'>
+   </instance>
+   <instance ref='ruleCondition'>
+    <value>{"rootGroup":{"exprs":[{"valueType":"boolean","elements":[{"valueType":"boolean","elements":[{"valueType":"boolean","name":"isScoreReject","fqName":"BTCommonVar.termInput.blazeApplication.isScoreReject","externalType":"boolean","__meta_klass":"PropertyOperand"}],"exprType":0,"externalType":"boolean","__meta_klass":"Expr"},{"opValue":"is equal to","__meta_klass":"Operator"},{"valueType":"boolean","elements":[{"valueType":"boolean","instValue":"true","voType":"boolean","__meta_klass":"LiteralOperand"}],"exprType":0,"__meta_klass":"Expr"}],"exprType":0,"__meta_klass":"CompExpr"}],"subGroups":[],"operator":"and","__meta_klass":"ConditionGroup"},"ctr":0,"isVisible":true,"__meta_klass":"ConditionBuilderViewModel","__meta_version":"3.0"}</value>
+   </instance>
+   <instance ref='ruleAction'>
+    <value>responseDeviation = a ResponseDeviation;
+responseDeviation.ruleId = "NEWBL_SEG1";
+responseDeviation.ruleName = "NEWBL_SEG1";
+responseDeviation.ruleDescription = "BL_Judgemental_CRIF score Card Segment is Score Rejected";
+responseDeviation.ruleAction = "DEVIATION";
+responseDeviation.ruleCategory = "BL";
+responseDeviation.reasonText = "BL";
+responseDeviation.approvalLevel = "unknown";
+responseDeviation.deviationType = "ScoreCard";
+responseDeviation.ruleLevel="";
+responseDeviation.entityId=message.invocation.applicationNumber;
+responseDeviation.entityType="Application";
+responseDeviation.accountNo="";
+responseDeviation.recommendationText="";
+message.response.responseDeviations.append(responseDeviation);</value>
+   </instance>
+  </item>
   <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.Generic Rule Template' id='NZ4cdx'>
    <instance ref='__ENTITY_PROPERTIES__VH__'>
    </instance>

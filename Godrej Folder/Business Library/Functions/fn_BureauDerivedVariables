@@ -434,7 +434,7 @@ try {
           if(Account.dateClosed  is  unknown)  then  {
 			  aBlazeApplicant.noOfLiveAcc = aBlazeApplicant.noOfLiveAcc+1;  
             //  logic  for  currentBalance  >  0  and  maxModifiedLimit  >  0
-            if((Account.currentBalance  <>  unknown  and  Account.currentBalance  >  0)  
+            if((Account.currentBalance  <>  unknown  and  Account.currentBalance  >=  0)  
                and  (Account.maxModifiedLimit  <>  unknown  and  Account.maxModifiedLimit  >  0)  )  then  {        
               
               //  totalOSAllLiveAccnt  &  totalLoanAmtAllLiveAccnt  --  Used in Experian Score Card               
@@ -1048,7 +1048,7 @@ try {
 		}
              print("----> aBlazeApplicant.bureauDelinquencyCategory :: "aBlazeApplicant.bureauDelinquencyCategory);
 }
-      print("----------------------------------------------------------------------------------++>>Entering Applicant ::"aBlazeApplicant.customerCif);
+      print("----------------------------------------------------------------------------------++>>Exiting Applicant ::"aBlazeApplicant.customerCif);
 	}
 
 	

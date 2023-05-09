@@ -64,62 +64,6 @@
   <value>BL_Judgemental_Score_CRIF</value>
  </instance>
  <instance-list ref='cases'>
-  <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='J2mTrM'>
-   <instance ref='__ENTITY_PROPERTIES__VH__'>
-   </instance>
-   <instance-list ref='condition cells'>
-    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='UPlyvD'>
-     <instance ref='CELL GROUP NAME'>
-      <value>All_Entities1</value>
-     </instance>
-     <instance-selection ref='binding'>
-      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Less than or equal to' id='79oSbc'>
-       <instance ref='value'>
-        <value>35</value>
-       </instance>
-      </item>
-     </instance-selection>
-     <instance ref='type'>
-      <value></value>
-     </instance>
-     <instance ref='property'>
-      <value></value>
-     </instance>
-    </item>
-   </instance-list>
-   <instance-list ref='action cells'>
-    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='25OgGK'>
-     <instance ref='CELL GROUP NAME'>
-      <value>Action1</value>
-     </instance>
-     <instance-selection ref='binding'>
-      <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Return' id='L3QR1Y'>
-       <instance ref='value'>
-        <value>SCORE REJECT</value>
-       </instance>
-      </item>
-     </instance-selection>
-     <instance ref='type'>
-      <value></value>
-     </instance>
-     <instance ref='property'>
-      <value></value>
-     </instance>
-    </item>
-   </instance-list>
-   <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>rule1</value>
-   </instance>
-   <instance ref='__ND_DecTableCellRowVH'>
-    <value>1</value>
-   </instance>
-   <instance ref='__ND_DecTableCellColumnVH'>
-    <value>1</value>
-   </instance>
-   <instance ref='__ND_DecTableCellCreatedVH'>
-    <value>Apr 19, 2023 9:54 AM</value>
-   </instance>
-  </item>
   <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='Z035Qz'>
    <instance ref='__ENTITY_PROPERTIES__VH__'>
    </instance>
@@ -131,10 +75,10 @@
      <instance-selection ref='binding'>
       <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Include range' id='7Mqp07'>
        <instance ref='value1'>
-        <value>36</value>
+        <value>0</value>
        </instance>
        <instance ref='value2'>
-        <value>63</value>
+        <value>55</value>
        </instance>
       </item>
      </instance-selection>
@@ -170,7 +114,7 @@
     <value>rule2</value>
    </instance>
    <instance ref='__ND_DecTableCellRowVH'>
-    <value>2</value>
+    <value>1</value>
    </instance>
    <instance ref='__ND_DecTableCellColumnVH'>
     <value>1</value>
@@ -190,10 +134,10 @@
      <instance-selection ref='binding'>
       <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Include range' id='HIBrcR'>
        <instance ref='value1'>
-        <value>64</value>
+        <value>56</value>
        </instance>
        <instance ref='value2'>
-        <value>83</value>
+        <value>75</value>
        </instance>
       </item>
      </instance-selection>
@@ -229,7 +173,7 @@
     <value>rule3</value>
    </instance>
    <instance ref='__ND_DecTableCellRowVH'>
-    <value>3</value>
+    <value>2</value>
    </instance>
    <instance ref='__ND_DecTableCellColumnVH'>
     <value>1</value>
@@ -247,9 +191,12 @@
       <value>All_Entities1</value>
      </instance>
      <instance-selection ref='binding'>
-      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Greater than or equal to' id='3ro7td'>
-       <instance ref='value'>
-        <value>84</value>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Include range' id='4gqr68'>
+       <instance ref='value1'>
+        <value>76</value>
+       </instance>
+       <instance ref='value2'>
+        <value>100</value>
        </instance>
       </item>
      </instance-selection>
@@ -285,7 +232,7 @@
     <value>rule4</value>
    </instance>
    <instance ref='__ND_DecTableCellRowVH'>
-    <value>4</value>
+    <value>3</value>
    </instance>
    <instance ref='__ND_DecTableCellColumnVH'>
     <value>1</value>

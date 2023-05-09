@@ -392,7 +392,8 @@ try {
                   regex = regularExpression("(?<=\\G.)");
                   
                   //stringArr = regex.split(paymentHistoryStr);
-                  stringArr = regex.split(acNonsummary.PaymentHistory1);
+                  // stringArr = regex.split(acNonsummary.PaymentHistory1);
+				  stringArr = regex.split(paymentHistoryStr);
                   
                   day is a string initially "01";
                   print("----> DAY ::  " day);
