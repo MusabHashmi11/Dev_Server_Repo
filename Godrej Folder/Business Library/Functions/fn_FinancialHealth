@@ -1,0 +1,406 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<instantiation xmlns='http://www.blazesoft.com/instantiation' template='Q8jH6kHdOYIZ1uG0WKXqvvejqv0' name='fn_FinancialHealth'>
+ <instantiation xmlns='http://www.blazesoft.com/instantiation' template='1VBfZr8g32Q2FnSWcWO9txQWwEE' name='Instance' id='Instance'>
+ </instantiation>
+ <instantiation xmlns='http://www.blazesoft.com/instantiation' template='18uqQPJXnTmKrAiLEOVcQMUAFmD' name='Entry' id='Entry'>
+  <instance ref='Source Reference'>
+   <instance ref='value'>
+    <instance ref='locationVH'>
+     <value></value>
+    </instance>
+    <instance ref='repositoryNameVH'>
+     <value></value>
+    </instance>
+    <instance ref='versionVH'>
+     <value></value>
+    </instance>
+    <instance ref='filterVH'>
+     <value></value>
+    </instance>
+    <instance ref='releaseDateVH'>
+     <value></value>
+    </instance>
+    <instance ref='repositoryAccessVH'>
+     <value></value>
+    </instance>
+   </instance>
+  </instance>
+  <instance ref='Predictive Model Type'>
+   <instance ref='value'>
+    <value>NotApplicable</value>
+   </instance>
+  </instance>
+ </instantiation>
+ <instance ref='__ENTITY_PROPERTIES__VH__'>
+  <instance ref='Test Role'>
+   <instance ref='value'>
+    <value>None</value>
+   </instance>
+  </instance>
+  <instance ref='Test Case'>
+   <instance ref='value'>
+    <value></value>
+   </instance>
+  </instance>
+ </instance>
+ <instance ref='InstanceName'>
+  <value></value>
+ </instance>
+ <instance ref='UniqueInstanceNameVH'>
+  <value>fn_FinancialHealth1</value>
+ </instance>
+ <instance ref='FunctionNameVH'>
+  <value>fn_FinancialHealth</value>
+ </instance>
+ <instance ref='FunctionReturnType'>
+  <value>void</value>
+ </instance>
+ <instance ref='FunctionBodyVH'>
+  <value><![CDATA[print("");
+print("++++> Entering function :: fn_FinancialHealth");
+
+
+aBlazeApplication is some BlazeApplication initially BTCommonVar.termInput.blazeApplication as a BlazeApplication;
+
+productCode is a string;
+productCode = message.invocation.decisionService;
+applicationNumber is a string;
+applicationNumber = message.invocation.applicationNumber;
+
+print("aBlazeApplication.businessErrorsFlag = "aBlazeApplication.businessErrorsFlag);
+try{
+	if(aBlazeApplication.businessErrorsFlag = false) then {
+		
+		for each BlazeApplicant in BTCommonVar.termInput.blazeApplication.blazeApplicantArray such that(it <> unknown and it.applicantType is known and it.applicantType = (ignoring case) "MainApp") do {
+			
+			aBlazeApplicant is some BlazeApplicant initially it as a BlazeApplicant;
+			
+			//aBlazeApplicant.sector;														 //pennantSector
+			//aBlazeApplication.applicationAdditionalDetails.other.psl;                    //Revenue
+			//aBlazeApplication.applicationAdditionalDetails.other.pep;                    //Gross Profit Margin             
+			//aBlazeApplication.applicationAdditionalDetails.other.borrowerType;           //EBITDA Margin
+			//aBlazeApplication.applicationAdditionalDetails.other.lendingType;            //Current Ratio
+			//aBlazeApplication.applicationAdditionalDetails.other.propertyIdentified;	 //Quick Ratio
+			//aBlazeApplication.applicationAdditionalDetails.other.riskCategorization;     //Debt Equity Ratio
+			//aBlazeApplication.applicationAdditionalDetails.other.finalFoirPercentage;    //Interest Coverage Ratio
+			//aBlazeApplication.applicationAdditionalDetails.other.finalLoanAmount;        //Debt Service Coverage Ratio
+			//aBlazeApplication.applicationAdditionalDetails.other.eligibilityMethod;      //Debtors Days 
+			//aBlazeApplication.applicationAdditionalDetails.other.sblMet;				 //Creditors Days
+			
+			sector is a string initially "";
+			
+			if(aBlazeApplicant.sector is known and aBlazeApplicant.sector <> "") then {
+				sector = DTAB_PennantSectorMapping(aBlazeApplicant.sector);
+			}
+			
+			revenue is a real initially 0.0;
+			if(aBlazeApplication.applicationAdditionalDetails.other.psl is known) then {
+				revenue = (aBlazeApplication.applicationAdditionalDetails.other.psl as a real/10000000);
+			}
+			
+			grossProfitMargin is a real initially 0;
+			eBITDAMargin is a real initially 0;
+			currentRatio is a real initially 0;
+			quickRatio is a real initially 0;
+			debtEquiRatio is a real initially 0;
+			intCoverageRatio is a real initially 0;
+			debtSerCoverageRatio is a real initially 0;
+			debtorsDays is a real initially 0;
+			credtorsDays is a real initially 0;
+			
+			scale is a string initially "";
+			
+			grossProfitMarginColor is a string initially "";
+			eBITDAMarginColor is a string initially "";
+			currentRatioColor is a string initially "";
+			quickRatioColor is a string initially "";
+			debtEquiRatioColor is a string initially "";
+			intCoverageRatioColor is a string initially "";
+			debtSerCoverageRatioColor is a string initially "";
+			debtorsDaysColor is a string initially "";
+			credtorsDaysColor is a string initially "";
+			
+			grossProfitMarginRange is a string initially "";
+			eBITDAMarginRange is a string initially "";
+			currentRatioRange is a string initially "";
+			quickRatioRange is a string initially "";
+			debtEquiRatioRange is a string initially "";
+			intCoverageRatioRange is a string initially "";
+			debtSerCoverageRatioRange is a string initially "";
+			debtorsDaysRange is a string initially "";
+			credtorsDaysRange is a string initially "";
+			
+			
+			if(aBlazeApplication.applicationAdditionalDetails.other.pep is known) then {
+				grossProfitMargin = aBlazeApplication.applicationAdditionalDetails.other.pep as a real;
+			}
+			if(aBlazeApplication.applicationAdditionalDetails.other.borrowerType is known) then {
+				eBITDAMargin = aBlazeApplication.applicationAdditionalDetails.other.borrowerType as a real;
+			}
+			if(aBlazeApplication.applicationAdditionalDetails.other.lendingType is known) then {
+				currentRatio = aBlazeApplication.applicationAdditionalDetails.other.lendingType as a real;
+			}
+			if(aBlazeApplication.applicationAdditionalDetails.other.propertyIdentified is known) then {
+				quickRatio = aBlazeApplication.applicationAdditionalDetails.other.propertyIdentified as a real;
+			}
+			if(aBlazeApplication.applicationAdditionalDetails.other.riskCategorization is known) then {
+				debtEquiRatio = aBlazeApplication.applicationAdditionalDetails.other.riskCategorization as a real;
+			}
+			if(aBlazeApplication.applicationAdditionalDetails.other.finalFoirPercentage is known) then {
+				intCoverageRatio = aBlazeApplication.applicationAdditionalDetails.other.finalFoirPercentage as a real;
+			}
+			if(aBlazeApplication.applicationAdditionalDetails.other.finalLoanAmount is known) then {
+				debtSerCoverageRatio = aBlazeApplication.applicationAdditionalDetails.other.finalLoanAmount as a real;
+			}
+			if(aBlazeApplication.applicationAdditionalDetails.other.eligibilityMethod is known) then {
+				debtorsDays = aBlazeApplication.applicationAdditionalDetails.other.eligibilityMethod as a real;
+			}
+			if(aBlazeApplication.applicationAdditionalDetails.other.sblMet is known) then {
+				credtorsDays = aBlazeApplication.applicationAdditionalDetails.other.sblMet as a real;
+			}
+
+			scale = DTAB_SMLSegmentation(revenue,sector);
+			
+			// :::::::::::::::::::::::::::::::::::: Find Minimum and Maximum Value ::::::::::::::::::::::::::::::::::::::
+			
+			DTAB_GrossProfitMargin(sector,scale); 
+			DTAB_EBITDAMargin(sector,scale);
+			DTAB_CurrentRatio(sector,scale);
+			DTAB_QuickRatio(sector,scale);
+			DTAB_DebtEquiRatio(sector,scale);
+			DTAB_IntCoverageRatio(sector,scale);
+			DTAB_DebtSerCoverageRatio(sector,scale);
+			DTAB_DebtorsDays(sector,scale);
+			DTAB_CredtorsDays(sector,scale);
+			
+			// :::::::::::::::::::::::::::::: Variables Color Set and Range Set:::::::::::::::::::::::::::::::::
+			
+			if(grossProfitMargin <> unknown) then {
+				if((aBlazeApplication.grossProfitMarginMax is known) and (grossProfitMargin >= aBlazeApplication.grossProfitMarginMax)) then {
+					grossProfitMarginColor = "Green";
+					grossProfitMarginRange = ">= "aBlazeApplication.grossProfitMarginMax;
+				}else if(((aBlazeApplication.grossProfitMarginMax is known) and (grossProfitMargin < aBlazeApplication.grossProfitMarginMax)) and ((aBlazeApplication.grossProfitMarginMin) is known and (grossProfitMargin > aBlazeApplication.grossProfitMarginMin))) then {
+					grossProfitMarginColor = "Amber";
+					grossProfitMarginRange = ""aBlazeApplication.grossProfitMarginMax" > > "aBlazeApplication.grossProfitMarginMin;
+				}else if((aBlazeApplication.grossProfitMarginMin is known) and (grossProfitMargin <= aBlazeApplication.grossProfitMarginMin)) then {
+					grossProfitMarginColor = "Red";
+					grossProfitMarginRange = "<= "aBlazeApplication.grossProfitMarginMin;
+				}
+			}
+			
+			if(eBITDAMargin <> unknown) then {
+				if((aBlazeApplication.eBITDAMarginMax is known) and (eBITDAMargin >= aBlazeApplication.eBITDAMarginMax)) then {
+					eBITDAMarginColor = "Green";
+					eBITDAMarginRange = ">= "aBlazeApplication.eBITDAMarginMax;
+				}else if(((aBlazeApplication.eBITDAMarginMax is known) and (eBITDAMargin < aBlazeApplication.eBITDAMarginMax)) and ((aBlazeApplication.eBITDAMarginMin is known) and (grossProfitMargin > aBlazeApplication.eBITDAMarginMin))) then {
+					eBITDAMarginColor = "Amber";
+					eBITDAMarginRange = ""aBlazeApplication.eBITDAMarginMax" > > "aBlazeApplication.eBITDAMarginMin;
+				}else if((aBlazeApplication.eBITDAMarginMin is known) and (eBITDAMargin <= aBlazeApplication.eBITDAMarginMin)) then {
+					eBITDAMarginColor = "Red";
+					eBITDAMarginRange = "<= "aBlazeApplication.eBITDAMarginMin;
+				}
+			}
+			
+			if(currentRatio <> unknown) then {
+				if((aBlazeApplication.currentRatioMax is known) and (currentRatio >= aBlazeApplication.currentRatioMax)) then {
+					currentRatioColor = "Green";
+					currentRatioRange = ">= "aBlazeApplication.currentRatioMax;
+				}else if(((aBlazeApplication.currentRatioMax is known) and (currentRatio < aBlazeApplication.currentRatioMax)) and ((aBlazeApplication.currentRatioMin is known) and (grossProfitMargin > aBlazeApplication.currentRatioMin))) then {
+					currentRatioColor = "Amber";
+					currentRatioRange = ""aBlazeApplication.currentRatioMax" > > "aBlazeApplication.currentRatioMin;
+				}else if((aBlazeApplication.currentRatioMin is known) and (currentRatio <= aBlazeApplication.currentRatioMin)) then {
+					currentRatioColor = "Red";
+					currentRatioRange = "<= "aBlazeApplication.currentRatioMin;
+				}
+			}
+			
+			if(quickRatio <> unknown) then {
+				if((aBlazeApplication.quickRatioMax is known) and (quickRatio >= aBlazeApplication.quickRatioMax)) then {
+					quickRatioColor = "Green";
+					quickRatioRange = ">= "aBlazeApplication.quickRatioMax;
+				}else if(((aBlazeApplication.quickRatioMax is known) and (quickRatio < aBlazeApplication.quickRatioMax)) and ((aBlazeApplication.quickRatioMin is known) and (grossProfitMargin > aBlazeApplication.quickRatioMin))) then {
+					quickRatioColor = "Amber";
+					quickRatioRange = ""aBlazeApplication.quickRatioMax" > > "aBlazeApplication.quickRatioMin;
+				}else if((aBlazeApplication.quickRatioMin is known) and (quickRatio <= aBlazeApplication.quickRatioMin)) then {
+					quickRatioColor = "Red";
+					quickRatioRange = "<= "aBlazeApplication.quickRatioMin;
+				}
+			}
+			
+			if(debtEquiRatio <> unknown) then {
+				if((aBlazeApplication.debtEquiRatioMax is known) and (debtEquiRatio >= aBlazeApplication.debtEquiRatioMax)) then {
+					quickRatioColor = "Red";
+					debtEquiRatioRange = ">= "aBlazeApplication.debtEquiRatioMax;
+				}else if(((aBlazeApplication.debtEquiRatioMax is known) and (debtEquiRatio < aBlazeApplication.debtEquiRatioMax)) and ((aBlazeApplication.debtEquiRatioMin is known) and (grossProfitMargin > aBlazeApplication.debtEquiRatioMin))) then {
+					quickRatioColor = "Amber";
+					debtEquiRatioRange = ""aBlazeApplication.debtEquiRatioMax" > > "aBlazeApplication.debtEquiRatioMin;
+				}else if((aBlazeApplication.debtEquiRatioMin is known) and (debtEquiRatio <= aBlazeApplication.debtEquiRatioMin)) then {
+					quickRatioColor = "Green";
+					debtEquiRatioRange = "<= "aBlazeApplication.debtEquiRatioMin;
+				}
+			}
+			
+			if(intCoverageRatio <> unknown) then {
+				if((aBlazeApplication.intCoverageRatioMax is known) and (intCoverageRatio >= aBlazeApplication.intCoverageRatioMax)) then {
+					intCoverageRatioColor = "Green";
+					intCoverageRatioRange = ">= "aBlazeApplication.intCoverageRatioMax;
+				}else if(((aBlazeApplication.intCoverageRatioMax is known) and (intCoverageRatio < aBlazeApplication.intCoverageRatioMax))and ((aBlazeApplication.intCoverageRatioMin is known) and (grossProfitMargin > aBlazeApplication.intCoverageRatioMin))) then {
+					intCoverageRatioColor = "Amber";
+					intCoverageRatioRange = ""aBlazeApplication.intCoverageRatioMax" > > "aBlazeApplication.intCoverageRatioMin;
+				}else if((aBlazeApplication.intCoverageRatioMin is known) and (intCoverageRatio <= aBlazeApplication.intCoverageRatioMin)) then {
+					intCoverageRatioColor = "Red";
+					intCoverageRatioRange = "<= "aBlazeApplication.intCoverageRatioMin;
+				}
+			}
+			
+			if(debtSerCoverageRatio <> unknown) then {
+				if((aBlazeApplication.debtSerCoverageRatioMax is known) and (debtSerCoverageRatio >= aBlazeApplication.debtSerCoverageRatioMax)) then {
+					debtSerCoverageRatioColor = "Green";
+					debtSerCoverageRatioRange = ">= "aBlazeApplication.debtSerCoverageRatioMax;
+				}else if(((aBlazeApplication.debtSerCoverageRatioMax is known) and (debtSerCoverageRatio < aBlazeApplication.debtSerCoverageRatioMax)) and ((aBlazeApplication.debtSerCoverageRatioMin is known) and (grossProfitMargin > aBlazeApplication.debtSerCoverageRatioMin))) then {
+					debtSerCoverageRatioColor = "Amber";
+					debtSerCoverageRatioRange = ""aBlazeApplication.debtSerCoverageRatioMax" > > "aBlazeApplication.debtSerCoverageRatioMin;
+				}else if((aBlazeApplication.debtSerCoverageRatioMin is known) and (debtSerCoverageRatio <= aBlazeApplication.debtSerCoverageRatioMin)) then {
+					debtSerCoverageRatioColor = "Red";
+					debtSerCoverageRatioRange = "<= "aBlazeApplication.debtSerCoverageRatioMin;
+				}
+			}
+			
+			if(debtorsDays <> unknown) then {
+				if((aBlazeApplication.debtorsDaysMax is known) and (debtorsDays >= aBlazeApplication.debtorsDaysMax)) then {
+					debtorsDaysColor = "Red";
+					debtorsDaysRange = ">= "aBlazeApplication.debtorsDaysMax;
+				}else if(((aBlazeApplication.debtorsDaysMax is known) and (debtorsDays < aBlazeApplication.debtorsDaysMax)) and ((aBlazeApplication.debtorsDaysMin is known) and (grossProfitMargin > aBlazeApplication.debtorsDaysMin))) then {
+					debtorsDaysColor = "Amber";
+					debtorsDaysRange = ""aBlazeApplication.debtorsDaysMax" > > "aBlazeApplication.debtorsDaysMin;
+				}else if((aBlazeApplication.debtorsDaysMin is known) and (debtorsDays <= aBlazeApplication.debtorsDaysMin)) then {
+					debtorsDaysColor = "Green";
+					debtorsDaysRange = "<= "aBlazeApplication.debtorsDaysMin;
+				}
+			}
+			
+			if(credtorsDays <> unknown) then {
+				if((aBlazeApplication.credtorsDaysMax is known) and (credtorsDays >= aBlazeApplication.credtorsDaysMax)) then {
+					credtorsDaysColor = "Green";
+					credtorsDaysRange = ">= "aBlazeApplication.credtorsDaysMax;
+				}else if(((aBlazeApplication.credtorsDaysMax is known) and (credtorsDays < aBlazeApplication.credtorsDaysMax)) and ((aBlazeApplication.credtorsDaysMin is known) and (grossProfitMargin > aBlazeApplication.credtorsDaysMin))) then {
+					credtorsDaysColor = "Amber";
+					credtorsDaysRange = ""aBlazeApplication.credtorsDaysMax" > > "aBlazeApplication.credtorsDaysMin;;
+				}else if((aBlazeApplication.credtorsDaysMin is known) and (credtorsDays <= aBlazeApplication.credtorsDaysMin)) then {
+					credtorsDaysColor = "Red";
+					credtorsDaysRange = "<= "aBlazeApplication.credtorsDaysMin;
+				}
+			}
+		
+		
+		if(grossProfitMargin is known) then{
+		fn_AppendCalculatedVariable(message,"grossProfitMargin", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", math().round(grossProfitMargin,-1)"%,"grossProfitMarginColor","grossProfitMarginRange);
+		}
+		else {
+			fn_AppendCalculatedVariable(message,"grossProfitMargin", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", "Blue,NA");
+		}
+		
+		if(eBITDAMargin is known) then{
+		fn_AppendCalculatedVariable(message,"eBITDAMargin", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", math().round(eBITDAMargin,-1)"%,"eBITDAMarginColor","eBITDAMarginRange);
+		}
+		else {
+			fn_AppendCalculatedVariable(message,"eBITDAMargin", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", "Blue,NA");
+		}
+		
+		if(currentRatio is known) then {
+		fn_AppendCalculatedVariable(message,"currentRatio", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", math().round(currentRatio,-1)","currentRatioColor","currentRatioRange);
+		}
+		else {
+			fn_AppendCalculatedVariable(message,"currentRatio", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", "Blue,NA");
+		}
+		
+		if(quickRatio is known) then {
+		fn_AppendCalculatedVariable(message,"quickRatio", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", math().round(quickRatio,-1)","quickRatioColor","quickRatioRange);
+		}
+		else {
+			fn_AppendCalculatedVariable(message,"quickRatio", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", "Blue,NA");
+		}
+		
+		if(debtEquiRatio is known) then {
+			fn_AppendCalculatedVariable(message,"debtEquiRatio", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", math().round(debtEquiRatio,-1)","debtEquiRatioColor","debtEquiRatioRange);
+		}
+		else {
+			fn_AppendCalculatedVariable(message,"debtEquiRatio", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", "Blue,NA");
+		}
+		
+		if(intCoverageRatio is known) then {
+		fn_AppendCalculatedVariable(message,"intCoverageRatio", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", math().round(intCoverageRatio,-1)","intCoverageRatioColor","intCoverageRatioRange);
+		}
+		else {
+			fn_AppendCalculatedVariable(message,"intCoverageRatio", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", "Blue,NA");
+		}
+		
+		if(debtSerCoverageRatio is known) then {
+		fn_AppendCalculatedVariable(message,"debtSerCoverageRatio", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", math().round(debtSerCoverageRatio,-1)","debtSerCoverageRatioColor","debtSerCoverageRatioRange);
+		}
+		else {
+			fn_AppendCalculatedVariable(message,"debtSerCoverageRatio", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", "Blue,NA");
+		}
+		
+		if(debtorsDays is known) then {
+		fn_AppendCalculatedVariable(message,"debtorsDays", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", math().round(debtorsDays,-1)","debtorsDaysColor","debtorsDaysRange);
+		}
+		else {
+			fn_AppendCalculatedVariable(message,"debtorsDays", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", "Blue,NA");
+		}
+		
+		if(credtorsDays is known) then {
+		fn_AppendCalculatedVariable(message,"credtorsDays", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", math().round(credtorsDays,-1)","credtorsDaysColor","credtorsDaysRange);
+		}
+		else {
+			fn_AppendCalculatedVariable(message,"credtorsDays", "real", productCode, applicationNumber, "applicantType", "AutoPopulate", "Blue,NA");
+		}
+		
+		// Print statement for all variables 
+		
+		print("--> Sector ::"sector", --> Revenue ::"revenue", --> Scale ::"scale);
+		
+		print("--> grossProfitMargin ::"math().round(grossProfitMargin,-1)"%,"grossProfitMarginColor","" grossProfitMarginRange ::"grossProfitMarginRange","" Minimum ::"aBlazeApplication.grossProfitMarginMin","" Maximum ::"aBlazeApplication.grossProfitMarginMax);
+		
+		print("--> eBITDAMargin ::"math().round(eBITDAMargin,-1)"%,"eBITDAMarginColor","" eBITDAMarginRange ::"eBITDAMarginRange","" Minimum ::"aBlazeApplication.eBITDAMarginMin","" Maximum ::"aBlazeApplication.eBITDAMarginMax);
+		
+		print("--> currentRatio ::"math().round(currentRatio,-1)"%,"currentRatioColor","" currentRatioRange ::"currentRatioRange","" Minimum ::"aBlazeApplication.currentRatioMin","" Maximum ::"aBlazeApplication.currentRatioMax);
+		
+		print("--> quickRatio ::"math().round(quickRatio,-1)"%,"quickRatioColor","" quickRatioRange ::"quickRatioRange","" Minimum ::"aBlazeApplication.quickRatioMin","" Maximum ::"aBlazeApplication.quickRatioMax);
+		
+		print("--> debtEquiRatio ::"math().round(debtEquiRatio,-1)"%,"debtEquiRatioColor","" debtEquiRatioRange ::"debtEquiRatioRange","" Minimum ::"aBlazeApplication.debtEquiRatioMin","" Maximum ::"aBlazeApplication.debtEquiRatioMax);
+		
+		print("--> intCoverageRatio ::"math().round(intCoverageRatio,-1)"%,"intCoverageRatioColor","" intCoverageRatioRange ::"intCoverageRatioRange","" Minimum ::"aBlazeApplication.intCoverageRatioMin","" Maximum ::"aBlazeApplication.intCoverageRatioMax);
+		
+		print("--> debtSerCoverageRatio ::"math().round(debtSerCoverageRatio,-1)"%,"debtSerCoverageRatioColor","" debtSerCoverageRatioRange ::"debtSerCoverageRatioRange","" Minimum ::"aBlazeApplication.debtSerCoverageRatioMin","" Maximum ::"aBlazeApplication.debtSerCoverageRatioMax);
+		
+		print("--> debtorsDays ::"math().round(debtorsDays,-1)"%,"debtorsDaysColor","" debtorsDaysRange ::"debtorsDaysRange","" Minimum ::"aBlazeApplication.debtorsDaysMin","" Maximum ::"aBlazeApplication.debtorsDaysMax);
+		
+		print("--> credtorsDays ::"math().round(credtorsDays,-1)"%,"credtorsDaysColor","" credtorsDaysRange ::"credtorsDaysRange","" Minimum ::"aBlazeApplication.credtorsDaysMin","" Maximum ::"aBlazeApplication.credtorsDaysMax);
+		
+	}
+	}
+	print("++++> Exiting function :: fn_FinancialHealth");
+	print("");
+}
+catch an Exception with {
+  aBlazeApplication.fn_FinancialHealthException = true;  
+  print("\n***Exception :: \n>>@@@<<\n" evaluationException().toString()"\n>>@@@<<\n");
+}]]></value>
+ </instance>
+ <instance ref='CommentsVH'>
+  <value></value>
+ </instance>
+ <instance ref='FunctionParametersVH'>
+  <instance-list ref='ParametersVH'>
+   <item template='DRNZKQyw5rcjBd4Yxo6FN649lWN.template1' id='a1aaRs'>
+    <instance ref='ParameterNameVH'>
+     <value>message</value>
+    </instance>
+    <instance ref='ParameterTypeVH'>
+     <value>Message</value>
+    </instance>
+   </item>
+  </instance-list>
+ </instance>
+</instantiation>

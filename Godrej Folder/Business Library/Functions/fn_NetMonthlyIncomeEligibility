@@ -101,7 +101,9 @@ if(incomeProgramUsed <> unknown and incomeProgramUsed = (ignoring case) "CASH PR
   if(totalOtherIncome<> unknown and (totalOtherIncome > eligibleIncomeGrossMargin)) then{
     totalOtherIncome = eligibleIncomeGrossMargin;
   }
-}else if(incomeProgramUsed <> unknown and incomeProgramUsed = (ignoring case) "INDUSTRY MARGIN" and eligibleIncomeIndustryMargin <> unknown) then{
+}
+}
+  if(incomeProgramUsed <> unknown and incomeProgramUsed = (ignoring case) "INDUSTRY MARGIN" and eligibleIncomeIndustryMargin <> unknown) then{
   eligibleIncome = eligibleIncomeIndustryMargin;
   if(totalOtherIncome<> unknown and (totalOtherIncome > eligibleIncomeIndustryMargin)) then{
     totalOtherIncome = eligibleIncomeIndustryMargin;
@@ -116,7 +118,7 @@ if(incomeProgramUsed <> unknown and incomeProgramUsed = (ignoring case) "CASH PR
   print("----> eligibleIncome Director Renumeration :: " eligibleIncome);
   print("----> totalOtherIncome Director Renumeration :: " totalOtherIncome);
 }
-} 
+ 
  if(incomeProgramUsed <> unknown and (incomeProgramUsed = (ignoring case) "BANKING SURROGATE" or incomeProgramUsed = (ignoring case) "LOW LTV")
 and aBlazeApplicant.applicantAdditionalDetails.otherSenpInputEligibility.avgMonthlyBalancePerfios <> unknown) then{
   eligibleIncome = aBlazeApplicant.applicantAdditionalDetails.otherSenpInputEligibility.avgMonthlyBalancePerfios;

@@ -1,0 +1,18 @@
+#Extended attributes for Innovator file-based repository (directory: 'BL_Max_Loan_Exposure_GRID ')
+#Tue May 23 19:15:39 UTC 2023
+contentType=Instance
+guid=4pz9QfdW9Aq0VzSJ2baq18EEDBB
+innovatorDisplayName=BL_Max_Loan_Exposure_GRID
+innovatorItemCreationId=admin
+innovatorLastModifiedUser=admin
+innovatorTemplateRef=6wJBDnNMEpPfdP4wizmesDxkko8
+managementProperty.Predictive\ Model\ Type=NotApplicable
+managementProperty.Source\ Reference.filterVH=
+managementProperty.Source\ Reference.locationVH=
+managementProperty.Source\ Reference.releaseDateVH=
+managementProperty.Source\ Reference.repositoryAccessVH=
+managementProperty.Source\ Reference.repositoryNameVH=
+managementProperty.Source\ Reference.versionVH=
+subType=Decision Table
+target=SRL
+type=SRL Ruleset

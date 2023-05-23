@@ -1,0 +1,810 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<instantiation xmlns='http://www.blazesoft.com/instantiation' template='6wJBDnNMEpPfdP4wizmesDxkko8' name='BL_Credit_to_Loan_Ratio_Bank_Surrogate_SEP'>
+ <instantiation xmlns='http://www.blazesoft.com/instantiation' template='1VBfZr8g32Q2FnSWcWO9txQWwEE' name='Instance' id='Instance'>
+ </instantiation>
+ <instantiation xmlns='http://www.blazesoft.com/instantiation' template='18uqQPJXnTmKrAiLEOVcQMUAFmD' name='Entry' id='Entry'>
+  <instance ref='Source Reference'>
+   <instance ref='value'>
+    <instance ref='locationVH'>
+     <value></value>
+    </instance>
+    <instance ref='repositoryNameVH'>
+     <value></value>
+    </instance>
+    <instance ref='versionVH'>
+     <value></value>
+    </instance>
+    <instance ref='filterVH'>
+     <value></value>
+    </instance>
+    <instance ref='releaseDateVH'>
+     <value></value>
+    </instance>
+    <instance ref='repositoryAccessVH'>
+     <value></value>
+    </instance>
+   </instance>
+  </instance>
+  <instance ref='Predictive Model Type'>
+   <instance ref='value'>
+    <value>NotApplicable</value>
+   </instance>
+  </instance>
+ </instantiation>
+ <instance ref='__ENTITY_PROPERTIES__VH__'>
+ </instance>
+ <instance ref='__GENERIC__ParametersVH'>
+  <instance-list ref='ParametersVH'>
+   <item template='DRNZKQyw5rcjBd4Yxo6FN649lWN.template1' id='1Pt0lp'>
+    <instance ref='ParameterNameVH'>
+     <value>riskSegment</value>
+    </instance>
+    <instance ref='ParameterTypeVH'>
+     <value>string</value>
+    </instance>
+   </item>
+   <item template='DRNZKQyw5rcjBd4Yxo6FN649lWN.template1' id='8vF1Wi'>
+    <instance ref='ParameterNameVH'>
+     <value>bank_Suurogate_Loan_Amt1</value>
+    </instance>
+    <instance ref='ParameterTypeVH'>
+     <value>real</value>
+    </instance>
+   </item>
+  </instance-list>
+ </instance>
+ <instance ref='__GENERIC__ReturnTypeVH'>
+  <value>real</value>
+ </instance>
+ <instance ref='__GENERIC__CommentsVH'>
+  <value></value>
+ </instance>
+ <instance ref='__GENERIC__TableLayoutVH'>
+  <value>2</value>
+ </instance>
+ <instance ref='InstanceName'>
+  <value></value>
+ </instance>
+ <instance ref='UniqueInstanceNameVH'>
+  <value>BL_Credit_to_Loan_Ratio_Bank_Surrogate_SEP1</value>
+ </instance>
+ <instance ref='rulesetName'>
+  <value>BL_Credit_to_Loan_Ratio_Bank_Surrogate_SEP</value>
+ </instance>
+ <instance-list ref='cases'>
+  <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='UG3M3T'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance-list ref='condition cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='a4QxMG'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities3</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='Yr47jO'>
+       <instance ref='value'>
+        <value>MARKET</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='RIOxMW'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Less than' id='Lgqggq'>
+       <instance ref='value'>
+        <value>1500000</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance-list ref='action cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='U7Mr5h'>
+     <instance ref='CELL GROUP NAME'>
+      <value>Action1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Return' id='RNMpAO'>
+       <instance ref='value'>
+        <value>4</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance ref='__ND_MetaphorRuleNameVH'>
+    <value>rule1</value>
+   </instance>
+   <instance ref='__ND_DecTableCellRowVH'>
+    <value>2</value>
+   </instance>
+   <instance ref='__ND_DecTableCellColumnVH'>
+    <value>1</value>
+   </instance>
+   <instance ref='__ND_DecTableCellCreatedVH'>
+    <value>May 23, 2023 11:53 AM</value>
+   </instance>
+  </item>
+  <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='DsWa0e'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance-list ref='condition cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='2OILs2'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities3</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='2D8T1z'>
+       <instance ref='value'>
+        <value>MARKET PLUS</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='WKC6La'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Less than' id='Lgqggq'>
+       <instance ref='value'>
+        <value>1500000</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance-list ref='action cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='2gdlJF'>
+     <instance ref='CELL GROUP NAME'>
+      <value>Action1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Return' id='5CodEn'>
+       <instance ref='value'>
+        <value>3</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance ref='__ND_MetaphorRuleNameVH'>
+    <value>rule2</value>
+   </instance>
+   <instance ref='__ND_DecTableCellRowVH'>
+    <value>2</value>
+   </instance>
+   <instance ref='__ND_DecTableCellColumnVH'>
+    <value>2</value>
+   </instance>
+   <instance ref='__ND_DecTableCellCreatedVH'>
+    <value>May 23, 2023 11:53 AM</value>
+   </instance>
+  </item>
+  <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='aEfLnF'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance-list ref='condition cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='SLeJ3G'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities3</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='OvzOtL'>
+       <instance ref='value'>
+        <value>PLUS PLUS</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='VXZAp5'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Less than' id='Lgqggq'>
+       <instance ref='value'>
+        <value>1500000</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance-list ref='action cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='U5aXjq'>
+     <instance ref='CELL GROUP NAME'>
+      <value>Action1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Return' id='TcdOyn'>
+       <instance ref='value'>
+        <value>2</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance ref='__ND_MetaphorRuleNameVH'>
+    <value>rule3</value>
+   </instance>
+   <instance ref='__ND_DecTableCellRowVH'>
+    <value>2</value>
+   </instance>
+   <instance ref='__ND_DecTableCellColumnVH'>
+    <value>3</value>
+   </instance>
+   <instance ref='__ND_DecTableCellCreatedVH'>
+    <value>May 23, 2023 11:53 AM</value>
+   </instance>
+  </item>
+  <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='3UXedn'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance-list ref='condition cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='5zJ5Wf'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities3</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='Yr47jO'>
+       <instance ref='value'>
+        <value>MARKET</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='aBZcF2'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Exclude include range' id='I0Hott'>
+       <instance ref='value1'>
+        <value>1500000</value>
+       </instance>
+       <instance ref='value2'>
+        <value>2000000</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance-list ref='action cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='YTpxL5'>
+     <instance ref='CELL GROUP NAME'>
+      <value>Action1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Return' id='K3EZUk'>
+       <instance ref='value'>
+        <value>5</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance ref='__ND_MetaphorRuleNameVH'>
+    <value>rule4</value>
+   </instance>
+   <instance ref='__ND_DecTableCellRowVH'>
+    <value>3</value>
+   </instance>
+   <instance ref='__ND_DecTableCellColumnVH'>
+    <value>1</value>
+   </instance>
+   <instance ref='__ND_DecTableCellCreatedVH'>
+    <value>May 23, 2023 11:53 AM</value>
+   </instance>
+  </item>
+  <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='Jab2DF'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance-list ref='condition cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='Ron0e5'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities3</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='2D8T1z'>
+       <instance ref='value'>
+        <value>MARKET PLUS</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='LFOoda'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Exclude include range' id='I0Hott'>
+       <instance ref='value1'>
+        <value>1500000</value>
+       </instance>
+       <instance ref='value2'>
+        <value>2000000</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance-list ref='action cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='aCU0rG'>
+     <instance ref='CELL GROUP NAME'>
+      <value>Action1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Return' id='YdMSn6'>
+       <instance ref='value'>
+        <value>4</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance ref='__ND_MetaphorRuleNameVH'>
+    <value>rule5</value>
+   </instance>
+   <instance ref='__ND_DecTableCellRowVH'>
+    <value>3</value>
+   </instance>
+   <instance ref='__ND_DecTableCellColumnVH'>
+    <value>2</value>
+   </instance>
+   <instance ref='__ND_DecTableCellCreatedVH'>
+    <value>May 23, 2023 11:53 AM</value>
+   </instance>
+  </item>
+  <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='MIBUFG'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance-list ref='condition cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='4s7Bjs'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities3</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='OvzOtL'>
+       <instance ref='value'>
+        <value>PLUS PLUS</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='6CS0hB'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Exclude include range' id='I0Hott'>
+       <instance ref='value1'>
+        <value>1500000</value>
+       </instance>
+       <instance ref='value2'>
+        <value>2000000</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance-list ref='action cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='4pCciW'>
+     <instance ref='CELL GROUP NAME'>
+      <value>Action1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Return' id='aPp9tI'>
+       <instance ref='value'>
+        <value>3</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance ref='__ND_MetaphorRuleNameVH'>
+    <value>rule6</value>
+   </instance>
+   <instance ref='__ND_DecTableCellRowVH'>
+    <value>3</value>
+   </instance>
+   <instance ref='__ND_DecTableCellColumnVH'>
+    <value>3</value>
+   </instance>
+   <instance ref='__ND_DecTableCellCreatedVH'>
+    <value>May 23, 2023 11:53 AM</value>
+   </instance>
+  </item>
+  <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='Ada7Nn'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance-list ref='condition cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='YGLndM'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities3</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='Yr47jO'>
+       <instance ref='value'>
+        <value>MARKET</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='XwU4RG'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Greater than' id='LAImzr'>
+       <instance ref='value'>
+        <value>2000000</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance-list ref='action cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='CJ92zO'>
+     <instance ref='CELL GROUP NAME'>
+      <value>Action1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Return' id='PohSFP'>
+       <instance ref='value'>
+        <value>5</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance ref='__ND_MetaphorRuleNameVH'>
+    <value>rule7</value>
+   </instance>
+   <instance ref='__ND_DecTableCellRowVH'>
+    <value>4</value>
+   </instance>
+   <instance ref='__ND_DecTableCellColumnVH'>
+    <value>1</value>
+   </instance>
+   <instance ref='__ND_DecTableCellCreatedVH'>
+    <value>May 23, 2023 11:53 AM</value>
+   </instance>
+  </item>
+  <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='HDeBR0'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance-list ref='condition cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='NLewaO'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities3</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='2D8T1z'>
+       <instance ref='value'>
+        <value>MARKET PLUS</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='DOSky1'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Greater than' id='LAImzr'>
+       <instance ref='value'>
+        <value>2000000</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance-list ref='action cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='2nuKK6'>
+     <instance ref='CELL GROUP NAME'>
+      <value>Action1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Return' id='YpOp8q'>
+       <instance ref='value'>
+        <value>4</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance ref='__ND_MetaphorRuleNameVH'>
+    <value>rule8</value>
+   </instance>
+   <instance ref='__ND_DecTableCellRowVH'>
+    <value>4</value>
+   </instance>
+   <instance ref='__ND_DecTableCellColumnVH'>
+    <value>2</value>
+   </instance>
+   <instance ref='__ND_DecTableCellCreatedVH'>
+    <value>May 23, 2023 11:53 AM</value>
+   </instance>
+  </item>
+  <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Decision Table Case Template' id='S3nhXl'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance-list ref='condition cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='WgzE6A'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities3</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='OvzOtL'>
+       <instance ref='value'>
+        <value>PLUS PLUS</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='MyxVfI'>
+     <instance ref='CELL GROUP NAME'>
+      <value>All_Entities1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Greater than' id='LAImzr'>
+       <instance ref='value'>
+        <value>2000000</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance-list ref='action cells'>
+    <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Template' id='L5dTML'>
+     <instance ref='CELL GROUP NAME'>
+      <value>Action1</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Return' id='ANL9Jk'>
+       <instance ref='value'>
+        <value>3</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance ref='__ND_MetaphorRuleNameVH'>
+    <value>rule9</value>
+   </instance>
+   <instance ref='__ND_DecTableCellRowVH'>
+    <value>4</value>
+   </instance>
+   <instance ref='__ND_DecTableCellColumnVH'>
+    <value>3</value>
+   </instance>
+   <instance ref='__ND_DecTableCellCreatedVH'>
+    <value>May 23, 2023 11:53 AM</value>
+   </instance>
+  </item>
+ </instance-list>
+ <instance ref='editingInfo'>
+  <instance ref='rowCondValueCount'>
+   <value>3</value>
+  </instance>
+  <instance ref='colCondValueCount'>
+   <value>3</value>
+  </instance>
+  <instance ref='isNewInstance'>
+   <value>false</value>
+  </instance>
+ </instance>
+ <instance ref='casesInfo'>
+  <instance-list ref='condition cells'>
+   <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Group Info Template' id='6WLmS7'>
+    <instance ref='name'>
+     <value>All_Entities3</value>
+    </instance>
+    <instance ref='displayName'>
+     <value>riskSegment</value>
+    </instance>
+    <instance ref='property'>
+     <value>riskSegment</value>
+    </instance>
+    <instance ref='type'>
+     <value>string</value>
+    </instance>
+   </item>
+   <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Group Info Template' id='5viJmg'>
+    <instance ref='name'>
+     <value>All_Entities1</value>
+    </instance>
+    <instance ref='displayName'>
+     <value>bank_Suurogate_Loan_Amt1</value>
+    </instance>
+    <instance ref='property'>
+     <value>bank_Suurogate_Loan_Amt1</value>
+    </instance>
+    <instance ref='type'>
+     <value>real</value>
+    </instance>
+   </item>
+  </instance-list>
+  <instance-list ref='action cells'>
+   <item template='6wJBDnNMEpPfdP4wizmesDxkko8.Cell Group Info Template' id='R0GzSq'>
+    <instance ref='name'>
+     <value>Action1</value>
+    </instance>
+    <instance ref='displayName'>
+     <value>Return</value>
+    </instance>
+    <instance ref='property'>
+     <value></value>
+    </instance>
+    <instance ref='type'>
+     <value>real</value>
+    </instance>
+   </item>
+  </instance-list>
+ </instance>
+</instantiation>

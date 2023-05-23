@@ -121,7 +121,12 @@ try{
      // Total Variable Salary
      totalVariableSalary is a real initially 0;
      totalVariableSalary = netBonus + netIncentive;
-     aBlazeApplicant.totalVariableSalary = totalVariableSalary;
+     if(aBlazeApplicant.applicantAdditionalDetails.additionalDetail.netAnnual is known and
+         totalVariableSalary > aBlazeApplicant.applicantAdditionalDetails.additionalDetail.netAnnual)then{
+			totalVariableSalary =aBlazeApplicant.applicantAdditionalDetails.additionalDetail.netAnnual;
+	   }else{
+			aBlazeApplicant.totalVariableSalary = totalVariableSalary;
+	   }
      print("----> totalVariableSalary :: " totalVariableSalary);
      
      // Total Salary Related Income

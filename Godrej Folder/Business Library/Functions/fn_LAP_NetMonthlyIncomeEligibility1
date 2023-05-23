@@ -109,7 +109,9 @@ if(incomeProgramUsed <> unknown and incomeProgramUsed = (ignoring case) "CASH PR
   if(totalOtherIncome<> unknown and (totalOtherIncome > eligibleIncomeGrossMargin)) then{
     totalOtherIncome = eligibleIncomeGrossMargin;
   }
-}else if(incomeProgramUsed <> unknown and incomeProgramUsed = (ignoring case) "INDUSTRY MARGIN" and eligibleIncomeIndustryMargin <> unknown) then{
+}
+}
+if(incomeProgramUsed <> unknown and incomeProgramUsed = (ignoring case) "INDUSTRY MARGIN" and eligibleIncomeIndustryMargin <> unknown) then{
   eligibleIncome = eligibleIncomeIndustryMargin;
   if(totalOtherIncome<> unknown and (totalOtherIncome > eligibleIncomeIndustryMargin)) then{
     totalOtherIncome = eligibleIncomeIndustryMargin;
@@ -127,7 +129,6 @@ if(incomeProgramUsed <> unknown and incomeProgramUsed = (ignoring case) "CASH PR
 and aBlazeApplicant.applicantAdditionalDetails.otherSenpInputEligibility.avgMonthlyBalancePerfios <> unknown) then{
   eligibleIncome = aBlazeApplicant.applicantAdditionalDetails.otherSenpInputEligibility.avgMonthlyBalancePerfios;
   print("----> eligibleIncome BANKING SURROGATE or LOW LTV :: " eligibleIncome);
-}
 }
 print("----> eligibleIncome final :: " eligibleIncome);
 print("----> totalOtherIncome final :: " totalOtherIncome);

@@ -617,8 +617,18 @@ if(aBlazeApplication.fn_Perfios_CustomerSupplierConcentration= true)  then {
 }
 
 //--------------------------------------------------------------------------------Perfios Function end--------------------------------------------------------------------------------------------------//
-
-
+//--------------------------------------------------------------------------------Financial Health Start------------------------------------------------------------------------------------------------//
+//BL Calulated Variable Exception
+print("----> aBlazeApplication.fn_FinancialHealthException  :: "aBlazeApplication.fn_FinancialHealthException);
+if(aBlazeApplication.fn_FinancialHealthException = true)  then {
+  print("**Error :: ###>> Exception occured in fn_FinancialHealthException <<###");
+    errType = "Exception";
+    errText = "Exception occured in fn_FinancialHealthException check logs for more info";
+    errId = "EXCEPTION_FHR";
+    errName = errId;    
+    fn_SetErrorInResponse(message,errType,errId,errName,errAction,errCode,errText);
+}
+//--------------------------------------------------------------------------------Financial Health End--------------------------------------------------------------------------------------------------//
 }
 //--------------------------------------------------------------------------------------------------BL Exception Ends--------------------------------------------------------------------------------------------------------
 

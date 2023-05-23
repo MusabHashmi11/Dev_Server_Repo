@@ -1,0 +1,18 @@
+#Extended attributes for Innovator file-based repository (directory: 'BL_Min_ROI_SEP')
+#Tue May 23 19:17:35 UTC 2023
+contentType=Instance
+guid=SbdjjykbPiAq2yLbmW8S8voRAwt
+innovatorDisplayName=BL_Min_ROI_SEP
+innovatorItemCreationId=admin
+innovatorLastModifiedUser=admin
+innovatorTemplateRef=6wJBDnNMEpPfdP4wizmesDxkko8
+managementProperty.Predictive\ Model\ Type=NotApplicable
+managementProperty.Source\ Reference.filterVH=
+managementProperty.Source\ Reference.locationVH=
+managementProperty.Source\ Reference.releaseDateVH=
+managementProperty.Source\ Reference.repositoryAccessVH=
+managementProperty.Source\ Reference.repositoryNameVH=
+managementProperty.Source\ Reference.versionVH=
+subType=Decision Table
+target=SRL
+type=SRL Ruleset

@@ -213,7 +213,7 @@ try{
         // Trading
         if(aBlazeApplicant.natureOfBusiness =(ignoring case)"TRADING") then {
           if(aBlazeApplicant.applicantAdditionalDetails.senpLatestYearEligibility.turnover <> unknown
-             and (eligibleLoanAmountAbb > aBlazeApplicant.applicantAdditionalDetails.senpLatestYearEligibility.turnover)) then {
+             and (eligibleLoanAmountAbb > aBlazeApplicant.applicantAdditionalDetails.senpLatestYearEligibility.turnover * 0.75)) then {
             eligibleLoanAmountAbb = 0.75 * aBlazeApplicant.applicantAdditionalDetails.senpLatestYearEligibility.turnover;
             print("----> eligibleLoanAmountAbb Trading  :: " eligibleLoanAmountAbb);
             }

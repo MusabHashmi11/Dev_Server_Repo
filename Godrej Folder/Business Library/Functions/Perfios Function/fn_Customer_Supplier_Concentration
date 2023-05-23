@@ -68,7 +68,7 @@ productCode is a string;
 productCode = message.invocation.decisionService;
 
 try{
-	print("aBlazeApplication.businessErrorsFlag---------------> "aBlazeApplication.businessErrorsFlag);
+	print("aBlazeApplication.businessErrorsFlag----> "aBlazeApplication.businessErrorsFlag);
 	
 	if(aBlazeApplication.businessErrorsFlag = false) then{
 		
@@ -76,6 +76,16 @@ try{
 		blazeData is some BlazeData initially a BlazeData;
 		blazeData.blazeAccountAnalysisArray =an array of BlazeAccountAnalysis;
 		
+		blazeData.combinedCreditorsArray =an array of BlazeCreditor;
+		blazeData.combinedDebtorsArray =an array of BlazeDebtor;
+		
+			sumOfTotalCashWithdrawalsInL12M_Count is a real initially 0;
+			sumOfTotalCashDepositInL12M_Count is a real initially 0;
+			sumOfTotalBusinessDebitTxnsinL12M_ForAll is a real initially 0;
+			sumOfTotalBusinessCreditTxnsinL12M_ForAll is a real initially 0;
+			netCreditAmount_ForAll is a real initially 0;
+			netDebitAmount_ForAll is a real initially 0;
+			
 		//Entering AccountAnalysis loop
 		print("---------------------Entering AccountAnalysis loop---------------------");
 		for each AccountAnalysis in perfiosData.data.accountAnalysis do{
@@ -98,14 +108,13 @@ try{
 			for each Top10PaymentsmadeMonthwise in it.top10PaymentsmadeMonthwise such that (it<>null and it<>unknown)
 			do{
 				//Creating Top10PaymentsmadeMonthwise iterative object for loop
-				aTop10PaymentsmadeMonthwise is some Top10PaymentsmadeMonthwise initially it as a Top10PaymentsmadeMonthwise;
+				aTop10PaymentsmadeMonthwise is some Top10PaymentsmadeMonthwise initially it as a Top10PaymentsmadeMonthwise;			
 				
 				//Creating BlazeCreditors local object inside the loop to append it on localArray and then initialising it again
 				blazeCreditorsObj is some BlazeCreditor initially a BlazeCreditor;
 				
 				//Creating a flag that specifies if the party name has appeared for the first time in loop or has been appeared before
 				isRepeated is a boolean initially false;
-				
 				if(blazeCreditorsTempArr.count=0)then{
 					blazeCreditorsObj.party =aTop10PaymentsmadeMonthwise.party;
 					blazeCreditorsObj.amount =aTop10PaymentsmadeMonthwise.amount;
@@ -116,8 +125,6 @@ try{
 					counter is an integer initially 0;
 					
 					//Entering while loop to check if the party name has appeared before or not
-					print("---->counter ::"counter);
-					print("---->blazeCreditorsTempArr.count ::"blazeCreditorsTempArr.count);
 					while (counter<blazeCreditorsTempArr.count)
 						do{
 							if(aTop10PaymentsmadeMonthwise.party =blazeCreditorsTempArr[counter].party)then{
@@ -148,8 +155,7 @@ try{
 			//Appending temporary blazeCreditorsArray to Global blazeCreditorsArray
 			if(blazeCreditorsTempArr is not equal to null and blazeCreditorsTempArr is not unknown) then {
 				blazeAccountAnalysis.blazeCreditorsArray = blazeCreditorsTempArr;
-				
-				
+					
 			}else {
 				print("----> blazeCreditorsArray is null");
 			}
@@ -244,6 +250,15 @@ try{
 			}
 			//Exiting Loop for MonthlyDetails
 			
+			print("---->blazeAccountAnalysis.sumOfTotalCashWithdrawalsInL12M ::"blazeAccountAnalysis.sumOfTotalCashWithdrawalsInL12M);
+			print("---->blazeAccountAnalysis.sumOfTotalCashDepositInL12M ::"blazeAccountAnalysis.sumOfTotalCashDepositInL12M);
+			
+			//Counting sumOfTotalCashWithdrawalsInL12M for all accounts
+			sumOfTotalCashWithdrawalsInL12M_Count =sumOfTotalCashWithdrawalsInL12M_Count+ blazeAccountAnalysis.sumOfTotalCashWithdrawalsInL12M;
+			sumOfTotalCashDepositInL12M_Count =sumOfTotalCashDepositInL12M_Count +blazeAccountAnalysis.sumOfTotalCashDepositInL12M;
+			print("---->sumOfTotalCashWithdrawalsInL12M_Count ::"sumOfTotalCashWithdrawalsInL12M_Count);
+			print("---->sumOfTotalCashDepositInL12M_Count ::"sumOfTotalCashDepositInL12M_Count);
+			
 			//Reinitialising buffer month variable to use it for another loop
 			bufferMonthCounter =0;
 			
@@ -272,6 +287,16 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for monthlyData1
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -296,6 +321,16 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for monthlyData2
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -320,6 +355,16 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for monthlyData3
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll+blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -344,6 +389,16 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for aMonthlyData4
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -368,6 +423,16 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for monthlyData5
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -392,6 +457,16 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for aMonthlyData6
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -416,6 +491,16 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for monthlyData6
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -440,6 +525,16 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for monthlyData7
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -464,6 +559,15 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for monthlyData8
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -488,6 +592,16 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for monthlyData9
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -512,6 +626,16 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for monthlyData1
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 
 			//Checking for which monthlyDetail array to enter
@@ -536,14 +660,20 @@ try{
 					monthsCounterLocal =monthsCounterLocal+1;
 				}
 				//Exiting loop for monthlyData11
+				
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
+				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
+				
+				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
+				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
+				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
+				
+				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
+				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
 			}
 			
 			blazeAccountAnalysis.netDebitAmount =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M -blazeAccountAnalysis.sumOfTotalCashWithdrawalsInL12M;
 			blazeAccountAnalysis.netCreditAmount =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M -blazeAccountAnalysis.sumOfTotalCashDepositInL12M;
-			
-			print("---->blazeData ::"blazeData);
-			print("---->blazeData.blazeAccountAnalysisArray ::"blazeData.blazeAccountAnalysisArray);
-			print("---->blazeAccountAnalysis ::"blazeAccountAnalysis);
 			
 			if(blazeAccountAnalysis is not null and blazeAccountAnalysis is known)then{
 				blazeData.blazeAccountAnalysisArray.append(blazeAccountAnalysis);
@@ -567,23 +697,28 @@ try{
 
 			print(">>>Entering BlazeCreditorsArray");
 			//it<>blazeData.blazeAccountAnalysisArray[0].blazeCreditorsArray
-			for each BlazeCreditor in aBlazeAccountAnalysis.blazeCreditorsArray such that(it<>null)do{
+			for each BlazeCreditor in aBlazeAccountAnalysis.blazeCreditorsArray such that(it<>null and it<>unknown)do{
 				aBlazeCreditor is some BlazeCreditor initially it as a BlazeCreditor;
 				
 				//Checking if the object with party name exist in the combinedCreditorsArray, if it exists then adding its amount to the existing one
-				for each BlazeCreditor in blazeData.combinedCreditorsArray such that(it<>null)do{
-					finalCreditorObj is some BlazeCreditor initially it as a BlazeCreditor;
-					print("---->aBlazeCreditor.party ::"aBlazeCreditor.party);
-					print("---->aBlazeCreditor.amount ::"aBlazeCreditor.amount);
-				
-					if(finalCreditorObj.party =aBlazeCreditor.party)then{
-						finalCreditorObj.amount = finalCreditorObj.amount +aBlazeCreditor.amount;
-						isRepeated =true;
+				print("---->blazeData.combinedCreditorsArray ::"blazeData.combinedCreditorsArray);
+				if(blazeData.combinedCreditorsArray <>unknown and blazeData.combinedCreditorsArray<>null)then{
+					for each BlazeCreditor in blazeData.combinedCreditorsArray do{
+						finalCreditorObj is some BlazeCreditor initially it as a BlazeCreditor;
+						print("---->aBlazeCreditor.party ::"aBlazeCreditor.party);
+						print("---->aBlazeCreditor.amount ::"aBlazeCreditor.amount);
+					
+						if(finalCreditorObj.party =aBlazeCreditor.party)then{
+							finalCreditorObj.amount = finalCreditorObj.amount +aBlazeCreditor.amount;
+							isRepeated =true;
+						}
 					}
 				}
 				
+				
 				//Appending the object into the array if the object with correspondding party does not exist
 				if(not isRepeated)then{
+					print("---->aBlazeCreditor ::"aBlazeCreditor);
 					blazeData.combinedCreditorsArray.append(aBlazeCreditor);
 				}	
 			}
@@ -591,16 +726,19 @@ try{
 			
 			
 			print(">>>Entering BlazeDebtorsArray");
-			for each BlazeDebtor in aBlazeAccountAnalysis.blazeDebtorsArray such that(it<>null)do{
+			for each BlazeDebtor in aBlazeAccountAnalysis.blazeDebtorsArray such that(it<>null and it<>unknown)do{
 				aBlazeDebtor is some BlazeDebtor initially it as a BlazeDebtor;
 				
-				//Checking if the object with party name exist in the combinedDebtorsArray, if it exists then adding its amount to the existing one
-				for each BlazeDebtor in blazeData.combinedDebtorsArray such that(it<>null)do{
-				finalDebtorObj is some BlazeDebtor initially it as a BlazeDebtor;
-				
-					if(finalDebtorObj.party =aBlazeDebtor.party)then{
-						finalDebtorObj.amount = finalDebtorObj.amount +aBlazeDebtor.amount;
-						isRepeated =true;
+				print("---->blazeData.combinedDebtorsArray ::"blazeData.combinedDebtorsArray);
+				if(blazeData.combinedDebtorsArray is known and blazeData.combinedDebtorsArray<>null)then{	
+					//Checking if the object with party name exist in the combinedDebtorsArray, if it exists then adding its amount to the existing one
+					for each BlazeDebtor in blazeData.combinedDebtorsArray do{
+					finalDebtorObj is some BlazeDebtor initially it as a BlazeDebtor;
+					
+						if(finalDebtorObj.party =aBlazeDebtor.party)then{
+							finalDebtorObj.amount = finalDebtorObj.amount +aBlazeDebtor.amount;
+							isRepeated =true;
+						}
 					}
 				}
 				print("---->aBlazeDebtor.party ::"aBlazeDebtor.party);
@@ -611,7 +749,13 @@ try{
 				}	
 			}
 			print(">>>Exiting BlazeDebtosArray");
-			//Bubble sorting Debtiors array
+			
+			netDebitAmount_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll -sumOfTotalCashWithdrawalsInL12M_Count;
+			netCreditAmount_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll -sumOfTotalCashDepositInL12M_Count;
+			print("---->netDebitAmount_ForAll ::"netDebitAmount_ForAll);
+			print("---->netCreditAmount_ForAll ::"netCreditAmount_ForAll);
+			
+			//Bubble sorting Debtiorsarray in aBlazeAccountAnalysis.blazeDebtorsArray
 			i is a integer initially 0;
 			n is a integer initially 0;
 			
@@ -631,12 +775,12 @@ try{
 				}
 				i=0;
 				for each BlazeDebtor in aBlazeAccountAnalysis.blazeDebtorsArray do {
-					print("amount["i"]------------------------------------------------->"it.amount);
+					print("aBlazeAccountAnalysis.blazeDebtorsArray["i"].amount---->"it.amount);
 					i=i+1;
 				}
 			}
 			  
-			//Bubble sorting Creditors Array
+			//Bubble sorting CreditorsArray in aBlazeAccountAnalysis.blazeCreditorsArray
 			i = 0;
 			if(aBlazeAccountAnalysis.blazeCreditorsArray is known and aBlazeAccountAnalysis.blazeCreditorsArray is not null)then{
 				n = aBlazeAccountAnalysis.blazeCreditorsArray.count;
@@ -654,17 +798,63 @@ try{
 				}
 				i=0;
 				for each BlazeCreditor in aBlazeAccountAnalysis.blazeCreditorsArray do {
-					print("amount["i"]------------------------------------------------->"it.amount);
+					print("aBlazeAccountAnalysis.blazeCreditorsArray["i"].amount---->"it.amount);
 					i=i+1;
 				}
 			}
 			
 			
+			//Bubble Sorting CombinedCreditorsArray in blazeData.combinedCreditorsArray
+			i = 0;
+			if(blazeData.combinedCreditorsArray is known and blazeData.combinedCreditorsArray is not null)then{
+				n = blazeData.combinedCreditorsArray.count;
+				while(i < n-1)do {
+					if((blazeData.combinedCreditorsArray[i].amount) < blazeData.combinedCreditorsArray[i+1].amount)then {
+						tempAllocationDetails is some BlazeCreditor initially a BlazeCreditor;
+						tempAllocationDetails = blazeData.combinedCreditorsArray[i+1];
+						blazeData.combinedCreditorsArray[i+1] = blazeData.combinedCreditorsArray[i];
+						blazeData.combinedCreditorsArray[i] = tempAllocationDetails;
+						
+						// reinitiallizing i
+						i = -1;
+					}
+					i = i+1;
+				}
+				i=0;
+				for each BlazeCreditor in blazeData.combinedCreditorsArray do {
+					print("blazeData.combinedCreditorsArray["i"].amount---->"it.amount);
+					i=i+1;
+				}
+			}
+			
+			//Bubble sorting Debtiorsarray in blazeData.combinedDebtorsArray
+			i = 0;
+			if(blazeData.combinedDebtorsArray is known and blazeData.combinedDebtorsArray is not null)then{
+				n=blazeData.combinedDebtorsArray.count;
+				while(i < n-1)do {
+					if(((blazeData.combinedDebtorsArray[i].amount) < blazeData.combinedDebtorsArray[i+1].amount)) then {
+						tempAllocationDetails is some BlazeDebtor initially a BlazeDebtor;
+						tempAllocationDetails = blazeData.combinedDebtorsArray[i+1];
+						blazeData.combinedDebtorsArray[i+1] = blazeData.combinedDebtorsArray[i];
+						blazeData.combinedDebtorsArray[i] = tempAllocationDetails;
+						
+						// reinitiallizing i
+						i = -1;
+					}
+					i = i+1;
+				}
+				i=0;
+				for each BlazeDebtor in blazeData.combinedDebtorsArray do {
+					print("blazeData.combinedDebtorsArray["i"].amount---->"it.amount);
+					i=i+1;
+				}
+			}
+			
 			//Counter to get top 10 Amount in creditor and Debtior
 			blazeTop10Counter is an integer initially 0;
 	
 			//Initialising loop to add creditorConcentration
-			for each BlazeCreditor in aBlazeAccountAnalysis.blazeCreditorsArray such that(it<>null and blazeTop10Counter<10)do{
+			for each BlazeCreditor in aBlazeAccountAnalysis.blazeCreditorsArray such that(it<>null and it<>unknown and blazeTop10Counter<10)do{
 				
 				aBlazeCreditor is some BlazeCreditor initially it as a BlazeCreditor;
 				
@@ -681,12 +871,14 @@ try{
 			   fn_AppendCalculatedVariable(message, "CreditorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeCreditor.party","aBlazeCreditor.creditorFlag);
 			   blazeTop10Counter = blazeTop10Counter +1;
 			}
+			print("---->blazeCreditorsArray.count ::"aBlazeAccountAnalysis.blazeCreditorsArray.count);
+
 			
 			//reinitallizing BlazeCounter  For Debtors Array
 			blazeTop10Counter = 0;
 			
 			//Initialising loop to add DebtorConcentration 
-			for each BlazeDebtor in aBlazeAccountAnalysis.blazeDebtorsArray such that(it<>null and blazeTop10Counter < 10) do{
+			for each BlazeDebtor in aBlazeAccountAnalysis.blazeDebtorsArray such that(it<>null and it<>unknown and blazeTop10Counter < 10) do{
 				aBlazeDebtor is some BlazeDebtor initially it as a BlazeDebtor;
 				
 				//Calculating Creditors Conditors for each Creditor
@@ -702,7 +894,51 @@ try{
 				blazeTop10Counter = blazeTop10Counter +1;
 				fn_AppendCalculatedVariable(message, "DebtorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeDebtor.party","aBlazeDebtor.debtorFlag);
 			}
-			print("blazeDebtorsArray.count-------------------------"aBlazeAccountAnalysis.blazeDebtorsArray.count);
+			print("---->blazeDebtorsArray.count ::"aBlazeAccountAnalysis.blazeDebtorsArray.count);
+			
+			blazeTop10Counter =0;
+			//Initialising loop to add creditorConcentration
+			for each BlazeCreditor in blazeData.combinedCreditorsArray such that(it<>null and it<>unknown and blazeTop10Counter<10)do{
+				
+				aBlazeCreditor is some BlazeCreditor initially it as a BlazeCreditor;
+				
+				//Calculating Creditors Conditors for each Creditor
+				aBlazeCreditor.creditorPercent =(aBlazeCreditor.amount/netDebitAmount_ForAll)*100;
+				
+				//setting flag for each creditor
+				if(aBlazeCreditor.creditorPercent > 25) then{
+					aBlazeCreditor.creditorFlag = "Red";
+				}else{
+					aBlazeCreditor.creditorFlag = "Green";
+			   }
+			  
+			   fn_AppendCalculatedVariable(message, "CreditorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeCreditor.party","aBlazeCreditor.creditorFlag);
+			   blazeTop10Counter = blazeTop10Counter +1;
+			}
+			print("---->combinedCreditorsArray.count ::"blazeData.combinedCreditorsArray.count);
+			
+			//reinitallizing BlazeCounter  For Debtors Array
+			blazeTop10Counter = 0;
+			
+			//Initialising loop to add DebtorConcentration 
+			for each BlazeDebtor in blazeData.combinedDebtorsArray such that(it<>null and it<>unknown and blazeTop10Counter < 10) do{
+				aBlazeDebtor is some BlazeDebtor initially it as a BlazeDebtor;
+				
+				//Calculating Creditors Conditors for each Creditor
+				aBlazeDebtor.debtorPercent =(aBlazeDebtor.amount/netCreditAmount_ForAll)*100;
+			  
+				//setting flag for each creditor
+				if(aBlazeDebtor.debtorPercent > 25) then{
+				   aBlazeDebtor.debtorFlag = "Red";
+				}
+				else{
+				   aBlazeDebtor.debtorFlag = "Green";
+				}
+				blazeTop10Counter = blazeTop10Counter +1;
+				fn_AppendCalculatedVariable(message, "DebtorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeDebtor.party","aBlazeDebtor.debtorFlag);
+			}
+			print("---->ombinedDebtorsArray.count ::"blazeData.combinedDebtorsArray.count);
+			
 		}
 	}
 }

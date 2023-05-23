@@ -113,8 +113,13 @@ if(aBlazeApplication.businessErrorsFlag = false) then {
       calculatedVariable33.entityType = "Application";
       calculatedVariable33.purpose = "AutoPopulate";
       if(message.request.application.applicationAdditionalDetails.buffer5 is known and message.request.application.applicationAdditionalDetails.buffer5 <>"") then {
-      value is some BigDecimal initially BigDecimal.newInstance(message.request.application.applicationAdditionalDetails.buffer5 as a real);
-      calculatedVariable33.fieldValue = fn_DecimalNumberPrecision(value as a string, precision);     
+      if(aBlazeApplication.applicationAdditionalDetails.buffer5 =(ignoring case)"Infinity")then{
+		  calculatedVariable33.fieldValue ="infinity";
+	  }
+	  else{
+	 value is some BigDecimal initially BigDecimal.newInstance(message.request.application.applicationAdditionalDetails.buffer5 as a real);
+      calculatedVariable33.fieldValue = fn_DecimalNumberPrecision(value as a string, precision);  
+	  }
       }else{
       calculatedVariable33.fieldValue = "-1";
       }
@@ -129,8 +134,13 @@ if(aBlazeApplication.businessErrorsFlag = false) then {
       calculatedVariable34.entityType = "Application";
       calculatedVariable34.purpose = "AutoPopulate";
 	  if(message.request.application.applicationAdditionalDetails.buffer6 is known and message.request.application.applicationAdditionalDetails.buffer6 <>"") then {
-      value is some BigDecimal initially BigDecimal.newInstance(message.request.application.applicationAdditionalDetails.buffer6 as a real);
-      calculatedVariable34.fieldValue = fn_DecimalNumberPrecision(value as a string, precision);     
+      if(aBlazeApplication.applicationAdditionalDetails.buffer6 =(ignoring case)"Infinity")then{
+		 calculatedVariable34.fieldValue ="infinity";
+	  }
+	  else{
+	  value is some BigDecimal initially BigDecimal.newInstance(message.request.application.applicationAdditionalDetails.buffer6 as a real);
+      calculatedVariable34.fieldValue = fn_DecimalNumberPrecision(value as a string, precision);  
+	  }
       }else{
       calculatedVariable34.fieldValue = "-1";
       }
@@ -222,56 +232,37 @@ if(aBlazeApplication.businessErrorsFlag = false) then {
       calculatedVariable42.purpose = "AutoPopulate";
       calculatedVariable42.fieldValue =aBlazeApplication.finalEligLoAmtBankingSur_HT;
     calculatedVariablesArray.append(calculatedVariable42);
-    																			
-																					 
-												
-													  
-														
-													  
-													
-																					
-														  
-   
-																				
-																				   
-												
-													  
-														
-													  
-													
-																					 
-														  
- 
-																				 
-																					 
-												
-													  
-														
-													  
-													
-																					
-														  
- 
-																				 
-																						
-												
-													  
-														
-													  
-													
-																					  
-														  
- 
-																				 
-																					  
-												
-													  
-														
-													  
-													
-																					 
-														  
-    
+		
+		calculatedVariable43 is some CalculatedVariable initially a CalculatedVariable;
+		calculatedVariable43.fieldName = "Final Eligible Loan Amount Income Method SEP";
+		calculatedVariable43.fieldType = "String";
+		calculatedVariable43.productCode = productCode; 
+		calculatedVariable43.entityId = applicationNumber;
+		calculatedVariable43.entityType = "Application";
+		calculatedVariable43.purpose = "AutoPopulate";
+		calculatedVariable43.fieldValue =aBlazeApplication.finalEligLoAmtIncMethod_SEP;
+		calculatedVariablesArray.append(calculatedVariable43);
+
+ 		calculatedVariable44 is some CalculatedVariable initially a CalculatedVariable;
+		calculatedVariable44.fieldName = "Final Eligible Loan Amount Banking Method SEP";
+		calculatedVariable44.fieldType = "String";
+		calculatedVariable44.productCode = productCode; 
+		calculatedVariable44.entityId = applicationNumber;
+		calculatedVariable44.entityType = "Application";
+		calculatedVariable44.purpose = "AutoPopulate";
+		calculatedVariable44.fieldValue =aBlazeApplication.finalEligLoAmtBankingSur_SEP;
+		calculatedVariablesArray.append(calculatedVariable44);
+
+  		calculatedVariable45 is some CalculatedVariable initially a CalculatedVariable;
+		calculatedVariable45.fieldName = "Final Eligible Loan Amount Gross Receipt SEP";
+		calculatedVariable45.fieldType = "String";
+		calculatedVariable45.productCode = productCode; 
+		calculatedVariable45.entityId = applicationNumber;
+		calculatedVariable45.entityType = "Application";
+		calculatedVariable45.purpose = "AutoPopulate";
+		calculatedVariable45.fieldValue =aBlazeApplication.finalEligLoAmtGrossReceipt_SEP;
+		calculatedVariablesArray.append(calculatedVariable45);
+
      //----------------------------------------------------BL Calculated Variables Ends --------------------------------------------------
   }
    else if(message.invocation.decisionService <> (ignoring case)"BL") then{ 

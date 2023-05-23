@@ -99,7 +99,7 @@ try {
 		noOfAccountWithUnknownDateOpenedOrDisbursed is an integer initially 0;
 		N_CTR_EVER_ALL is a real;
 		N_CTR_EVER_ALL =aBlazeApplicant.creditBureauReports[0].CreditReport.Account.count;
-		MAX_of_MAX_DELQ is a real;
+		MAX_of_MAX_DELQ is a real initially initVarApp;
 		MAX_of_MAX_DELQ_L6M is a real;
 		MIN_of_MAX_DELQ_special is a real;
 		MIN_MOB_UNSEC_App is a real initially initVarApp;
@@ -113,7 +113,8 @@ try {
 		PCT_LEVERAGE_A_ALL_SPECIAL is a real;
 		MIN_PCT_LEVERAGE_A_ALL_SPECIAL is a real;
 		segment is a string initially "";
-		
+		aBlazeApplicant.MAX_DELQ_L24M_SEC =0;
+		print("~~~~>aBlazeApplicant.MAX_DELQ_L24M_SEC ::"aBlazeApplicant.MAX_DELQ_L24M_SEC);
 		//Initialising local flags Appliant level
 		MON_SIN_L30P_ALL_FLAG is a boolean initially false;
 		MIN_PCT_BAL_DA_A_ALL_FLAG is a boolean initially false;
@@ -142,9 +143,7 @@ try {
 		PCT_OTB_A_CARDS is a real;
 		OVERDUE_1 is a real;
 		closeAccCount is an integer initially 0;
-		print("---->initVarAcc ::"initVarAcc);
 		print("---->aBlazeApplicant.customerCif ::"aBlazeApplicant.customerCif);
-		print("---->MOB_UNSEC after declaration ::"MOB_UNSEC);
 		//Declaring Special variables Account level
 		MIN_PCT_BAL_DA_A_ALL_SPECIAL is a real;
 		MS_L30P_SPECIAL is a real initially initVarAcc;
@@ -175,17 +174,12 @@ try {
 			ccFlag = true;
 			ccCount = ccCount+1;
 		}
-		print("accountSecuredFlag = "accountSecuredFlag);
-		print("---->Account.DISBURSED_AMT ::"Account.DISBURSED_AMT);
 		//Setting DA_ISSUE_FLAG
 		if(Account.DISBURSED_AMT<=0)then{
 			DA_ISSUE_FLAG =true;
 		}else{
 			DA_ISSUE_FLAG =false;
 		}
-		print("---->DA_ISSUE_FLAG ::"DA_ISSUE_FLAG);
-		
-		print("---->Account.ACCOUNT_STATUS ::"Account.ACCOUNT_STATUS);
 		
 		//Setting ACTIVE_FLAG
 		if(Account.ACCOUNT_STATUS is known and Account.ACCOUNT_STATUS<>"" and Account.dateClosed is known and aBlazeApplicant.INQUIRY_DATE is known and
@@ -196,15 +190,12 @@ try {
         }else{
 			ACTIVE_FLAG  =true;
 		}
-		print("---->ACTIVE_FLAG ::"ACTIVE_FLAG);
-		
-		print("----->Account.MS_LAST_REP ::"Account.MS_LAST_REP);
-		print("----->Account.currentBalance ::"Account.currentBalance);
+
 		//Setting CURRENT_BAL1
 		if(Account.currentBalance is known and Account.MS_LAST_REP is known and Account.MS_LAST_REP>=0 and Account.MS_LAST_REP<=6)then{
 			CURRENT_BAL1 =Account.currentBalance;
 		}
-		print("---->CURRENT_BAL1 ::"CURRENT_BAL1);
+
 
 		//Setting MIN_PCT_BAL_DA_A_ALL_SPECIAL
 		if(ACTIVE_FLAG and DA_ISSUE_FLAG)then{
@@ -227,8 +218,6 @@ try {
 				COUNT_PCT_OTB_A_CARDS = COUNT_PCT_OTB_A_CARDS + 1;
 			}
 		}
-		print("---->SUM_PCT_OTB_A_CARDS ::"SUM_PCT_OTB_A_CARDS);
-		print("---->COUNT_PCT_OTB_A_CARDS ::"COUNT_PCT_OTB_A_CARDS);
 		// Setting PCT_OTB_A_CARDS_special
 		if (Account.ACCOUNT_STATUS is known and Account.ACCOUNT_STATUS <> (ignoring case)"Active" and ccFlag is false) then {
 			PCT_OTB_A_CARDS_special = -777.77;
@@ -268,14 +257,13 @@ try {
 		if(aBlazeApplicant.MIN_PCT_BAL_DA_A_ALL = unknown)then{
 			aBlazeApplicant.MIN_PCT_BAL_DA_A_ALL =MIN_PCT_BAL_DA_A_ALL_SPECIAL;
 		}
-		print("---->aBlazeApplicant.MIN_PCT_BAL_DA_A_ALL ::"aBlazeApplicant.MIN_PCT_BAL_DA_A_ALL);
 		
 		print("Account.MOB ::"Account.MOB);
 		// Calculating N_CTR_L24M_ALL ----"SCORECARDVARIABLE"----
 		if (Account.MOB is known and Account.MOB >=0 and Account.MOB<=24) then {
 			aBlazeApplicant.N_CTR_L24M_ALL = aBlazeApplicant.N_CTR_L24M_ALL + 1;
 		}
-		
+		print("----> Check This one aBlazeApplicant.N_CTR_L24M_ALL ::"aBlazeApplicant.N_CTR_L24M_ALL);
 		if(ccFlag and Account.MOB is known and Account.MOB>=0 and Account.MOB <=24)then{
 				aBlazeApplicant.N_CTR_L24M_CC =aBlazeApplicant.N_CTR_L24M_CC +1;
 		}
@@ -329,7 +317,6 @@ try {
 				MAX_DELQ_L24M =PaymentHistory.DELQ;
 			}
 		}
-		print("MAX_DELQ_L24M :: "MAX_DELQ_L24M);
 		
 		//Calculating MAX_DELQ_L36M
 		if(PaymentHistory.MS_REP is known and PaymentHistory.MS_REP <=36 and PaymentHistory.DELQ is known)then{
@@ -340,7 +327,7 @@ try {
 				MAX_DELQ_L36M =PaymentHistory.DELQ;
 			}
 		}
-		print("MAX_DELQ_L36M :: "MAX_DELQ_L36M);
+
 		
 		//Calculating MAX_DELQ_L6M
 		if(PaymentHistory.MS_REP is known and PaymentHistory.MS_REP <=6 and PaymentHistory.DELQ is known)then{
@@ -352,14 +339,10 @@ try {
 			}
 			print("PaymentHistory.DELQ="PaymentHistory.DELQ);
 		}
-		print("PaymentHistory.DELQ="PaymentHistory.DELQ);
-		print("MS_REP="MS_REP);
-		print("MAX_DELQ_L6M="MAX_DELQ_L6M);
+
 	//Exiting PaymentHistory Loop
 	}
 		}
-	print("MAX_DELQ_L6M="MAX_DELQ_L6M);
-	print("MAX_DELQ_L36M="MAX_DELQ_L36M);
 	
 	if(accountSecuredFlag =true and Account.DISBURSED_AMT>0 and MAX_DELQ_L24M is known)then{
 		MAX_DELQ =MAX_DELQ_L24M;
@@ -371,7 +354,7 @@ try {
 		}
 		MAX_DELQ_known=true;
 	}
-	print("MAX_of_MAX_DELQ :: "MAX_of_MAX_DELQ);
+
 	
 	// Calculating MAX_DELQ_special
 	if(MAX_DELQ_known=false) then {
@@ -410,7 +393,6 @@ try {
 	else if(MIN_of_MAX_DELQ_special>MAX_DELQ_special) then {
 		MIN_of_MAX_DELQ_special=MAX_DELQ_special;
 	}
-	print("MIN_of_MAX_DELQ_special :: "MIN_of_MAX_DELQ_special);
 	}
 	
 	//Calculating MON_SIN_L30P_ALL ----"SCORECARDVARIABLE"----
@@ -424,7 +406,7 @@ try {
 			aBlazeApplicant.MON_SIN_L30P_ALL =MIN_MS_L30P;
 		}
 	}
-	print("aBlazeApplicant.MON_SIN_L30P_ALL :: "aBlazeApplicant.MON_SIN_L30P_ALL);
+
 	
 	if(accountSecuredFlag =false and Account.MOB is known and Account.MOB>=0)then{
 		 MOB_UNSEC =Account.MOB;
@@ -434,10 +416,7 @@ try {
 		MOB_SPECIAL =-777.79;
 	}
 	
-	print("---->MOB_UNSEC ::"MOB_UNSEC);
-	print("---->MOB_SPECIAL ::"MOB_SPECIAL);
-	print("---->aBlazeApplicant.customerCif ::"aBlazeApplicant.customerCif);
-	print("Coming through MIN_MON_UNSEC_BLOCK");
+
 	if(MIN_MOB_UNSEC_App is unknown and MOB_UNSEC is known)then{
 		MIN_MOB_UNSEC_App =MOB_UNSEC;
 	}else if(MIN_MOB_UNSEC_App is known and MOB_UNSEC is known and MIN_MOB_UNSEC_App > MOB_UNSEC)then{
@@ -447,8 +426,7 @@ try {
 	}else if(MIN_MOB_SPECIAL is known and MOB_SPECIAL is known and MIN_MOB_SPECIAL > MOB_SPECIAL) then {
 		MIN_MOB_SPECIAL = MOB_SPECIAL;
 	}
-	print("---->MIN_MOB_UNSEC_App ::"MIN_MOB_UNSEC_App);
-	print("---->MIN_MOB_SPECIAL ::"MIN_MOB_SPECIAL);
+
 	
 	//Calculating OVERDUE_1
 	print("----> ::Account.MS_LAST_REP ::"Account.MS_LAST_REP);
@@ -465,7 +443,6 @@ try {
 			MAX_of_MAX_DELQ_L6M =MAX_DELQ_L6M;
 		}
 	}
-	print("MAX_of_MAX_DELQ_L6M="MAX_of_MAX_DELQ_L6M);
 		
 	//Calculating N_CTR_A_OVD_UNSEC ----"SCORECARDVARIABLE"----
 	if(OVERDUE_1 is known and accountSecuredFlag =false and  Account.ACCOUNT_STATUS is known and Account.ACCOUNT_STATUS =(ignoring case)"Active" and OVERDUE_1>0)then{
@@ -495,19 +472,16 @@ try {
 	}else if(MIN_of_N_CTR_A_OVD_UNSEC_special is known and MIN_of_N_CTR_A_OVD_UNSEC_special>N_CTR_A_OVD_UNSEC_special)then{
 		MIN_of_N_CTR_A_OVD_UNSEC_special =N_CTR_A_OVD_UNSEC_special;
 	}
-	print("--->MIN_of_N_CTR_A_OVD_UNSEC_special ::"MIN_of_N_CTR_A_OVD_UNSEC_special);
 	
 	//Calculating TOT_BAL_A_ALL_IMDT
 	if (CURRENT_BAL1 is known and ACTIVE_FLAG and DA_ISSUE_FLAG =false)then{
 		TOT_BAL_A_ALL_IMDT = TOT_BAL_A_ALL_IMDT +CURRENT_BAL1;
 	}
-	print("---->TOT_BAL_A_ALL_IMDT ::"TOT_BAL_A_ALL_IMDT);
 	
 	//Calculating TOT_DA_A_ALL_IMDT
 	if (Account.DISBURSED_AMT is known and ACTIVE_FLAG and DA_ISSUE_FLAG=false)then{
 		TOT_DA_A_ALL_IMDT =TOT_DA_A_ALL_IMDT +Account.DISBURSED_AMT; 
 	}
-	print("---->TOT_DA_A_ALL_IMDT ::"TOT_DA_A_ALL_IMDT);
 	
 	if(ACTIVE_FLAG and DA_ISSUE_FLAG) then {
 		PCT_LEVERAGE_A_ALL_SPECIAL = -999.99;
@@ -542,8 +516,6 @@ try {
 	}
 	
 	//Calculating RAT_REC_L24M_ALL ----"SCORECARDVARIABLE"-----
-	print("---->N_CTR_EVER_ALL ::"N_CTR_EVER_ALL);
-	print("---->noOfAccountWithUnknownDateOpenedOrDisbursed ::"noOfAccountWithUnknownDateOpenedOrDisbursed);
 	N_CTR_EVER_ALL =N_CTR_EVER_ALL-noOfAccountWithUnknownDateOpenedOrDisbursed;
 	print("---->N_CTR_EVER_ALL ::"N_CTR_EVER_ALL);
 	if(aBlazeApplicant.N_CTR_L24M_ALL is known)then{
@@ -668,7 +640,6 @@ try {
 			scoreCardCharacteristicsDetail.partialScore = scoredCharacteristics.partialScore as a string;
 			scoreCardCharacteristicsArray.append(scoreCardCharacteristicsDetail);
 		}
-		print("----> scoreCardCharacteristicsArray count :: " scoreCardCharacteristicsArray.count);
 		scoreCardDetail is some ScoreCardDetail initially a ScoreCardDetail;  
 		if(scoreCardCharacteristicsArray <> unknown and scoreCardCharacteristicsArray <> null) then {
 			scoreCardDetail.scoreCardCharacteristics = scoreCardCharacteristicsArray;
@@ -679,7 +650,6 @@ try {
         segment = apply BL_CRIF_Risk_Segmentation(crifBusinessModelDecision.score);
         
 		scoreCardDetail.scorecardName = crifBusinessModelDecision.scoreModelName","segment;      
-		print("Final Score Card Name  ---> "scoreCardDetail.scorecardName);
 		scoreCardDetail.scorecardScore = crifBusinessModelDecision.score;
 		scoreCardDetail.characteristicCount = crifBusinessModelDecision.characteristicCount;
 		scoreCardDetail.scorecardKey = "appScore";

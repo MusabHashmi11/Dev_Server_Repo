@@ -103,7 +103,8 @@ try{
 			
 			//Corporate -- aBlazeApplicant.bureauScore
 			print("----> aBlazeApplicant.corporateFlag  ::  "  aBlazeApplicant.corporateFlag);
-			if(aBlazeApplicant.corporateFlag is true and aBlazeApplicant.applicantAdditionalDetails.cibil.score<>unknown) then {
+			if(aBlazeApplicant.corporateFlag is true and aBlazeApplicant.applicantAdditionalDetails.cibil.score<>unknown
+              and aBlazeApplicant.applicantAdditionalDetails.cibil.score<>"") then {
 				aBlazeApplicant.bureauScore  =  aBlazeApplicant.applicantAdditionalDetails.cibil.score as a real; 
 				print("----> Corporate aBlazeApplicant.bureauScore  ::  "  aBlazeApplicant.bureauScore);
 			} 
@@ -124,7 +125,13 @@ try{
 				aBlazeApplicant.bureauScore  =  aBlazeApplicant.applicantAdditionalDetails.cibil.score as a real;  
 				print("----> SALARIED aBlazeApplicant.bureauScore  ::  "  aBlazeApplicant.bureauScore);
 			}
-			print("----> aBlazeApplicant.bureauScore  ::  "  aBlazeApplicant.bureauScore);     
+			print("----> aBlazeApplicant.bureauScore  ::  "  aBlazeApplicant.bureauScore);    
+          
+                    if(aBlazeApplicant.customerCategory =(ignoring case)"CORP")then{
+            aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome =aBlazeApplicant.applicantAdditionalDetails.customerIndividualSalaried.rentalIncome;
+          }
+		print("---->aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome ::"aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome);
+          
 			//isNtc used in Thin Segment Experian Scorecard      
 			if(aBlazeApplicant.bureauScore  is  not  unknown  and  aBlazeApplicant.bureauScore  is  equal  to  -1  )  then  {
 				aBlazeApplicant.isNtc  =  true;

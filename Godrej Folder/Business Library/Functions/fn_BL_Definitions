@@ -106,7 +106,6 @@ try{
 				aBlazeApplicant.bureauScore  =  aBlazeApplicant.applicantAdditionalDetails.cibil.score as a real; 
 				print("----> Corporate aBlazeApplicant.bureauScore  ::  "  aBlazeApplicant.bureauScore);
 			}
-			
 			//SALARIED --aBlazeApplicant.bureauScore
 			//Added by KAJAL on 28 July as per change given by ANKIT/GAURAV
 			//Need to add condition for the salaried if creditBureauReports is not present then score should be customer selected.
@@ -122,7 +121,6 @@ try{
 				print("----> SALARIED aBlazeApplicant.bureauScore  ::  "  aBlazeApplicant.bureauScore);	  
 			}
 			print("----> aBlazeApplicant.bureauScore  ::  "  aBlazeApplicant.bureauScore);
-
 			//  isNtc used in Thin Segment Experian Scorecard
 
 			if(aBlazeApplicant.bureauScore  is  not  unknown  and  aBlazeApplicant.bureauScore  is  equal  to  -1  )  then  {

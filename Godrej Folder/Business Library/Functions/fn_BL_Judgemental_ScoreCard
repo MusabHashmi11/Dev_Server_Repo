@@ -79,6 +79,8 @@ try {
         officeSelfOwnedorRented is a string initially "";
 		aBlazeApplication.isScoreReject =false;
 		someScore is a real;
+		noOfUnsecuredEnqInL3m_keyApp is an integer;
+		
         for each BlazeApplicant in BTCommonVar.termInput.blazeApplication.blazeApplicantArray
         do {
           aBlazeApplicant is some BlazeApplicant initially it as a BlazeApplicant;
@@ -88,6 +90,15 @@ try {
             
             print("----> applicantType :: "aBlazeApplicant.applicantType);
             print("----> aBlazeApplicant.buffer1 :: "aBlazeApplicant.buffer1);
+			
+			if(message1.request.application.applicants.count =2 and aBlazeApplicant.applicantType = (ignoring case)"CoApp")then{
+				noOfUnsecuredEnqInL3m_keyApp =aBlazeApplicant.noOfUnsecuredEnqInL3m;
+			}else if(message1.request.application.applicants.count >2 and aBlazeApplicant.applicantType = (ignoring case)"CoApp"
+			and aBlazeApplicant.buffer1 <> unknown and aBlazeApplicant.buffer1 <> ""
+			and aBlazeApplicant.buffer1 = (ignoring case)"YES") then {
+				noOfUnsecuredEnqInL3m_keyApp =aBlazeApplicant.noOfUnsecuredEnqInL3m;
+			}
+			
             if (aBlazeApplicant.applicantType <> "" and aBlazeApplicant.applicantType <> unknown and aBlazeApplicant.applicantType = (ignoring case)"CoApp" 
 			and aBlazeApplicant.buffer1 <> unknown and aBlazeApplicant.buffer1 <> ""
 			and aBlazeApplicant.buffer1 = (ignoring case)"YES") then {
@@ -181,10 +192,10 @@ try {
                 //----------------------------------------- -----Last Year bank statement Logic ends---------------------------------------------------
 
                 businessVintage = fn_CalculateAge(aBlazeApplicant);
-                if (businessVintage <> unknown) then {
-                    print("----> businessVintage :: "
-                        businessVintage);
-                }
+				aBlazeApplication.business_Vintage =businessVintage;
+				print("----> businessVintage ::"businessVintage);
+				print("----> aBlazeApplication.business_Vintage ::"aBlazeApplication.business_Vintage);
+
                 otherPSL is a real;
                 if (message1.request.application.applicationAdditionalDetails.other.psl <> "") then {
                     otherPSL = message1.request.application.applicationAdditionalDetails.other.psl as a real;
@@ -389,10 +400,11 @@ try {
                 scoreCardDetailArray.append(scoreCardDetail);
 				
 				jugdementalMondelDecision_CRIF is some NdScoreModelReturnInfo;
-				print("helloScore ::"someScore);
+				print("---->someScore ::"someScore);
+				print("---->noOfUnsecuredEnqInL3m_keyApp ::"noOfUnsecuredEnqInL3m_keyApp);
 				jugdementalMondelDecision_CRIF = BL_Judgemental_Score_Card_CRIF_Instance(businessVintage, turnoverRatio, officeSelfOwnedorRented,
 				Last12mthBankStatementBal, agePrimaryApplicant, someScore, manufacturerValue, retailTraderValue, wholesaleTraderValue,
-				serviceITValue, serviceNonITValue,aBlazeApplicant.noOfUnsecuredEnqInL3m);
+				serviceITValue, serviceNonITValue,noOfUnsecuredEnqInL3m_keyApp);
 				
 				judgementalScore_CRIF is a real initially 0;
 				judgementalScore_CRIF = jugdementalMondelDecision_CRIF.score;
@@ -434,23 +446,30 @@ try {
 					aBlazeApplication.isScoreReject =true;
 				}
                //message1.request.application.loanBasicDetail.keyDetails.=BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore);
-				if(isCrif)then{
+				// if(isCrif)then{
 					//aBlazeApplication.riskSegment = BL_Judgemental_Score(scoreCardDetail1.scorecardScore);
-                   aBlazeApplication.riskSegment =BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore);
-				}
-				else if(isCrif =false)then{
-					aBlazeApplication.riskSegment = BL_Judgemental_Score(scoreCardDetail.scorecardScore);
-				}
+                   // aBlazeApplication.riskSegment =BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore);
+				// }
+				// else if(isCrif =false)then{
+					// aBlazeApplication.riskSegment = BL_Judgemental_Score(scoreCardDetail.scorecardScore);
+				// }
+				
+				message1.request.application.loanBasicDetail.keyDetails.stepLoan = BL_Judgemental_Score(scoreCardDetail.scorecardScore);
+				message1.request.application.collateral[0].property[0].buffer1= BL_Judgemental_Score(scoreCardDetail1.scorecardScore);
+				
+				aBlazeApplication.riskSegment =message1.request.application.loanBasicDetail.keyDetails.stepLoan;
+				aBlazeApplication.judgementalSegement_CRIF =message1.request.application.collateral[0].property[0].buffer1;
+				
 				if(BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore) <>(unknown and unavailable))then
 					scoreCardDetail1.scorecardName = portable().concat(jugdementalMondelDecision_CRIF.scoreModelName,portable().concat("," , BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore)));
-			scoreCardDetailArray.append(scoreCardDetail1);
-                print("aBlazeApplication.riskSegment  (total) ::"aBlazeApplication.riskSegment);
-                message1.request.application.loanBasicDetail.keyDetails.stepLoan = aBlazeApplication.riskSegment;
+				scoreCardDetailArray.append(scoreCardDetail1);
+				print("aBlazeApplication.riskSegment  (total) ::"aBlazeApplication.riskSegment);
+                
                 aBlazeApplication.roiAsPerGrid =BL_Judgemnetal_Based_ROI(aBlazeApplication.riskSegment);
                 print("---->aBlazeApplication.roiAsPerGrid ::"aBlazeApplication.roiAsPerGrid);
                  
-                  print("---->message1.request.application.applicationAdditionalDetails.finalOffer.ROINTR ::"message1.request.application.applicationAdditionalDetails.finalOffer.ROINTR);
-                  print("---->aBlazeApplication.loanBasicDetail.paymentDetails.baseRate ::"aBlazeApplication.loanBasicDetail.paymentDetails.baseRate);
+                print("---->message1.request.application.applicationAdditionalDetails.finalOffer.ROINTR ::"message1.request.application.applicationAdditionalDetails.finalOffer.ROINTR);
+                print("---->aBlazeApplication.loanBasicDetail.paymentDetails.baseRate ::"aBlazeApplication.loanBasicDetail.paymentDetails.baseRate);
                 if(aBlazeApplication.loanBasicDetail.paymentDetails.baseRate = unknown or aBlazeApplication.loanBasicDetail.paymentDetails.baseRate="")then{
                   aBlazeApplication.loanBasicDetail.paymentDetails.baseRate =aBlazeApplication.roiAsPerGrid as a string;
                   aBlazeApplication.applicationAdditionalDetails.finalOffer.ROINTR =aBlazeApplication.roiAsPerGrid;

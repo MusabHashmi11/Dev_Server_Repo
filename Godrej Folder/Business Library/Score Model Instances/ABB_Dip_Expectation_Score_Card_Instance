@@ -170,7 +170,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>RED,-1,30</value>
+    <value>RED,-1,30,GT 6 Times</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -182,7 +182,7 @@
     <value>BalConsitencyBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>BalConsitencyBreachCount_0_RED__1_30</value>
+    <value>BalConsitencyBreachCount_0_RED__1_30_GT_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -230,7 +230,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>AMBER,0,30</value>
+    <value><![CDATA[AMBER,0,30,GTE 2 & LTE 6 Times]]></value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -242,7 +242,7 @@
     <value>BalConsitencyBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>BalConsitencyBreachCount_1_AMBER_0_30</value>
+    <value>BalConsitencyBreachCount_1_AMBER_0_30_GTE_2___LTE_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -287,7 +287,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>GREEN,1,30</value>
+    <value>GREEN,1,30,LTE 1 Time</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -299,7 +299,7 @@
     <value>BalConsitencyBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>BalConsitencyBreachCount_2_GREEN_1_30</value>
+    <value>BalConsitencyBreachCount_2_GREEN_1_30_LTE_1_Time</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -344,7 +344,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>RED,-1,25</value>
+    <value>RED,-1,25,LTE -15%</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -356,7 +356,7 @@
     <value>balanceTrendDifference</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>balanceTrendDifference_0_RED__1_25</value>
+    <value>balanceTrendDifference_0_RED__1_25_LTE__15_</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -404,7 +404,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>AMBER,0,25</value>
+    <value><![CDATA[AMBER,0,25,GTE -14% & LTE 14%]]></value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -416,7 +416,7 @@
     <value>balanceTrendDifference</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>balanceTrendDifference_1_AMBER_0_25</value>
+    <value>balanceTrendDifference_1_AMBER_0_25_GTE__14____LTE_14_</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -461,7 +461,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>GREEN,1,25</value>
+    <value>GREEN,1,25,GTE 15%</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -473,7 +473,7 @@
     <value>balanceTrendDifference</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>balanceTrendDifference_2_GREEN_1_25</value>
+    <value>balanceTrendDifference_2_GREEN_1_25_GTE_15_</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -518,7 +518,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>RED,-1,20</value>
+    <value>RED,-1,20,GT 6 Times</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -530,7 +530,7 @@
     <value>cCBalConsistencyThresholdBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>cCBalConsistencyThresholdBreachCount_0_RED__1_20</value>
+    <value>cCBalConsistencyThresholdBreachCount_0_RED__1_20_GT_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -578,7 +578,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>AMBER,0,20</value>
+    <value><![CDATA[AMBER,0,20,GTE 2 & LTE 6 Times]]></value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -590,7 +590,7 @@
     <value>cCBalConsistencyThresholdBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>cCBalConsistencyThresholdBreachCount_1_AMBER_0_20</value>
+    <value>cCBalConsistencyThresholdBreachCount_1_AMBER_0_20_GTE_2___LTE_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -635,7 +635,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>GREEN,1,20</value>
+    <value>GREEN,1,20,LTE 1 Time</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -647,7 +647,7 @@
     <value>cCBalConsistencyThresholdBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>cCBalConsistencyThresholdBreachCount_2_GREEN_1_20</value>
+    <value>cCBalConsistencyThresholdBreachCount_2_GREEN_1_20_LTE_1_Time</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -692,7 +692,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>RED-1,15</value>
+    <value>RED-1,15,GT 6 Times</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -704,7 +704,7 @@
     <value>aCCBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>aCCBreachCount_0_RED_1_15</value>
+    <value>aCCBreachCount_0_RED_1_15_GT_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -752,7 +752,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>AMBER,0,15</value>
+    <value><![CDATA[AMBER,0,15,GTE 2 & LTE 6 Times]]></value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -764,7 +764,7 @@
     <value>aCCBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>aCCBreachCount_1_AMBER_0_15</value>
+    <value>aCCBreachCount_1_AMBER_0_15_GTE_2___LTE_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -809,7 +809,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>GREEN,1,15</value>
+    <value>GREEN,1,15,LTE 1 Time</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -821,7 +821,7 @@
     <value>aCCBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>aCCBreachCount_2_GREEN_1_15</value>
+    <value>aCCBreachCount_2_GREEN_1_15_LTE_1_Time</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -866,7 +866,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>RED,-1,5</value>
+    <value>RED,-1,5,GT 6 Times</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -878,7 +878,7 @@
     <value>aDCBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>aDCBreachCount_0_RED__1_5</value>
+    <value>aDCBreachCount_0_RED__1_5_GT_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -926,7 +926,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>AMBER,0,5</value>
+    <value><![CDATA[AMBER,0,5,GTE 2 & LTE 6 Times]]></value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -938,7 +938,7 @@
     <value>aDCBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>aDCBreachCount_1_AMBER_0_5</value>
+    <value>aDCBreachCount_1_AMBER_0_5_GTE_2___LTE_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -983,7 +983,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>GREEN,1,5</value>
+    <value>GREEN,1,5,LTE 1 Time</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -995,7 +995,7 @@
     <value>aDCBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>aDCBreachCount_2_GREEN_1_5</value>
+    <value>aDCBreachCount_2_GREEN_1_5_LTE_1_Time</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -1040,7 +1040,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>RED,-1,5</value>
+    <value>RED,-1,5,GT 2%</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -1052,7 +1052,7 @@
     <value>inwardChequeBounceRate</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>inwardChequeBounceRate_0_RED__1_5</value>
+    <value>inwardChequeBounceRate_0_RED__1_5_GT_2_</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -1100,7 +1100,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>AMBER,0,5</value>
+    <value><![CDATA[AMBER,0,5,GTE 1% & LTE 2 %]]></value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -1112,7 +1112,7 @@
     <value>inwardChequeBounceRate</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>inwardChequeBounceRate_1_AMBER_0_5</value>
+    <value>inwardChequeBounceRate_1_AMBER_0_5_GTE_1____LTE_2__</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -1157,7 +1157,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value>GREEN,1,5</value>
+    <value>GREEN,1,5,LT 1%</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -1169,7 +1169,7 @@
     <value>inwardChequeBounceRate</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>inwardChequeBounceRate_2_GREEN_1_5</value>
+    <value>inwardChequeBounceRate_2_GREEN_1_5_LT_1_</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>

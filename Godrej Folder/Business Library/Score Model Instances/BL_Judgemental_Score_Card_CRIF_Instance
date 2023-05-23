@@ -1019,7 +1019,7 @@
     <value>4</value>
    </instance>
    <instance ref='__ND_PartialScoreVH'>
-    <value>10</value>
+    <value>3</value>
    </instance>
    <instance ref='__ND_ReasonCodeVH'>
     <value></value>
@@ -1313,7 +1313,7 @@
     <value>5</value>
    </instance>
    <instance ref='__ND_PartialScoreVH'>
-    <value>5</value>
+    <value>-5</value>
    </instance>
    <instance ref='__ND_ReasonCodeVH'>
     <value></value>
@@ -2230,7 +2230,7 @@
     <value>30.0</value>
    </instance>
    <instance ref='__ND_MinBinScoreVH'>
-    <value>0.0</value>
+    <value>-5.0</value>
    </instance>
    <instance ref='__ND_ReasonCodeVH'>
     <value></value>

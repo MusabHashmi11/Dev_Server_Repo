@@ -1,0 +1,18 @@
+#Extended attributes for Innovator file-based repository (directory: 'BL_Self_Employed_Judgemental_Score_Card_Instance')
+#Wed May 17 21:08:55 UTC 2023
+contentType=Instance
+guid=42iuMS8hGpy6G0Xb361w5dhROF7
+innovatorDisplayName=BL_Self_Employed_Judgemental_Score_Card_Instance
+innovatorItemCreationId=admin
+innovatorLastModifiedUser=admin
+innovatorTemplateRef=KNeIPzI6e9AyE3AOoalz7GNjpJJ
+managementProperty.Predictive\ Model\ Type=NotApplicable
+managementProperty.Source\ Reference.filterVH=
+managementProperty.Source\ Reference.locationVH=
+managementProperty.Source\ Reference.releaseDateVH=
+managementProperty.Source\ Reference.repositoryAccessVH=
+managementProperty.Source\ Reference.repositoryNameVH=
+managementProperty.Source\ Reference.versionVH=
+subType=Score Model
+target=SRL
+type=SRL Ruleset
