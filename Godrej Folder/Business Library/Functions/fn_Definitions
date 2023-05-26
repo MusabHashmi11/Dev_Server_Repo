@@ -58,7 +58,7 @@
  <instance ref='FunctionBodyVH'>
   <value><![CDATA[print("");
 print("++++> Entering function :: fn_Definitions");
-
+print("###################################################################################################################################################################3");
 aBlazeApplication is some BlazeApplication initially BTCommonVar.termInput.blazeApplication as a BlazeApplication;
 
 applicationDate is a date;
@@ -306,6 +306,9 @@ try{
 			}
 			print("----> aBlazeApplicant.isNonTargetEmployer :: " aBlazeApplicant.isNonTargetEmployer);
 
+          
+          print("----> aBlazeApplicant.KycRisk Before :: " aBlazeApplicant.kycRisk);
+              
 			// aBlazeApplicant.rag
 			print("---->Ankit--> aBlazeApplicant.subSector :: " aBlazeApplicant.subSector);
 			if(aBlazeApplicant.subSector <> unknown 
@@ -313,6 +316,8 @@ try{
 				Industry_SubSector_Instance(aBlazeApplicant);     
 			}
 			print("----> aBlazeApplicant.rag :: " aBlazeApplicant.rag);
+          
+            print("----> aBlazeApplicant.KycRisk After:: " aBlazeApplicant.kycRisk);
 
 			// isSingleSalariedApplicant
 			if(message.request.application.applicants.count <> unknown and message.request.application.applicants.count = 1) then {

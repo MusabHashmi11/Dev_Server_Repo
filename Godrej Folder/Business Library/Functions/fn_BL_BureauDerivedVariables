@@ -98,8 +98,32 @@ try {
 		print("----> Account.ACCOUNT_STATUS ::  " Account.ACCOUNT_STATUS);
 		
 		//MOB for CRIF
+		
 		if(aBlazeApplicant.INQUIRY_DATE is known and Account.DISBURSED_DATE is known)then{
-			Account.MOB =aBlazeApplicant.INQUIRY_DATE.subtractInMonths(Account.DISBURSED_DATE).months;
+			
+			inqDateArr is some array of string initially an array of string;
+			inqDateArr = aBlazeApplicant.INQUIRY_DATE.toString().split("-") as a array of string;
+
+			inqDay is a string initially "01";
+			inqMonth is a string initially inqDateArr[1];
+			inqYear is a string initially inqDateArr[0];
+			
+			inqDateStr is a string initially inqYear"-"inqMonth"-"inqDay;   
+			inqDate is a date initially SimpleDateFormat.newInstance("yyyy-MM-dd").parse(inqDateStr) as a date;
+			
+			disDateArr is some array of string initially an array of string;
+			disDateArr = Account.DISBURSED_DATE.toString().split("-") as a array of string;
+
+			disDay is a string initially "01";
+			disMonth is a string initially disDateArr[1];
+			disYear is a string initially disDateArr[0];
+			
+			disDateStr is a string initially disYear"-"disMonth"-"disDay;   
+			disDate is a date initially SimpleDateFormat.newInstance("yyyy-MM-dd").parse(disDateStr) as a date;
+			
+			print("---->Account.INQUIRY_DATE_MOB ::"inqDate);
+			print("---->Account.DISBURSED_DATE_MOB ::"disDate);
+			Account.MOB =inqDate.subtractInMonths(disDate).months;
 		}
 		print("---->Account.MOB ::"Account.MOB);
 

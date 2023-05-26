@@ -137,7 +137,7 @@ try {
             natureOfbusiness is a string initially "";
             natureOfbusinessValue is a real;
             turnOverStability is a real initially 0;
-			isCrif is a boolean initially false;
+			isCrif is a boolean initially true;
             if (aBlazeApplicant.applicantType <> "" and aBlazeApplicant.applicantType <> unknown 
                 and aBlazeApplicant.applicantType = (ignoring case)"MainApp") then {
 
@@ -446,22 +446,27 @@ try {
 					aBlazeApplication.isScoreReject =true;
 				}
                //message1.request.application.loanBasicDetail.keyDetails.=BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore);
-				// if(isCrif)then{
+				 if(isCrif)then{
 					//aBlazeApplication.riskSegment = BL_Judgemental_Score(scoreCardDetail1.scorecardScore);
-                   // aBlazeApplication.riskSegment =BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore);
-				// }
-				// else if(isCrif =false)then{
-					// aBlazeApplication.riskSegment = BL_Judgemental_Score(scoreCardDetail.scorecardScore);
-				// }
+                    aBlazeApplication.riskSegment =BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore);
+				 }
+				 else if(isCrif =false)then{
+					 aBlazeApplication.riskSegment = BL_Judgemental_Score(scoreCardDetail.scorecardScore);
+				 }
 				
 				message1.request.application.loanBasicDetail.keyDetails.stepLoan = BL_Judgemental_Score(scoreCardDetail.scorecardScore);
 				message1.request.application.collateral[0].property[0].buffer1= BL_Judgemental_Score(scoreCardDetail1.scorecardScore);
+				//aBlazeApplication.riskSegment =message1.request.application.loanBasicDetail.keyDetails.stepLoan;
+				//aBlazeApplication.judgementalSegement_CRIF =message1.request.application.collateral[0].property[0].buffer1;
 				
-				aBlazeApplication.riskSegment =message1.request.application.loanBasicDetail.keyDetails.stepLoan;
-				aBlazeApplication.judgementalSegement_CRIF =message1.request.application.collateral[0].property[0].buffer1;
+				print("---->Judgmental Crif Segment ::"message1.request.application.collateral[0].property[0].buffer1);
+				print("---->Judgemental Cibil Segment ::"message1.request.application.loanBasicDetail.keyDetails.stepLoan);
 				
-				if(BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore) <>(unknown and unavailable))then
+				if(scoreCardDetail1.scorecardScore <=45)then{
+					scoreCardDetail1.scorecardName = portable().concat(jugdementalMondelDecision_CRIF.scoreModelName,portable().concat("," ,"Score Reject"));
+				}else{
 					scoreCardDetail1.scorecardName = portable().concat(jugdementalMondelDecision_CRIF.scoreModelName,portable().concat("," , BL_Judgemental_Score_CRIF(scoreCardDetail1.scorecardScore)));
+				}
 				scoreCardDetailArray.append(scoreCardDetail1);
 				print("aBlazeApplication.riskSegment  (total) ::"aBlazeApplication.riskSegment);
                 
@@ -474,8 +479,8 @@ try {
                   aBlazeApplication.loanBasicDetail.paymentDetails.baseRate =aBlazeApplication.roiAsPerGrid as a string;
                   aBlazeApplication.applicationAdditionalDetails.finalOffer.ROINTR =aBlazeApplication.roiAsPerGrid;
                 }
-                  print("---->message1.request.application.applicationAdditionalDetails.finalOffer.ROINTR ::"message1.request.application.applicationAdditionalDetails.finalOffer.ROINTR);
-                  print("---->aBlazeApplication.loanBasicDetail.paymentDetails.baseRate ::"aBlazeApplication.loanBasicDetail.paymentDetails.baseRate);
+                print("---->message1.request.application.applicationAdditionalDetails.finalOffer.ROINTR ::"message1.request.application.applicationAdditionalDetails.finalOffer.ROINTR);
+                print("---->aBlazeApplication.loanBasicDetail.paymentDetails.baseRate ::"aBlazeApplication.loanBasicDetail.paymentDetails.baseRate);
             }
         }
     }

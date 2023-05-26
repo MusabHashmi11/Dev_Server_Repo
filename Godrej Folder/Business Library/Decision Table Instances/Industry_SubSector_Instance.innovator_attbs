@@ -1,0 +1,18 @@
+#Extended attributes for Innovator file-based repository (directory: 'Industry_SubSector_Instance')
+#Thu May 25 13:40:19 UTC 2023
+contentType=Instance
+guid=Pr6HrBOmGrXCcDWX4KX7TgsyoqF
+innovatorDisplayName=Industry_SubSector_Instance
+innovatorItemCreationId=admin
+innovatorLastModifiedUser=admin
+innovatorTemplateRef=6wJBDnNMEpPfdP4wizmesDxkko8
+managementProperty.Predictive\ Model\ Type=NotApplicable
+managementProperty.Source\ Reference.filterVH=
+managementProperty.Source\ Reference.locationVH=
+managementProperty.Source\ Reference.releaseDateVH=
+managementProperty.Source\ Reference.repositoryAccessVH=
+managementProperty.Source\ Reference.repositoryNameVH=
+managementProperty.Source\ Reference.versionVH=
+subType=Decision Table
+target=SRL
+type=SRL Ruleset

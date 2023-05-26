@@ -470,40 +470,6 @@ try{
 			}
 
 			//Checking for which monthlyDetail array to enter
-			if(i =6 and perfiosData.data.additionalMonthlyDetails.monthlyData6 is known)then{
-				//Calculating buffer months
-				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData6.count -12;
-				if(bufferMonthCounter<0)then{
-					bufferMonthCounter =0
-				}
-				
-				for each MonthlyData in perfiosData.data.additionalMonthlyDetails.monthlyData6 do{
-					//initialising MonthlyData1 object
-					aMonthlyData6 is some MonthlyData initially it as a MonthlyData;
-					
-					//skipping buffer months
-					if(monthsCounterLocal>=bufferMonthCounter)then{
-						//Adding all totalBusinessDebitTxns to a single variable
-						blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M +aMonthlyData6.totalBusinessDebitTxns;
-						blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M =blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M +aMonthlyData6.totalBusinessCreditTxns;	
-					}
-					//Incrementing months
-					monthsCounterLocal =monthsCounterLocal+1;
-				}
-				//Exiting loop for monthlyData6
-				
-				print("---->blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M);
-				print("---->blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M ::"blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M);
-				
-				//Summing up all the blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12Ms and blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12Ms seperately
-				sumOfTotalBusinessDebitTxnsinL12M_ForAll =sumOfTotalBusinessDebitTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessDebitTxnsinL12M;
-				sumOfTotalBusinessCreditTxnsinL12M_ForAll =sumOfTotalBusinessCreditTxnsinL12M_ForAll +blazeAccountAnalysis.sumOfTotalBusinessCreditTxnsinL12M;
-				
-				print("---->sumOfTotalBusinessDebitTxnsinL12M_ForAll ::"sumOfTotalBusinessDebitTxnsinL12M_ForAll);
-				print("---->sumOfTotalBusinessCreditTxnsinL12M_ForAll ::"sumOfTotalBusinessCreditTxnsinL12M_ForAll);
-			}
-
-			//Checking for which monthlyDetail array to enter
 			if(i =6 and perfiosData.data.additionalMonthlyDetails.monthlyData7 is known)then{
 				//Calculating buffer months
 				bufferMonthCounter =perfiosData.data.additionalMonthlyDetails.monthlyData7.count -12;
@@ -686,6 +652,7 @@ try{
 		//Initialising finalCreditorsArray with first array of BazeCreditors
 		//blazeData.combinedCreditorsArray =blazeData.blazeAccountAnalysisArray[0].blazeCreditorsArray;
 		finalCreditor is some BlazeCreditor initially a BlazeCreditor;
+		itr is an integer initially 0;
 		for each BlazeAccountAnalysis in blazeData.blazeAccountAnalysisArray such that(it<>null) do{
 			
 			//Creating BlazeAccountAnalysis iterative object
@@ -868,7 +835,7 @@ try{
 					aBlazeCreditor.creditorFlag = "Green";
 			   }
 			  
-			   fn_AppendCalculatedVariable(message, "CreditorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeCreditor.party","aBlazeCreditor.creditorFlag);
+			   fn_AppendCalculatedVariable(message, "CreditorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier_"itr, aBlazeCreditor.party","aBlazeCreditor.creditorFlag","math().round(aBlazeCreditor.creditorPercent, -2));
 			   blazeTop10Counter = blazeTop10Counter +1;
 			}
 			print("---->blazeCreditorsArray.count ::"aBlazeAccountAnalysis.blazeCreditorsArray.count);
@@ -892,7 +859,7 @@ try{
 				   aBlazeDebtor.debtorFlag = "Green";
 				}
 				blazeTop10Counter = blazeTop10Counter +1;
-				fn_AppendCalculatedVariable(message, "DebtorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeDebtor.party","aBlazeDebtor.debtorFlag);
+				fn_AppendCalculatedVariable(message, "DebtorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier_"itr, aBlazeDebtor.party","aBlazeDebtor.debtorFlag","math().round(aBlazeDebtor.debtorPercent, -2));
 			}
 			print("---->blazeDebtorsArray.count ::"aBlazeAccountAnalysis.blazeDebtorsArray.count);
 			
@@ -912,7 +879,7 @@ try{
 					aBlazeCreditor.creditorFlag = "Green";
 			   }
 			  
-			   fn_AppendCalculatedVariable(message, "CreditorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeCreditor.party","aBlazeCreditor.creditorFlag);
+			   fn_AppendCalculatedVariable(message, "CreditorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeCreditor.party","aBlazeCreditor.creditorFlag","math().round(aBlazeCreditor.creditorPercent, -2));
 			   blazeTop10Counter = blazeTop10Counter +1;
 			}
 			print("---->combinedCreditorsArray.count ::"blazeData.combinedCreditorsArray.count);
@@ -935,7 +902,7 @@ try{
 				   aBlazeDebtor.debtorFlag = "Green";
 				}
 				blazeTop10Counter = blazeTop10Counter +1;
-				fn_AppendCalculatedVariable(message, "DebtorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeDebtor.party","aBlazeDebtor.debtorFlag);
+				fn_AppendCalculatedVariable(message, "DebtorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeDebtor.party","aBlazeDebtor.debtorFlag","math().round(aBlazeDebtor.debtorPercent, -2));
 			}
 			print("---->ombinedDebtorsArray.count ::"blazeData.combinedDebtorsArray.count);
 			

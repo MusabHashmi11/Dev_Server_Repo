@@ -791,8 +791,13 @@ try{
 	    for each NdScoredCharacteristic in aBBDinExpectationModelDecision.scoredCharacteristics do {
 		    scoredCharacteristics  is  some  NdScoredCharacteristic  initially  it  as  a  NdScoredCharacteristic;
 		    scoreCardCharacteristicsDetail is some ScoreCardCharacteristicsDetail initially a ScoreCardCharacteristicsDetail;   
-		    scoreCardCharacteristicsDetail.characteristicName = scoredCharacteristics.characteristicName;    
-		    scoreCardCharacteristicsDetail.characteristicValue =  scoredCharacteristics.binLabel;
+		    scoreCardCharacteristicsDetail.characteristicName = scoredCharacteristics.characteristicName;  
+            if(scoredCharacteristics.binLabel = (ignoring case) "All Other") then {
+                scoreCardCharacteristicsDetail.characteristicValue =  "Blue,NA";
+			}		
+            else {			
+		        scoreCardCharacteristicsDetail.characteristicValue =  scoredCharacteristics.binLabel;
+            }
 		    scoreCardCharacteristicsDetail.reasonCode = scoredCharacteristics.reasonCode as a string;
 		    scoreCardCharacteristicsDetail.partialScore = scoredCharacteristics.partialScore as a string;
 		    scoreCardCharacteristicsArray.append(scoreCardCharacteristicsDetail);
@@ -1002,8 +1007,12 @@ if(accountAnalysisCount>1) then {
 	    for each NdScoredCharacteristic in aBBDinExpectationModelDecisionComb.scoredCharacteristics do {
 		    scoredCharacteristics  is  some  NdScoredCharacteristic  initially  it  as  a  NdScoredCharacteristic;
 		    scoreCardCharacteristicsDetail is some ScoreCardCharacteristicsDetail initially a ScoreCardCharacteristicsDetail;   
-		    scoreCardCharacteristicsDetail.characteristicName = scoredCharacteristics.characteristicName;    
-		    scoreCardCharacteristicsDetail.characteristicValue =  scoredCharacteristics.binLabel;
+		    scoreCardCharacteristicsDetail.characteristicName = scoredCharacteristics.characteristicName;  
+            if(scoredCharacteristics.binLabel = (ignoring case)	"All Other") then {
+                scoreCardCharacteristicsDetail.characteristicValue =  "Blue,NA";
+			}else {				
+		        scoreCardCharacteristicsDetail.characteristicValue =  scoredCharacteristics.binLabel;
+			}
 		    scoreCardCharacteristicsDetail.reasonCode = scoredCharacteristics.reasonCode as a string;
 		    scoreCardCharacteristicsDetail.partialScore = scoredCharacteristics.partialScore as a string;
 		    scoreCardCharacteristicsArray.append(scoreCardCharacteristicsDetail);

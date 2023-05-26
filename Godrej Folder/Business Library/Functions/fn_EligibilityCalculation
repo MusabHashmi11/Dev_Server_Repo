@@ -54,7 +54,7 @@
  </instance>
  <instance ref='FunctionBodyVH'>
   <value><![CDATA[        print("++++> Entering function :: fn_LAP_EligibilityCalculation");
-
+print("###################################################################################################################################################################3");
         aBlazeApplication is some BlazeApplication initially BTCommonVar.termInput.blazeApplication as a BlazeApplication;
 
         try{
@@ -141,13 +141,16 @@
         }
         print("----> panCheckCalScore  :: "  panCheckCalScore );
         //   print("---->aBlazeApplicant.employmentType  :: " aBlazeApplicant.employmentType );
+		
+          print("aBlazeApplicant.kycRisk Before ::" aBlazeApplicant.kycRisk );
 
-
-        if (   (aBlazeApplicant.corporateFlag = true or aBlazeApplicant.employmentType=  (ignoring  case)  "SENP") and aBlazeApplicant.subSector <> unknown and aBlazeApplicant.subSector =(ignoring case)"SBSC221"  ) then {
+      if (   (aBlazeApplicant.corporateFlag = true or aBlazeApplicant.employmentType=  (ignoring  case)  "SENP") 
+          and aBlazeApplicant.kycRisk <> "" and aBlazeApplicant.kycRisk =(ignoring case)"HIGH"  ) then {
 
         print("----> aBlazeApplicant.corporateFlag  :: " aBlazeApplicant.corporateFlag );
         print("---->aBlazeApplicant.employmentType  :: " aBlazeApplicant.employmentType );
         print("----> aBlazeApplicant.subSector  :: " aBlazeApplicant.subSector );
+        print("aBlazeApplicant.kycRisk After ::" aBlazeApplicant.kycRisk );
         nob = 2;
         nobCal = 60;
         print("----> nobCal  :: " nobCal );
@@ -157,6 +160,7 @@
         nob = 1;
         nobCal = 30;
         }
+
         print("----> nobCal  :: " nobCal );
         if(aBlazeApplicant.customerRiskSegment = unknown) then
         {

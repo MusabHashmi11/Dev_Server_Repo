@@ -230,7 +230,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value><![CDATA[AMBER,0,30,GTE 2 & LTE 6 Times]]></value>
+    <value>AMBER,0,30,GTE 2 and LTE 6 Times</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -242,7 +242,7 @@
     <value>BalConsitencyBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>BalConsitencyBreachCount_1_AMBER_0_30_GTE_2___LTE_6_Times</value>
+    <value>BalConsitencyBreachCount_1_AMBER_0_30_GTE_2_and_LTE_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -404,7 +404,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value><![CDATA[AMBER,0,25,GTE -14% & LTE 14%]]></value>
+    <value>AMBER,0,25,GTE -14% and LTE 14%</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -416,7 +416,7 @@
     <value>balanceTrendDifference</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>balanceTrendDifference_1_AMBER_0_25_GTE__14____LTE_14_</value>
+    <value>balanceTrendDifference_1_AMBER_0_25_GTE__14__and_LTE_14_</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -578,7 +578,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value><![CDATA[AMBER,0,20,GTE 2 & LTE 6 Times]]></value>
+    <value>AMBER,0,20,GTE 2 and LTE 6 Times</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -590,7 +590,7 @@
     <value>cCBalConsistencyThresholdBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>cCBalConsistencyThresholdBreachCount_1_AMBER_0_20_GTE_2___LTE_6_Times</value>
+    <value>cCBalConsistencyThresholdBreachCount_1_AMBER_0_20_GTE_2_and_LTE_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -752,7 +752,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value><![CDATA[AMBER,0,15,GTE 2 & LTE 6 Times]]></value>
+    <value>AMBER,0,15,GTE 2 and LTE 6 Times</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -764,7 +764,7 @@
     <value>aCCBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>aCCBreachCount_1_AMBER_0_15_GTE_2___LTE_6_Times</value>
+    <value>aCCBreachCount_1_AMBER_0_15_GTE_2_and_LTE_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -926,7 +926,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value><![CDATA[AMBER,0,5,GTE 2 & LTE 6 Times]]></value>
+    <value>AMBER,0,5,GTE 2 and LTE 6 Times</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -938,7 +938,7 @@
     <value>aDCBreachCount</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>aDCBreachCount_1_AMBER_0_5_GTE_2___LTE_6_Times</value>
+    <value>aDCBreachCount_1_AMBER_0_5_GTE_2_and_LTE_6_Times</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>
@@ -1100,7 +1100,7 @@
     <value></value>
    </instance>
    <instance ref='__ND_BinLabelVH'>
-    <value><![CDATA[AMBER,0,5,GTE 1% & LTE 2 %]]></value>
+    <value>AMBER,0,5,GTE 1% and LTE 2 %</value>
    </instance>
    <instance ref='__ND_UnexpectedVH'>
     <value>false</value>
@@ -1112,7 +1112,7 @@
     <value>inwardChequeBounceRate</value>
    </instance>
    <instance ref='__ND_MetaphorRuleNameVH'>
-    <value>inwardChequeBounceRate_1_AMBER_0_5_GTE_1____LTE_2__</value>
+    <value>inwardChequeBounceRate_1_AMBER_0_5_GTE_1__and_LTE_2__</value>
    </instance>
    <instance ref='__ND_MetaphorRuleCreatedVH'>
     <value></value>

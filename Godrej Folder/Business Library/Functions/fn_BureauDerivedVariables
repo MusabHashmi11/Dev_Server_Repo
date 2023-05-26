@@ -1012,8 +1012,10 @@ try {
         do{
           Enquiry  is  some  EnquiryArray  initially  it  as  a  EnquiryArray;    
           if(Enquiry.enquiryDate is known)then{
+           print("applicationDate.subtractInMonths(Enquiry.enquiryDate).months-------------------------------------" applicationDate.subtractInMonths(Enquiry.enquiryDate).months);
           if(applicationDate.subtractInMonths(Enquiry.enquiryDate).months  <=  6)  then  {
-            aBlazeApplicant.noOfEnqInL6m=aBlazeApplicant.noOfEnqInL6m+1;          
+            aBlazeApplicant.noOfEnqInL6m=aBlazeApplicant.noOfEnqInL6m+1;  
+            print("aBlazeApplicant.noOfEnqInL6m------------" aBlazeApplicant.noOfEnqInL6m);
           }
           }
         }

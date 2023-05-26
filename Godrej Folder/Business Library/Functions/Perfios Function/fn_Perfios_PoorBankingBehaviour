@@ -277,40 +277,42 @@ if(perfiosData.data.accountAnalysis is known)then{
 		}
 		// ####################### Average Bank Balance End ##################################
 		
+		
+		//-------------------------------------------------------------------------------------------------------------------Flag updation
 		//Abb Rate Flag
 		if(abbRate < 1)then{
-			abbRateFlag = "Red";
+			abbRateFlag = "Red,LT 1";
 		}
 		else{
-			abbRateFlag = "Green";
+			abbRateFlag = "Green,GTE 1";
 		}
 		// EMI Bounce Flag
 		if(bounceCount >= 2)then{
-			bounceFlag = "Red"
+			bounceFlag = "Red,GTE 2"
 		}
 		else{
-			bounceFlag = "Green"
+			bounceFlag = "Green,LT 2"
 		}
 		//Over Drwan Flag
 		if(overDrawnCount >= 1)then{
-			overDrawnFlag = "Red"
+			overDrawnFlag = "Red,GTE 1"
 		}
 		else{
-		overDrawnFlag = "Green"
+		overDrawnFlag = "Green,LT 1"
 		}
 		//Penal Charges Flag
 		if(penalChargesCount >= 1)then{
-			penalChargesFlag = "Red"
+			penalChargesFlag = "Red,GTE 1"
 		}
 		else{
-			penalChargesFlag = "Green"
+			penalChargesFlag = "Green,LT 1"
 		}
 		//Inward cheque Balance Flag
 		if(inwardChqBncRate >= 1)then{
-			inwardChqBncFlag = "Red"
+			inwardChqBncFlag = "Red,GTE 1%"
 		}
 		else{
-			inwardChqBncFlag = "Green"
+			inwardChqBncFlag = "Green,Lt 1%"
 		}
 		
 		fn_AppendCalculatedVariable(message, "abbRate", "real", productCode, applicantId, applicantType, "PoorBanking_"i, abbRate","abbRateFlag);
@@ -379,33 +381,34 @@ if(perfiosData.data.accountAnalysis is known)then{
 			//Average Cash deposit
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
+			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -454,33 +457,34 @@ if(perfiosData.data.accountAnalysis is known)then{
 			//Average Cash deposit
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
+			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -529,33 +533,34 @@ if(perfiosData.data.accountAnalysis is known)then{
 			//Average Cash deposit
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
+			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -604,33 +609,34 @@ if(perfiosData.data.accountAnalysis is known)then{
 			//Average Cash deposit
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
+			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -679,33 +685,35 @@ if(perfiosData.data.accountAnalysis is known)then{
 			//Average Cash deposit
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
+			
+			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -753,33 +761,35 @@ if(perfiosData.data.accountAnalysis is known)then{
 			//Average Cash deposit
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
+			
+			//-------------------------------------------------------------------------------------------------------- Flag updation 
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -828,33 +838,34 @@ if(perfiosData.data.accountAnalysis is known)then{
 			//Average Cash deposit
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
+			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -903,33 +914,34 @@ if(perfiosData.data.accountAnalysis is known)then{
 			//Average Cash deposit
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
+			//-------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -978,33 +990,35 @@ if(perfiosData.data.accountAnalysis is known)then{
 			//Average Cash deposit
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
+			
+			//-------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -1053,33 +1067,34 @@ if(perfiosData.data.accountAnalysis is known)then{
 			//Average Cash deposit
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
+			//---------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -1122,6 +1137,9 @@ if(perfiosData.data.accountAnalysis is known)then{
 				monthlyDataCountMonData11 = monthlyDataCountMonData11 + 1;
 				j = j+1;
 			}
+			
+			
+			//----------------------------------------------------------------------------------------------------------------Flag updation	
 			// Average Limit Utilization Count
 			avgUtilization = math().round(avgUtilization/6, -2);
 			//Average Cash deposit
@@ -1129,31 +1147,31 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//Average Utilization Flag
 			if(avgUtilization >= 95)then{
-				avgUtilizationFlag = "Red"
+				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
-				avgUtilizationFlag = "Green"
+				avgUtilizationFlag = "Green,LT 95%"
 			}
 			//Cash Deposit Flag
 			if(cashDepositToCredit > 10)then{
-				cashDepositToCreditFlag = "Red"
+				cashDepositToCreditFlag = "Red,GT 10%"
 			}
 			else{
-				cashDepositToCreditFlag = "Green"
+				cashDepositToCreditFlag = "Green,LTE 10%"
 			}
 			//Business Credit Flag
 			if(businessCreditCount < 60)then{
-				businessCreditFlag = "Red"
+				businessCreditFlag = "Red,LT 60"
 			}
 			else{
-				businessCreditFlag = "Green"
+				businessCreditFlag = "Green,GTE 60"
 			}
 			//Business Debit Flag
 			if(businessDebitCount < 60)then{
-				businessDebitFlag = "Red"
+				businessDebitFlag = "Red,LT 60"
 			}
 			else{
-				businessDebitFlag = "Green"
+				businessDebitFlag = "Green,GTE 60"
 			}
 		}
 		
@@ -1233,66 +1251,66 @@ totalCashDepositToTotalCreditPercent = math().round((totalCashDepositToTotalCred
 //---------------------------- Flag Assignment --------------------------------
 //Abb Rate Flag
 if(abbRateTotal < 1)then{
-  abbRateFlagTotal = "Red"
+  abbRateFlagTotal = "Red,LT 1"
 }
 else{
-  abbRateFlagTotal = "Green";
+  abbRateFlagTotal = "Green,GTE 1";
 }
 //Inward cheque Balance Flag
 if(inwardChqBncRateTotal >= 1)then{
-	inwardChqBncFlagTotal = "Red"
+	inwardChqBncFlagTotal = "Red,GTE 1%"
 }
 else{
-	inwardChqBncFlagTotal = "Green"
+	inwardChqBncFlagTotal = "Green,LT 1%"
 }
 // EMI Bounce Flag
 if(bounceCountTotal >= 2)then{
-	bounceFlagTotal = "Red"
+	bounceFlagTotal = "Red,GTE 2"
 }
 else{
-	bounceFlagTotal = "Green"
+	bounceFlagTotal = "Green,LT 2"
 }
 //Total Average Utilization Flag
 if(totalAverageLimitUtilization >= 95)then{
-  totalAverageLimitUtilizationFlag = "Red"
+  totalAverageLimitUtilizationFlag = "Red,GTE 95%"
 }
 else{
-   totalAverageLimitUtilizationFlag = "Green"
+   totalAverageLimitUtilizationFlag = "Green,LT 95%"
 }
 //Over Drwan Flag
 if(overDrawnCountTotal >= (1*accAnalysisArrCount))then{
-  overDrawnFlagTotal = "Red"
+  overDrawnFlagTotal = "Red,GTE 1"
 }
 else{
-  overDrawnFlagTotal = "Green"
+  overDrawnFlagTotal = "Green,LT 1"
 }
 //Cash Deposit Flag
 if(totalCashDepositToTotalCreditPercent > 10)then{
-  totalCashDepositToTotalCreditPercentFlag = "Red"
+  totalCashDepositToTotalCreditPercentFlag = "Red,GT 10%"
 }
 else{
-  totalCashDepositToTotalCreditPercentFlag = "Green"
+  totalCashDepositToTotalCreditPercentFlag = "Green,LTE 10%"
 }
 //Penal Charges Flag
 if(penalChargesCountTotal >= (1*accAnalysisArrCount))then{
-	penalChargesFlagTotal = "Red"
+	penalChargesFlagTotal = "Red,GTE 1"
 }
 else{
-	penalChargesFlagTotal = "Green"
+	penalChargesFlagTotal = "Green,LT 1"
 }
 //Business Credit Flag
 if(totalBusinessCreditCount < (60*accAnalysisArrCount))then{
-  totalBusinessCreditCountFlag = "Red"
+  totalBusinessCreditCountFlag = "Red,LT 60"
 }
 else{
-    totalBusinessCreditCountFlag = "Green"
+    totalBusinessCreditCountFlag = "Green,GTE 60"
 }
 //Business Debit Flag
 if(totalBusinessDebitCount < (60*accAnalysisArrCount))then{
-  totalBusinessDebitCountFlag = "Red"
+  totalBusinessDebitCountFlag = "Red,LT 60"
 }
 else{
-    totalBusinessDebitCountFlag = "Green"
+    totalBusinessDebitCountFlag = "Green,GTE 60"
 }
 
 fn_AppendCalculatedVariable(message, "abbRateTotal", "real", productCode, applicantId, applicantType, "PoorBanking", abbRateTotal","abbRateFlagTotal);

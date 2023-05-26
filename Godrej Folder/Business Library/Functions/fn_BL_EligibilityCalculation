@@ -57,6 +57,7 @@
  </instance>
  <instance ref='FunctionBodyVH'>
   <value><![CDATA[print("");
+print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 print("++++> Entering function :: fn_BL_EligibilityCalculation");
 aBlazeApplication is some BlazeApplication initially BTCommonVar.termInput.blazeApplication as a BlazeApplication;
 calculatedVariablesArray is some array of CalculatedVariable initially an array of CalculatedVariable;
@@ -278,7 +279,7 @@ print("---->additionalBuffer10 ::"additionalBuffer10);
 
 keyAppQualification is a string;
 //Entering Applicant loop for applicant level calculations
-for each BlazeApplicant in BTCommonVar.termInput.blazeApplication.blazeApplicantArray such that(it.buffer1<>(ignoring case)"YES") do{
+for each BlazeApplicant in BTCommonVar.termInput.blazeApplication.blazeApplicantArray such that(it.buffer1 is known and it.buffer1<>"" and it.buffer1=(ignoring case)"YES") do{
 	aBlazeApplicant is some BlazeApplicant initially it as a BlazeApplicant;
 	
 	 keyAppQualification =aBlazeApplicant.qualification;
@@ -624,9 +625,12 @@ emiPerLakh is a real initially 0;
   print("---->gstTurnCapOD ::"gstTurnCapOD);
   
   revisedTurnCapOD is a real;
-  if(greatestIndividualContribution >40)then
-	revisedTurnCapOD =gstTurnCapOD - (otherSBIMet*greatestIndividualContribution/100);
-  print("----> revisedTurnCapOD :: " revisedTurnCapOD);
+ if(greatestIndividualContribution >40)then{
+ revisedTurnCapOD =gstTurnCapOD - (otherSBIMet*greatestIndividualContribution/100);
+ }else{
+ revisedTurnCapOD=gstTurnCapOD;
+ }
+ print("----> revisedTurnCapOD :: " revisedTurnCapOD);
   
   incPerIndustryMarginOD is a real;
   incPerIndustryMarginOD =(revisedTurnCapOD*indMarGstProgram/100)/12;
@@ -641,8 +645,8 @@ emiPerLakh is a real initially 0;
   print("---->eligLoAmtGSTProgram1OD ::"eligLoAmtGSTProgram1OD);
   
   finalEligLoAmtGSTProgramOD is a real;
-  if(finalEligLoAmtIncMethodOD<>(unknown and unavailable))then{
-	 finalEligLoAmtGSTProgramOD = math().min(eligLoAmtGSTProgram1OD,maxPermissibleLoAmountOD);
+  if(finalEligLoAmtIncMethodOD<>(unknown and unavailable)  and eligLoAmtGSTProgram1OD is  (known and available) and maxPermissibleLoAmountOD is (known and available))then{
+	finalEligLoAmtGSTProgramOD = math().min(eligLoAmtGSTProgram1OD,maxPermissibleLoAmountOD);
   }
   print("---->finalEligLoAmtGSTProgramOD ::"finalEligLoAmtGSTProgramOD);
 if(finalEligLoAmtGSTProgramOD is known)then
@@ -764,19 +768,33 @@ if(finalEligLoAmtGSTProgramOD is known)then
   abbToEmiRatioGrossRecipt is a real;
   foirForGrossRecipt is a real;
   maxPermissibleLoAmountAsPerGrid is a real;
+    print("keyAppQualification-------------------" keyAppQualification);
+    print("aBlazeApplication.riskSegment-------------------"aBlazeApplication.riskSegment);
+     print("aBlazeApplication.business_Vintage------------------"aBlazeApplication.business_Vintage);
   
-  mulRatForIncProgramSEP =BL_Multiplier_Ratio_For_IncProg_SEP(keyAppQualification,aBlazeApplication.judgementalSegement_CRIF);
-  abbEmiRatIncProgramSEP =BL_abb_To_Emi_Ratio_Inc_Prog_SEP(aBlazeApplication.judgementalSegement_CRIF,bankingSurEligLoAmt1);
-  abbToEmiRatioBanksurSEP =BL_abb_To_Emi_Ratio_Banking_Surrogate_SEP(keyAppQualification,aBlazeApplication.judgementalSegement_CRIF);
-  creditToLoanRatioBankSurSEP =BL_Credit_to_Loan_Ratio_Bank_Surrogate_SEP(aBlazeApplication.judgementalSegement_CRIF,bankingSurEligLoAmt1);
-  mulGrossReciptProgramSEP =BL_Multiplier_Ratio_For_Gross_Receipt_Prog_SEP(aBlazeApplication.judgementalSegement_CRIF,keyAppQualification);
-  abbToEmiRatioGrossRecipt =BL_abb_To_Emi_Ratio_Gross_Receipt_Prog_SEP(aBlazeApplication.judgementalSegement_CRIF,bankingSurEligLoAmt1);
-  foirForGrossRecipt =BL_FOIR_Gross_Receipt_Prog_SEP(aBlazeApplication.judgementalSegement_CRIF,keyAppQualification);
+  mulRatForIncProgramSEP =BL_Multiplier_Ratio_For_IncProg_SEP(keyAppQualification,aBlazeApplication.riskSegment);
+  abbEmiRatIncProgramSEP =BL_abb_To_Emi_Ratio_Inc_Prog_SEP(aBlazeApplication.riskSegment,bankingSurEligLoAmt1);
+  abbToEmiRatioBanksurSEP =BL_abb_To_Emi_Ratio_Banking_Surrogate_SEP(keyAppQualification,aBlazeApplication.riskSegment);
+  creditToLoanRatioBankSurSEP =BL_Credit_to_Loan_Ratio_Bank_Surrogate_SEP(aBlazeApplication.riskSegment,bankingSurEligLoAmt1);
+  mulGrossReciptProgramSEP =BL_Multiplier_Ratio_For_Gross_Receipt_Prog_SEP(aBlazeApplication.riskSegment,keyAppQualification);
+  abbToEmiRatioGrossRecipt =BL_abb_To_Emi_Ratio_Gross_Receipt_Prog_SEP(aBlazeApplication.riskSegment,bankingSurEligLoAmt1);
+  foirForGrossRecipt =BL_FOIR_Gross_Receipt_Prog_SEP(aBlazeApplication.riskSegment,keyAppQualification);
   maxPermissibleLoAmountAsPerGrid =BL_Max_Loan_Exposure_GRID_SEP(keyAppQualification,aBlazeApplication.business_Vintage);
+    print("---- mulRatForIncProgramSEP    "  mulRatForIncProgramSEP);
+     print("----abbEmiRatIncProgramSEP     "  abbEmiRatIncProgramSEP);
+     print("---- abbToEmiRatioBanksurSEP  "  abbToEmiRatioBanksurSEP );
+     print("----  abbToEmiRatioGrossRecipt  "   abbToEmiRatioGrossRecipt );
+
+    print("----creditToLoanRatioBankSurSEP   "  creditToLoanRatioBankSurSEP );
+    print("---- mulGrossReciptProgramSEP    "  mulGrossReciptProgramSEP);
+    print("---- foirForGrossRecipt    "  foirForGrossRecipt );
+    
+     print("---- maxPermissibleLoAmountAsPerGrid   "  maxPermissibleLoAmountAsPerGrid );
   
   if(maxPermissibleLoAmountAsPerGrid =(unknown or unavailable))then{
 	  maxPermissibleLoAmountAsPerGrid =1500000;
   }
+    print("---- maxPermissibleLoAmountAsPerGrid   "  maxPermissibleLoAmountAsPerGrid );
   
   //-------------------------------------------------------SEP Income Method logic starts-----------------------------------------------------------------
   
@@ -810,8 +828,9 @@ if(finalEligLoAmtGSTProgramOD is known)then
   print("----> incEligLoAmt2SEP :: " incEligLoAmt2SEP);
   
   finalEligLoAmtIncMethodSEP is a real;
-  if(incEligLoAmt1SEP<>unknown and incEligLoAmt2SEP<>unknown)then{ 
-  finalEligLoAmtIncMethodSEP =math().min(math().min(incEligLoAmt1SEP,incEligLoAmt2SEP),maxPermissibleLoAmountAsPerGrid);}
+  if(incEligLoAmt1SEP<>(unknown and unavailable) and incEligLoAmt2SEP<>(unknown and unavailable) )then{ 
+  //finalEligLoAmtIncMethodSEP =math().min(math().min(incEligLoAmt1SEP,incEligLoAmt2SEP),maxPermissibleLoAmountAsPerGrid);
+   finalEligLoAmtIncMethodSEP =math().min(math().min(incEligLoAmt1SEP,incEligLoAmt2SEP),maxPermissibleLoAmountAsPerGrid);}
   print("----> finalEligLoAmtIncMethodSEP :: " finalEligLoAmtIncMethodSEP);
   
   if(finalEligLoAmtIncMethodSEP is known)then
@@ -841,7 +860,7 @@ if(finalEligLoAmtGSTProgramOD is known)then
   
   //Final Eligible Loan Amount - Banking Method
   finalEligLoAmtBankingSurSEP is a real;
-  if(bankingSurEligLoAmt1SEP<>unknown and eligLoAmtCreditLoRatioSEP<>unknown and maxPermissibleLoAmountAsPerGrid<>(unknown and unavailable))then{
+  if(bankingSurEligLoAmt1SEP<>unknown and bankingSurEligLoAmt1SEP<>unavailable  and eligLoAmtCreditLoRatioSEP<>unknown and maxPermissibleLoAmountAsPerGrid<>(unknown and unavailable))then{
   finalEligLoAmtBankingSurSEP =math().min(maxPermissibleLoAmountAsPerGrid,math().min(bankingSurEligLoAmt1SEP,eligLoAmtCreditLoRatioSEP));
   }
   print("----> finalEligLoAmtBankingSurSEP :: " finalEligLoAmtBankingSurSEP);
@@ -860,6 +879,9 @@ if(finalEligLoAmtGSTProgramOD is known)then
   print("---->capGrAsPerGrossReceipt ::"capGrAsPerGrossReceipt);
   
   eligEmiForGrossReceiptProgram is a real;
+    print("incPerIndustryMargin-----------"incPerIndustryMargin);
+    print("foirForGrossRecipt---------" foirForGrossRecipt);
+    print("-totalMonthlyOblGSTMethod--------------" totalMonthlyOblGSTMethod);
   if(incPerIndustryMargin is known and foirForGrossRecipt <>(unknown and unavailable) and totalMonthlyOblGSTMethod is known)then{
 	  eligEmiForGrossReceiptProgram =(incPerIndustryMargin * foirForGrossRecipt) -totalMonthlyOblGSTMethod;
   }
@@ -894,7 +916,7 @@ if(finalEligLoAmtGSTProgramOD is known)then
   }
   print("---->finalEligLoAmtGrossReceiptSEP ::"finalEligLoAmtGrossReceiptSEP);
   
-  if(finalEligLoAmtGrossReceiptSEP is known)then
+  if(finalEligLoAmtGrossReceiptSEP is (known and available))then
     aBlazeApplication.finalEligLoAmtGrossReceipt_SEP =math().round(finalEligLoAmtGrossReceiptSEP,-2) as a string;
   
   //--------------------------------------------------------SEP Gross Receipt logic Ends-----------------------------------------------------------------
@@ -937,9 +959,17 @@ if(finalEligLoAmtGSTProgramOD is known)then
 	else if(eligibilityMethod =(ignoring case)"Banking Method - HT Program")then{
 	  eligLoAmount =finalEligLoAmtBankingSurHT;
   }
-	else if(eligibilityMethod =(ignoring case)"Banking Method - HT Program")then{
-	  eligLoAmount =finalEligLoAmtBankingSurHT;
+	
+    else if(eligibilityMethod =(ignoring case)"SEP - Income Method")then{
+	  eligLoAmount =finalEligLoAmtIncMethodSEP ;
   }
+     else if(eligibilityMethod =(ignoring case)"SEP - Banking Surrogate")then{
+	  eligLoAmount =finalEligLoAmtBankingSurSEP ;
+  }
+     else if(eligibilityMethod =(ignoring case)"SEP - Gross Receipt Program")then{
+	  eligLoAmount = finalEligLoAmtGrossReceiptSEP ;
+  }
+    
   
   print("----> eligLoAmount :: " eligLoAmount);
 	if(eligLoAmount is known)then
@@ -953,7 +983,11 @@ if(finalEligLoAmtGSTProgramOD is known)then
 	
    finalLoanEMI =(rentalIncomeProgram * ratePerMonth * multiplier) / divisor;
     print("----------------->FinalLoanEmi::"finalLoanEMI);
-   message.request.application.applicationAdditionalDetails.finalOffer.EMIFINOFF =math().round(finalLoanEMI,-2);
+    emiFinOff is a real;
+    if( finalLoanEMI is (known and available))then{
+      emiFinOff=math().round(finalLoanEMI,-2);
+    }
+   message.request.application.applicationAdditionalDetails.finalOffer.EMIFINOFF =emiFinOff;
   print("----> finalLoanEMI :: "message.request.application.applicationAdditionalDetails.finalOffer.EMIFINOFF);
     
       //----------------------------------------------------FinalFoir Logic starts---------------------------------------------------------
@@ -983,6 +1017,20 @@ if(finalEligLoAmtGSTProgramOD is known)then
       finalFoir =((finalLoanEMI + totalMonthlyOblGSTMethod)/ incPerIndustryMargin)*100;
 	  print("----> GST finalFoir ::" finalFoir);  
     }
+   
+     else if(eligibilityMethod =(ignoring case)"SEP - Income Method" and otherBuffer16 <> unknown and cashProfitSEP <> unknown)then{
+      finalFoir =((finalLoanEMI + otherBuffer16)/cashProfitSEP);
+	  print("---->SEP -FinalFoirIncome Method ::" finalFoir);
+    }
+     else if(eligibilityMethod =(ignoring case)"SEP - Banking Surrogate" )then{
+     finalFoir =((finalLoanEMI + totalMonthlyOblBankSurMethod)/monthlyAvgBankBal12m);
+	  print("---->SEP - FinalBanking Surrogate::" finalFoir);
+    }
+    else if(eligibilityMethod =(ignoring case)"SEP - Gross Receipt Program" )then{
+      finalFoir =((finalLoanEMI + totalMonthlyOblGSTMethod)/ incPerIndustryMargin);
+	  print("----> SEP - FinalGross Receipt Program ::" finalFoir);  
+    }
+    
     
 	if(finalFoir is known)then
 		message.request.application.applicationAdditionalDetails.finalOffer.FINALFOIR =math().round(finalFoir,-2);
