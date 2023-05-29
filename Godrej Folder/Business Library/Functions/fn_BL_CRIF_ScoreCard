@@ -502,7 +502,10 @@ try {
 	
 	//End of account iteration
 	}
+	print("---->aBlazeApplicant.creditBureauData.blazeAccountDetailsArray.count ::"aBlazeApplicant.creditBureauData.blazeAccountDetailsArray.count);
 	
+	if(aBlazeApplicant.creditBureauData.blazeAccountDetailsArray<>unknown and aBlazeApplicant.creditBureauData.blazeAccountDetailsArray<>null and
+	aBlazeApplicant.creditBureauData.blazeAccountDetailsArray.count<>0)then{
 	if(at least 1 BlazeAccountDetails in aBlazeApplicant.creditBureauData.blazeAccountDetailsArray satisfy(it.MOB is known)) then{
 	   if(ccCount=0) then {
 		aBlazeApplicant.N_CTR_L24M_CC = -1;
@@ -513,6 +516,7 @@ try {
 	}
 	if(every BlazeAccountDetails in aBlazeApplicant.creditBureauData.blazeAccountDetailsArray satisfy(it.MOB is unknown)) then {
 		aBlazeApplicant.N_CTR_L24M_ALL = blankInt;
+	}
 	}
 	
 	//Calculating RAT_REC_L24M_ALL ----"SCORECARDVARIABLE"-----
@@ -550,7 +554,7 @@ try {
 	else if(MIN_of_MAX_DELQ_special is known) then {
 		aBlazeApplicant.MAX_DELQ_L24M_SEC = MIN_of_MAX_DELQ_special;
 	}
-	if(at least 1 BlazeAccountDetails in aBlazeApplicant.creditBureauData.blazeAccountDetailsArray satisfy(it.accountType is (unknown or unavailable) or it.accountType is null or it.accountType = "" or it.accountType = "-")) then {
+	if(at least 1 BlazeAccountDetails in aBlazeApplicant.creditBureauData.blazeAccountDetailsArray satisfy(it<>unknown and it<>null and it.accountType is (unknown or unavailable) or it.accountType is null or it.accountType = "" or it.accountType = "-")) then {
 	//	aBlazeApplicant.MAX_DELQ_L24M_SEC = blankInt;
 		aBlazeApplicant.N_CTR_A_OVD_UNSEC = -777.79;
 	}

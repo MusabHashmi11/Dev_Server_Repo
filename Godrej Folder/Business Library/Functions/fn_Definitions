@@ -127,10 +127,22 @@ try{
 			}
 			print("----> aBlazeApplicant.bureauScore  ::  "  aBlazeApplicant.bureauScore);    
           
-                    if(aBlazeApplicant.customerCategory =(ignoring case)"CORP")then{
-            aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome =aBlazeApplicant.applicantAdditionalDetails.customerIndividualSalaried.rentalIncome;
-          }
+             
+
+	if(aBlazeApplicant.customerCategory =(ignoring case)"CORP")
+		then{
+	 
+			if(aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome is known and aBlazeApplicant.applicantAdditionalDetails.customerIndividualSalaried.rentalIncome is known )
+			
+				then{
+					aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome = math().max(aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome , aBlazeApplicant.applicantAdditionalDetails.customerIndividualSalaried.rentalIncome ) ;
+					}
+			
+			}
+			
 		print("---->aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome ::"aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome);
+          
+		//print("---->aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome ::"aBlazeApplicant.applicantAdditionalDetails.customerSelfEmployedProfesional.rentalIncome);
           
 			//isNtc used in Thin Segment Experian Scorecard      
 			if(aBlazeApplicant.bureauScore  is  not  unknown  and  aBlazeApplicant.bureauScore  is  equal  to  -1  )  then  {

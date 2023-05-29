@@ -431,8 +431,10 @@ try {
           
           
           //  Live Account logic  --  Account.dateClosed  is  unknown 
+          print("account dateClosed-----------------" Account.dateClosed );
           if(Account.dateClosed  is  unknown)  then  {
 			  aBlazeApplicant.noOfLiveAcc = aBlazeApplicant.noOfLiveAcc+1;  
+            print("number of live account----------"aBlazeApplicant.noOfLiveAcc );
             //  logic  for  currentBalance  >  0  and  maxModifiedLimit  >  0
             if((Account.currentBalance  <>  unknown  and  Account.currentBalance  >=  0)  
                and  (Account.maxModifiedLimit  <>  unknown  and  Account.maxModifiedLimit  >  0)  )  then  {        
@@ -440,7 +442,7 @@ try {
               //  totalOSAllLiveAccnt  &  totalLoanAmtAllLiveAccnt  --  Used in Experian Score Card               
               totalUtilizationAllLiveAccnt  =  totalUtilizationAllLiveAccnt  +  ((Account.currentBalance/Account.maxModifiedLimit)*100);
               print("----> totalUtilizationAllLiveAccnt :: " totalUtilizationAllLiveAccnt);
-              
+              print("-----------------------Account.isCreditCard---------------------0000:::::" Account.isCreditCard);
               //  totalOSOnLiveCC  &  totalLoanAmtOnLiveCC
               if(Account.isCreditCard is  equal  to  true  )  then  {                
                 aBlazeApplicant.noOfLiveCC = aBlazeApplicant.noOfLiveCC+1;
@@ -450,10 +452,13 @@ try {
                 print("----> totalLoanAmtOnLiveCC :: " totalLoanAmtOnLiveCC);
               }
               //  totalOSOnLiveRegUnSecAcc  &  totalLoanAmtOnLiveRegUnSecAcc
+              print("-----------------------Account.isSecuredLoan----------------------0000:::::" Account.isSecuredLoan);
+               print("-----------------------Account.isRegular-------------------0000:::::" Account.isRegular);
               if(Account.isSecuredLoan is  equal  to  false and Account.isRegular is  equal  to  true)  then  {
                 aBlazeApplicant.noOfLiveRegUnSecAcc = aBlazeApplicant.noOfLiveRegUnSecAcc+1;
                 totalOSOnLiveRegUnSecAcc  =  totalOSOnLiveRegUnSecAcc  +  Account.currentBalance;
                 totalLoanAmtOnLiveRegUnSecAcc  =  totalLoanAmtOnLiveRegUnSecAcc  +  Account.maxModifiedLimit;
+                print("---checking1 ---aBlazeApplicant.noOfLiveRegUnSecAcc------------------" aBlazeApplicant.noOfLiveRegUnSecAcc);
                 
               }                                            
             }
@@ -919,7 +924,7 @@ try {
         }else if (aBlazeApplicant.currUtilizationOnLiveRegUnSecAcc > 63) then {
           aBlazeApplicant.currUtilizationOnLiveRegUnSecAccSegment = "E. GT 63%";
         }
-        
+        print("---------------------------------- aBlazeApplicant.currUtilizationOnLiveRegUnSecAccSegment------------------------------------------" aBlazeApplicant.currUtilizationOnLiveRegUnSecAccSegment);
         //  bureauDelinquencyCategory -- Used in Risk Score
         print("");
         print("----> aBlazeApplicant.isNtc :: "aBlazeApplicant.isNtc);
@@ -1011,7 +1016,12 @@ try {
         for  each  EnquiryArray  in  aBlazeApplicant.creditBureauData.blazeEnquiryArray  
         do{
           Enquiry  is  some  EnquiryArray  initially  it  as  a  EnquiryArray;    
+           print("applicationDate----------------"applicationDate);
+            print("enquiryDate----------------"Enquiry.enquiryDate);
           if(Enquiry.enquiryDate is known)then{
+            print("applicationDate----------------"applicationDate);
+            print("enquiryDate----------------"Enquiry.enquiryDate);
+            
            print("applicationDate.subtractInMonths(Enquiry.enquiryDate).months-------------------------------------" applicationDate.subtractInMonths(Enquiry.enquiryDate).months);
           if(applicationDate.subtractInMonths(Enquiry.enquiryDate).months  <=  6)  then  {
             aBlazeApplicant.noOfEnqInL6m=aBlazeApplicant.noOfEnqInL6m+1;  
@@ -1019,6 +1029,7 @@ try {
           }
           }
         }
+        print("number of Enq In ---------------------"   aBlazeApplicant.noOfEnqInL6m);
         print("");
         print("----> aBlazeApplicant.noOfEnqInL6m :: "aBlazeApplicant.noOfEnqInL6m);
         //-----------------------------------------------------EnquiryArray  iteration  ends-----------------------------------------
