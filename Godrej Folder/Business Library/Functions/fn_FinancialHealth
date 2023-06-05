@@ -88,15 +88,17 @@ try{
 			//aBlazeApplication.applicationAdditionalDetails.other.sblMet;				 //Creditors Days
 			
 			sector is a string initially "";
-			
+			print("---->aBlazeApplicant.sector ::"aBlazeApplicant.sector);
 			if(aBlazeApplicant.sector is known and aBlazeApplicant.sector <> "") then {
 				sector = DTAB_PennantSectorMapping(aBlazeApplicant.sector);
 			}
+			print("---->sector ::"sector);
 			
 			revenue is a real initially 0.0;
 			if(aBlazeApplication.applicationAdditionalDetails.other.psl is known) then {
 				revenue = (aBlazeApplication.applicationAdditionalDetails.other.psl as a real/10000000);
 			}
+			print("---->revenue ::"revenue);
 			
 			grossProfitMargin is a real initially 0;
 			eBITDAMargin is a real initially 0;
@@ -160,7 +162,7 @@ try{
 			}
 
 			scale = DTAB_SMLSegmentation(revenue,sector);
-			
+			print("---->scale ::"scale);
 			// :::::::::::::::::::::::::::::::::::: Find Minimum and Maximum Value ::::::::::::::::::::::::::::::::::::::
 			
 			DTAB_GrossProfitMargin(sector,scale); 
@@ -172,6 +174,11 @@ try{
 			DTAB_DebtSerCoverageRatio(sector,scale);
 			DTAB_DebtorsDays(sector,scale);
 			DTAB_CredtorsDays(sector,scale);
+			
+			print("---->BTCommonVar.termInput.blazeApplication.credtorsDaysMin ::"BTCommonVar.termInput.blazeApplication.credtorsDaysMin);
+			print("---->aBlazeApplication.credtorsDaysMin ::"BTCommonVar.termInput.blazeApplication.credtorsDaysMin);
+			print("---->BTCommonVar.termInput.blazeApplication.credtorsDaysMax ::"BTCommonVar.termInput.blazeApplication.credtorsDaysMax);
+			print("---->aBlazeApplication.credtorsDaysMax ::"BTCommonVar.termInput.blazeApplication.credtorsDaysMax);
 			
 			// :::::::::::::::::::::::::::::: Variables Color Set and Range Set:::::::::::::::::::::::::::::::::
 			

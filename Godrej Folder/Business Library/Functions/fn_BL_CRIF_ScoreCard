@@ -100,7 +100,7 @@ try {
 		N_CTR_EVER_ALL is a real;
 		N_CTR_EVER_ALL =aBlazeApplicant.creditBureauReports[0].CreditReport.Account.count;
 		MAX_of_MAX_DELQ is a real initially initVarApp;
-		MAX_of_MAX_DELQ_L6M is a real;
+		MAX_of_MAX_DELQ_L6M is a real initially initVarApp;
 		MIN_of_MAX_DELQ_special is a real;
 		MIN_MOB_UNSEC_App is a real initially initVarApp;
 		MIN_MOB_SPECIAL is a real;
@@ -125,7 +125,7 @@ try {
 		ccCount is an integer initially 0;
 		MS_REP_flag is a boolean initially false;
 		securedCount is an integer initially 0;
-		
+		accountNumberCounter is an integer initially 0;
 		for  each  BlazeAccountDetails  in  aBlazeApplicant.creditBureauData.blazeAccountDetailsArray do{
 		Account  is  some  BlazeAccountDetails  initially  it  as  a  BlazeAccountDetails;
 		
@@ -136,9 +136,9 @@ try {
 		DA_ISSUE_FLAG is a boolean initially false;
 		MIN_MS_L30P is a real initially initVarAcc;
 		MAX_DELQ is a real;
-		MAX_DELQ_L24M is a real;
+		MAX_DELQ_L24M is a real initially initVarAcc;
 		MAX_DELQ_L36M is a real;
-		MAX_DELQ_L6M is a real;
+		MAX_DELQ_L6M is a real initially initVarAcc;
 		MOB_UNSEC is a real initially initVarAcc;
 		PCT_OTB_A_CARDS is a real;
 		OVERDUE_1 is a real;
@@ -162,7 +162,8 @@ try {
 		if(Account.DISBURSED_DATE =(unknown or unavailable))then{
 			noOfAccountWithUnknownDateOpenedOrDisbursed =noOfAccountWithUnknownDateOpenedOrDisbursed+1;
 		}
-		
+		print("---->Account Counter ::"accountNumberCounter);
+          accountNumberCounter =accountNumberCounter+1;
 		print("Account.accountType :: "Account.accountType);
 		//Defining accountSecuredFlag
 		if(Account.accountType = ("4" or "04" or "13" or "17" or "15" or "34" or "59" or "32" or "33" or "1" or "01" or "7" or "07" or "50" or "2" or "02" or "3" or "03" or "44"))then{
@@ -180,6 +181,7 @@ try {
 		}else{
 			DA_ISSUE_FLAG =false;
 		}
+          print("---->accountSecuredFlag ::"accountSecuredFlag);
 		
 		//Setting ACTIVE_FLAG
 		if(Account.ACCOUNT_STATUS is known and Account.ACCOUNT_STATUS<>"" and Account.dateClosed is known and aBlazeApplicant.INQUIRY_DATE is known and
@@ -207,8 +209,8 @@ try {
 		}
 		
 		// Setting PCT_OTB_A_CARDS
-		if (CURRENT_BAL1 is known and Account.ACCOUNT_STATUS is known and Account.ACCOUNT_STATUS = (ignoring case)"Active" and Account.DISBURSED_AMT is known and Account.DISBURSED_AMT>0 and ccFlag is true) then {
-			PCT_OTB_A_CARDS = (100*(1-(CURRENT_BAL1/Account.DISBURSED_AMT)));
+		if (CURRENT_BAL1 is known and Account.ACCOUNT_STATUS is known and Account.ACCOUNT_STATUS = (ignoring case)"Active" and Account.DISBURSED_AMT is known and (Account.DISBURSED_AMT>0 or CURRENT_BAL1>0) and ccFlag is true) then {
+			PCT_OTB_A_CARDS = (100*(1-(CURRENT_BAL1/math().max(CURRENT_BAL1,Account.DISBURSED_AMT))));
 			if(SUM_PCT_OTB_A_CARDS is unknown) then {
 				SUM_PCT_OTB_A_CARDS = PCT_OTB_A_CARDS;
 				COUNT_PCT_OTB_A_CARDS = 1;
@@ -244,6 +246,7 @@ try {
 		//Setting MIN_PCT_BAL_DA_A_ALL ----"SCORECARDVARIABLE"----
 		if(Account.DISBURSED_AMT is known and CURRENT_BAL1 is known)then{
 		MIN_PCT_BAL_DA_A_ALL_LOCAL is a real;
+
 		MIN_PCT_BAL_DA_A_ALL_LOCAL =(CURRENT_BAL1/Account.DISBURSED_AMT)*100;
 			if(ACTIVE_FLAG and DA_ISSUE_FLAG =false)then{
 				if(MIN_PCT_BAL_DA_A_ALL_FLAG =false)then{
@@ -258,12 +261,10 @@ try {
 			aBlazeApplicant.MIN_PCT_BAL_DA_A_ALL =MIN_PCT_BAL_DA_A_ALL_SPECIAL;
 		}
 		
-		print("Account.MOB ::"Account.MOB);
 		// Calculating N_CTR_L24M_ALL ----"SCORECARDVARIABLE"----
 		if (Account.MOB is known and Account.MOB >=0 and Account.MOB<=24) then {
 			aBlazeApplicant.N_CTR_L24M_ALL = aBlazeApplicant.N_CTR_L24M_ALL + 1;
 		}
-		print("----> Check This one aBlazeApplicant.N_CTR_L24M_ALL ::"aBlazeApplicant.N_CTR_L24M_ALL);
 		if(ccFlag and Account.MOB is known and Account.MOB>=0 and Account.MOB <=24)then{
 				aBlazeApplicant.N_CTR_L24M_CC =aBlazeApplicant.N_CTR_L24M_CC +1;
 		}
@@ -271,7 +272,6 @@ try {
 		if(Account.blazePaymentHistoryArray is known) then{
 	//Entering Payment History Loop
 	for each BlazePaymentHistory in Account.blazePaymentHistoryArray do {             
-		print("------------------Entering Payment History---------------------------------");
 		PaymentHistory  is  some  BlazePaymentHistory  initially  it  as  a  BlazePaymentHistory;
 		
 		initVar is a real;
@@ -296,8 +296,6 @@ try {
 			}
 			//This is Experimental Please confirm this with sai and tanvi
 		}
-		print("MS_L30P :: "MS_L30P);
-		print("MS_L30P_SPECIAL :: "MS_L30P_SPECIAL);
 		
 		//Calculating MIN_MS_L30P
 		if(MIN_MS_L30P is unknown and MS_L30P is known) then {
@@ -306,7 +304,6 @@ try {
 		else if(MIN_MS_L30P is known and MS_L30P is known and MIN_MS_L30P>MS_L30P) then{
 			MIN_MS_L30P = MS_L30P;
 		}
-		print("MIN_MS_L30P :: "MIN_MS_L30P);
 		
 		//Calculating MAX_DELQ_L24M
 		if(PaymentHistory.MS_REP is known and PaymentHistory.MS_REP <=24 and PaymentHistory.DELQ is known)then{
@@ -330,6 +327,8 @@ try {
 
 		
 		//Calculating MAX_DELQ_L6M
+		print("---->PaymentHistory.MS_REP ::"PaymentHistory.MS_REP);
+		print("---->PaymentHistory.DELQ ::"PaymentHistory.DELQ);
 		if(PaymentHistory.MS_REP is known and PaymentHistory.MS_REP <=6 and PaymentHistory.DELQ is known)then{
 			if(MAX_DELQ_L6M_FLAG = false)then{
 				MAX_DELQ_L6M =PaymentHistory.DELQ;
@@ -337,13 +336,11 @@ try {
 			}else if (MAX_DELQ_L6M_FLAG = true and MAX_DELQ_L6M <PaymentHistory.DELQ)then{
 				MAX_DELQ_L6M =PaymentHistory.DELQ;
 			}
-			print("PaymentHistory.DELQ="PaymentHistory.DELQ);
 		}
 
 	//Exiting PaymentHistory Loop
 	}
 		}
-	
 	if(accountSecuredFlag =true and Account.DISBURSED_AMT>0 and MAX_DELQ_L24M is known)then{
 		MAX_DELQ =MAX_DELQ_L24M;
 		if(MAX_of_MAX_DELQ is unknown) then {
@@ -354,7 +351,6 @@ try {
 		}
 		MAX_DELQ_known=true;
 	}
-
 	
 	// Calculating MAX_DELQ_special
 	if(MAX_DELQ_known=false) then {
@@ -429,12 +425,11 @@ try {
 
 	
 	//Calculating OVERDUE_1
-	print("----> ::Account.MS_LAST_REP ::"Account.MS_LAST_REP);
 	if(Account.MS_LAST_REP is known and Account.MS_LAST_REP >=0 and Account.MS_LAST_REP <=6)then{
 		OVERDUE_1 =Account.amountOverdue;
 	}
-	print("----> OVERDUE_1 ::"OVERDUE_1);
-	
+
+	print("---->MAX_DELQ_L6M ::"MAX_DELQ_L6M);
 	//Calculating MAX_of_MAX_DELQ_L6M
 	if(MAX_DELQ_L6M is known)then{
 		if(MAX_of_MAX_DELQ_L6M is unknown)then{
@@ -502,8 +497,6 @@ try {
 	
 	//End of account iteration
 	}
-	print("---->aBlazeApplicant.creditBureauData.blazeAccountDetailsArray.count ::"aBlazeApplicant.creditBureauData.blazeAccountDetailsArray.count);
-	
 	if(aBlazeApplicant.creditBureauData.blazeAccountDetailsArray<>unknown and aBlazeApplicant.creditBureauData.blazeAccountDetailsArray<>null and
 	aBlazeApplicant.creditBureauData.blazeAccountDetailsArray.count<>0)then{
 	if(at least 1 BlazeAccountDetails in aBlazeApplicant.creditBureauData.blazeAccountDetailsArray satisfy(it.MOB is known)) then{
@@ -521,7 +514,6 @@ try {
 	
 	//Calculating RAT_REC_L24M_ALL ----"SCORECARDVARIABLE"-----
 	N_CTR_EVER_ALL =N_CTR_EVER_ALL-noOfAccountWithUnknownDateOpenedOrDisbursed;
-	print("---->N_CTR_EVER_ALL ::"N_CTR_EVER_ALL);
 	if(aBlazeApplicant.N_CTR_L24M_ALL is known)then{
 		aBlazeApplicant.RAT_REC_L24M_ALL =aBlazeApplicant.N_CTR_L24M_ALL/N_CTR_EVER_ALL;
 	}
@@ -566,7 +558,6 @@ try {
 	}else if (MIN_MOB_SPECIAL is known)then{
 		aBlazeApplicant.MIN_MOB_UNSEC = MIN_MOB_SPECIAL;
 	}
-	print("---->aBlazeApplicant.MIN_MOB_UNSEC ::"aBlazeApplicant.MIN_MOB_UNSEC);
 	//Calculating AVG_PCT_OTB_A_CARDS ----"SCORECARDVARIABLE"----
 	if(SUM_PCT_OTB_A_CARDS is known) then {
 		aBlazeApplicant.AVG_PCT_OTB_A_CARDS = SUM_PCT_OTB_A_CARDS/COUNT_PCT_OTB_A_CARDS;
@@ -575,12 +566,19 @@ try {
 		aBlazeApplicant.AVG_PCT_OTB_A_CARDS = MIN_PCT_OTB_A_CARDS_special;
 	}
 	//Calculating MAX_DELQ_L6M_ALL ----"SCORECARDVARIABLE"-----
-	if(MS_REP_flag)then {
+	print("---->MS_REP_flag ::"MS_REP_flag);
+	print("---->MAX_of_MAX_DELQ_L6M ::"MAX_of_MAX_DELQ_L6M);
+    if(MS_REP_flag)then {
 	  if(MAX_of_MAX_DELQ_L6M is unknown)then{
+		  print("Ifffed");
 		aBlazeApplicant.MAX_DELQ_L6M_ALL =-777.79;
 	  }else if(MAX_of_MAX_DELQ_L6M is known)then{
+		  print("Ellssed");
 		aBlazeApplicant.MAX_DELQ_L6M_ALL =MAX_of_MAX_DELQ_L6M;
 	  }
+	}
+	if(aBlazeApplicant.creditBureauData.blazeAccountDetailsArray is unknown or aBlazeApplicant.creditBureauData.blazeAccountDetailsArray.count=0) then {
+		aBlazeApplicant.MAX_DELQ_L24M_SEC = blankInt;
 	}
 		
 	print("---->aBlazeApplicant.MIN_PCT_BAL_DA_A_ALL ::"aBlazeApplicant.MIN_PCT_BAL_DA_A_ALL);

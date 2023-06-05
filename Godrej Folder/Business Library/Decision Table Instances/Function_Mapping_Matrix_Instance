@@ -15228,7 +15228,7 @@
      <instance-selection ref='binding'>
       <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Assignment' id='YhM41P'>
        <instance ref='value'>
-        <value>true</value>
+        <value>false</value>
        </instance>
       </item>
      </instance-selection>
@@ -15323,6 +15323,188 @@
    </instance>
    <instance ref='__ND_DecTableCellCreatedVH'>
     <value>Feb 1, 2023 10:25 AM</value>
+   </instance>
+  </item>
+  <item template='7Mc1jehiV8FILwHRvlFrUb5Yp1B.Decision Table Case Template' id='89LnMp'>
+   <instance ref='__ENTITY_PROPERTIES__VH__'>
+   </instance>
+   <instance-list ref='condition cells'>
+    <item template='7Mc1jehiV8FILwHRvlFrUb5Yp1B.Cell Template' id='MUm7op'>
+     <instance ref='CELL GROUP NAME'>
+      <value>decisionService</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='V20a9u'>
+       <instance ref='value'>
+        <value>BL</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='7Mc1jehiV8FILwHRvlFrUb5Yp1B.Cell Template' id='FmofDL'>
+     <instance ref='CELL GROUP NAME'>
+      <value>decisionPointAction</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='S1kprF'>
+       <instance ref='value'>
+        <value>SUBMIT</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='7Mc1jehiV8FILwHRvlFrUb5Yp1B.Cell Template' id='UgS7h0'>
+     <instance ref='CELL GROUP NAME'>
+      <value>decisionPoint</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='CKK3r3'>
+       <instance ref='value'>
+        <value>FHS</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance-list ref='action cells'>
+    <item template='7Mc1jehiV8FILwHRvlFrUb5Yp1B.Cell Template' id='IzLWYo'>
+     <instance ref='CELL GROUP NAME'>
+      <value>softstopHardstopCheck</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Assignment' id='msuegf'>
+       <instance ref='value'>
+        <value>true</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='7Mc1jehiV8FILwHRvlFrUb5Yp1B.Cell Template' id='DBRidq'>
+     <instance ref='CELL GROUP NAME'>
+      <value>calculatedVariablesCheck</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Assignment' id='SddP54'>
+       <instance ref='value'>
+        <value>false</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='7Mc1jehiV8FILwHRvlFrUb5Yp1B.Cell Template' id='2lxCUg'>
+     <instance ref='CELL GROUP NAME'>
+      <value>deviationsCheck</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Assignment' id='NHyG7z'>
+       <instance ref='value'>
+        <value>false</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='7Mc1jehiV8FILwHRvlFrUb5Yp1B.Cell Template' id='7NN0id'>
+     <instance ref='CELL GROUP NAME'>
+      <value>eligibilityCheck</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Assignment' id='JHPAG8'>
+       <instance ref='value'>
+        <value>false</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='7Mc1jehiV8FILwHRvlFrUb5Yp1B.Cell Template' id='69HgWM'>
+     <instance ref='CELL GROUP NAME'>
+      <value>riskScoreCardCheck</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Assignment' id='VGzLWD'>
+       <instance ref='value'>
+        <value>false</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+    <item template='7Mc1jehiV8FILwHRvlFrUb5Yp1B.Cell Template' id='GjfLdd'>
+     <instance ref='CELL GROUP NAME'>
+      <value>experianScoreCardCheck</value>
+     </instance>
+     <instance-selection ref='binding'>
+      <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Assignment' id='W6BDR9'>
+       <instance ref='value'>
+        <value>false</value>
+       </instance>
+      </item>
+     </instance-selection>
+     <instance ref='type'>
+      <value></value>
+     </instance>
+     <instance ref='property'>
+      <value></value>
+     </instance>
+    </item>
+   </instance-list>
+   <instance ref='__ND_MetaphorRuleNameVH'>
+    <value>rule85</value>
+   </instance>
+   <instance ref='__ND_DecTableCellRowVH'>
+    <value>85</value>
+   </instance>
+   <instance ref='__ND_DecTableCellColumnVH'>
+    <value>8</value>
+   </instance>
+   <instance ref='__ND_DecTableCellCreatedVH'>
+    <value>May 30, 2023 10:28 PM</value>
    </instance>
   </item>
  </instance-list>

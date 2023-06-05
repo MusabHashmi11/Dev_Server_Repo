@@ -296,6 +296,7 @@ try {
                         message1.request.application.applicationAdditionalDetails.buffer6);
                 }
                 //------------------------------------------------Growth Percentag Logic ends----------------------------------------------------
+              print("aBlazeApplication.loanBasicDetail.sourcingDetails.buffer4----------------------------------------------------------"aBlazeApplication.loanBasicDetail.sourcingDetails.buffer4);
                 if (aBlazeApplication.loanBasicDetail.sourcingDetails.buffer4 <> ""
                     and aBlazeApplication.loanBasicDetail.sourcingDetails.buffer4 <> unknown) then {
                     if (aBlazeApplication.loanBasicDetail.sourcingDetails.buffer4 = "000-1") then {
@@ -315,7 +316,7 @@ try {
                 natureOfbusiness = message1.request.application.applicationAdditionalDetails.buffer3;
                 if (natureOfbusiness is not equal to null and natureOfbusiness <> ""
                     and natureOfbusiness <> unknown) then {
-                    print("----> natureOfbusiness :: "
+                    print("----> natureOfbusiness ::  entring main condition"
                         natureOfbusiness);
 
                     if (natureOfbusiness is equal to(ignoring
@@ -344,7 +345,7 @@ try {
 
                     if (natureOfbusiness is equal to(ignoring
                             case)
-                        "Services-IT") then {
+                        "service IT") then {
                         serviceITValue = aBlazeApplication.applicationAdditionalDetails.other.psl as a real;
                         print("------> serviceITValue :: "
                             serviceITValue);
@@ -352,7 +353,7 @@ try {
 
                     if (natureOfbusiness is equal to(ignoring
                             case)
-                        "Services-Non IT") then {
+                        "Service Non IT") then {
                         serviceNonITValue = aBlazeApplication.applicationAdditionalDetails.other.psl as a real;
                         print("------> serviceNonITValue :: "
                             serviceNonITValue);
@@ -364,12 +365,13 @@ try {
                 print("----> serviceITValue :: "serviceITValue);
                 print("----> manufacturerValue :: "manufacturerValue);
                 print("----> serviceNonITValue :: "serviceNonITValue);
-                print("----> serviceITValue :: "serviceITValue); 
+               
                 print("---->turnoverRatio ::"turnoverRatio);
-
+   print("bureuScorePrimaryApplicant is -----------"bureauScorePrimaryApplicant);
                 jugdementalMondelDecision_CIBIL is some NdScoreModelReturnInfo;
 				jugdementalMondelDecision_CIBIL = BL_Judgemental_Score_Card_Instance(businessVintage, turnoverRatio, officeSelfOwnedorRented, Last12mthBankStatementBal, agePrimaryApplicant, bureauScorePrimaryApplicant, manufacturerValue, retailTraderValue, wholesaleTraderValue, serviceITValue, serviceNonITValue);
-                judgementalScore_CIBIL is a real initially 0;
+                
+              judgementalScore_CIBIL is a real initially 0;
 				judgementalScore_CIBIL = jugdementalMondelDecision_CIBIL.score;
 				aBlazeApplicant.judgementalScore_CIBIL = judgementalScore_CIBIL;
 				
@@ -403,7 +405,7 @@ try {
 				print("---->someScore ::"someScore);
 				print("---->noOfUnsecuredEnqInL3m_keyApp ::"noOfUnsecuredEnqInL3m_keyApp);
 				jugdementalMondelDecision_CRIF = BL_Judgemental_Score_Card_CRIF_Instance(businessVintage, turnoverRatio, officeSelfOwnedorRented,
-				Last12mthBankStatementBal, agePrimaryApplicant, someScore, manufacturerValue, retailTraderValue, wholesaleTraderValue,
+				Last12mthBankStatementBal, agePrimaryApplicant,someScore , manufacturerValue, retailTraderValue, wholesaleTraderValue,
 				serviceITValue, serviceNonITValue,noOfUnsecuredEnqInL3m_keyApp);
 				
 				judgementalScore_CRIF is a real initially 0;

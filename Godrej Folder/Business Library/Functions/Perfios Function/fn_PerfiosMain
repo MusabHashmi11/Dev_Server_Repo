@@ -92,9 +92,9 @@ try {
                 print("perfiosData.data ::"perfiosData.data);
                 print("perfiosData.data.customerInfo.name------------> "perfiosData.data.customerInfo.name);
             
-			  // fn_Perfios_ABB_Dip_Expectation_Model(message,perfiosData,aBlazeApplicant);
-               //fn_Perfios_PoorBankingBehaviour(message,perfiosData,aBlazeApplicant);
-              // fn_Perfios_TransactionAnalytics(message,perfiosData,aBlazeApplicant);
+			  fn_Perfios_ABB_Dip_Expectation_Model(message,perfiosData,aBlazeApplicant);
+               fn_Perfios_PoorBankingBehaviour(message,perfiosData,aBlazeApplicant);
+              fn_Perfios_TransactionAnalytics(message,perfiosData,aBlazeApplicant);
                fn_Perfios_CustomerSupplierConcentration(message,perfiosData,aBlazeApplicant);
                 }
 			}

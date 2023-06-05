@@ -57,7 +57,7 @@
 print("++++> Entering function :: fn_CalculatedVariables");
 
 // message.response.calculatedVariables
-if(message.invocation.decisionPoint <>(ignoring case)"CBR")then{
+if(message.invocation.decisionPoint <>(ignoring case)"CBR" and message.invocation.decisionPoint <>(ignoring case)"FHS")then{
 print("message.response.calculatedVariables.count = "message.response.calculatedVariables.count);
 calculatedVariablesArray is some array of CalculatedVariable initially an array of CalculatedVariable;
 print("Yaha pe galat hora hai sab kucch ::"calculatedVariablesArray.count);

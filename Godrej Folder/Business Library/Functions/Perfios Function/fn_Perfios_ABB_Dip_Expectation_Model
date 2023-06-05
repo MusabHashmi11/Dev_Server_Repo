@@ -784,6 +784,12 @@ try{
 	
 	    //Calling Scorecard
 	    aBBDinExpectationModelDecision is some NdScoreModelReturnInfo initially a NdScoreModelReturnInfo;
+ fn_AppendCalculatedVariable(message, "balConsitencyBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model_"i, balConsitencyBreachCount as a string);
+fn_AppendCalculatedVariable(message, "balanceTrendDifference", "real", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model_"i, math().round(balanceTrendDifference, -4) as a string);
+fn_AppendCalculatedVariable(message, "cCBalConsistencyThresholdBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model_"i, cCBalConsistencyThresholdBreachCount as a string);
+fn_AppendCalculatedVariable(message, "aCCBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model_"i, aCCBreachCount as a string);
+fn_AppendCalculatedVariable(message, "aDCBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model_"i, aDCBreachCount as a string);
+fn_AppendCalculatedVariable(message, "inwardChequeBounceRate", "real", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model_"i, math().round(inwardChequeBounceRate,-4) as a string);
 	    aBBDinExpectationModelDecision=ABB_Dip_Expectation_Score_Card_Instance(balConsitencyBreachCount,balanceTrendDifference,cCBalConsistencyThresholdBreachCount,aCCBreachCount,aDCBreachCount,inwardChequeBounceRate);
 	    
 	    aBBScore=aBBDinExpectationModelDecision.score;
@@ -1001,6 +1007,12 @@ if(accountAnalysisCount>1) then {
 	
 	    //Calling Scorecard
 		aBBDinExpectationModelDecisionComb is some NdScoreModelReturnInfo initially a NdScoreModelReturnInfo;
+      fn_AppendCalculatedVariable(message, "balConsitencyBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model", balConsitencyBreachCount as a string);
+fn_AppendCalculatedVariable(message, "balanceTrendDifference", "real", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model", math().round(balanceTrendDifference, -4) as a string);
+fn_AppendCalculatedVariable(message, "cCBalConsistencyThresholdBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model", cCBalConsistencyThresholdBreachCount as a string);
+fn_AppendCalculatedVariable(message, "aCCBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model", aCCBreachCount as a string);
+fn_AppendCalculatedVariable(message, "aDCBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model", aDCBreachCount as a string);
+fn_AppendCalculatedVariable(message, "inwardChequeBounceRate", "real", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model",math().round( inwardChequeBounceRate, -4) as a string);
 		aBBDinExpectationModelDecisionComb=ABB_Dip_Expectation_Score_Card_Instance(balConsitencyBreachCount,balanceTrendDifference,cCBalConsistencyThresholdBreachCount,aCCBreachCount,aDCBreachCount,inwardChequeBounceRate);
 	    aBBScore=aBBDinExpectationModelDecisionComb.score;
 		

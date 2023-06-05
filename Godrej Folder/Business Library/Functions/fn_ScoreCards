@@ -119,13 +119,24 @@ if(aBlazeApplication.businessErrorsFlag = false) then {
       // Experian Score
       experianScore is a real initially 0; 
       scoreModelDecision is some NdScoreModelReturnInfo;
+      print("aBlazeApplicant.employmentType------------------------------------>"aBlazeApplicant.employmentType);
+      print("aBlazeApplicant.isNtc-------------------------->"aBlazeApplicant.isNtc);
       if(result is true) then {
         if(aBlazeApplicant.isNtc=false  and  aBlazeApplicant.employmentType=  (ignoring  case  )  "SALARIED")  then  {
           scoreModelDecision = Sal_Segment_Experian_Score_Card_Instance(aBlazeApplicant);
           experianScore = scoreModelDecision.score;           
         } else  if(aBlazeApplicant.isNtc=false  and  (aBlazeApplicant.employmentType=  (ignoring  case  )  "SEP"  
         or  aBlazeApplicant.employmentType=  (ignoring  case  )  "SENP"))  then  {
+          print("aBlazeApplicant.maxdpdInL12Mscore-----------" aBlazeApplicant.maxDpdInL12mScore);
+         
+          print("aBlazeApplicant.mobScore-----------" aBlazeApplicant.mobScore);
+           print("aBlazeApplicant.noOfEnqInL6m-----------" aBlazeApplicant.noOfEnqInL6m);
+          print("aBlazeApplicant.currUtilizationOnLiveRegUnSecAccSegment-----------" aBlazeApplicant.currUtilizationOnLiveRegUnSecAccSegment);
+          print("calling scorecard START on basis of above values--------------");
           scoreModelDecision = Self_employed_Segment_Experian_Score_Card_Instance(aBlazeApplicant);
+           print("calling scorecard ENDED on basis of above values--------------");
+         
+          
           experianScore = scoreModelDecision.score;
         }       
       } 

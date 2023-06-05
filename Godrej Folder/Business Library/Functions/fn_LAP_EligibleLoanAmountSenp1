@@ -228,7 +228,8 @@ do {
     if(cashProfitGrowthPercentage <> unknown and aBlazeApplicant.applicantAdditionalDetails.senpGrowthPercentageEligibility.isCashProfitGrowthSutainable <> unknown
        and cashProfitGrowthPercentage > 50 and aBlazeApplicant.applicantAdditionalDetails.senpGrowthPercentageEligibility.isCashProfitGrowthSutainable is equal to true)  then{
       eligibleIncomeCashProfit = latestYearCashProfit;
-    } else if(cashProfitGrowthPercentage > 50 and aBlazeApplicant.applicantAdditionalDetails.senpGrowthPercentageEligibility.isCashProfitGrowthSutainable is equal to false) then {
+    } else if(cashProfitGrowthPercentage <> unknown and aBlazeApplicant.applicantAdditionalDetails.senpGrowthPercentageEligibility.isCashProfitGrowthSutainable <> unknown
+       and cashProfitGrowthPercentage > 50 and aBlazeApplicant.applicantAdditionalDetails.senpGrowthPercentageEligibility.isCashProfitGrowthSutainable is equal to false) then {
       eligibleIncomeCashProfit = ((latestYearCashProfit + previousYearCashProfit)/2);
     }
     print("----> eligibleIncomeCashProfit :: " eligibleIncomeCashProfit);

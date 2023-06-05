@@ -208,6 +208,7 @@ try {
               //print("----> PaymentHistory.daysPastDue ::  " PaymentHistory.daysPastDue);
               //print("----> PaymentHistory.paymentDate ::  " PaymentHistory.paymentDate);   
               //print("---->Account.currentDate ::"Account.currentDate);
+              print("Account.maxdpd-----"Account.maxdpd);
               if(Account.currentDate.subtractInMonths(PaymentHistory.paymentDate).months <= 36) then {
                 if(PaymentHistory.daysPastDue  >  Account.maxdpd)  then  {
                   Account.maxdpd=PaymentHistory.daysPastDue;
@@ -551,15 +552,23 @@ try {
           if(Account.currentDate <> unknown  and Account.accountOpenDate <> unknown and 
              Account.currentDate.subtractInMonths(Account.accountOpenDate).months  <=  36  )  then  {
             //  hlMaxMonthsInL36M
+            print("MOB =================================================================================== BEfore" mob);
+            print("accountRType-------------------------->"Account.blazeAccountType);
             if  (Account.blazeAccountType  is  contained  in  text  "02")  then  {      
               mob  =  Account.currentDate.subtractInMonths(Account.accountOpenDate).months;
+              
+                print("MOB =================================================================================== After" mob);
+                print("HLMAX =================================================================================== BEfore" aBlazeApplicant.hlMaxMonthsInL36M);
               if(mob  >  aBlazeApplicant.hlMaxMonthsInL36M)  then  {
                 aBlazeApplicant.hlMaxMonthsInL36M=mob;
               }
+              
                 if (aBlazeApplicant.hlMaxMonthsInL36M < 0) then
                   {
                     aBlazeApplicant.hlMaxMonthsInL36M =2; // changeed by Ankit on 8th April to correct negative scenario
                   }
+              
+                print("HLMAX =================================================================================== after" aBlazeApplicant.hlMaxMonthsInL36M);
               
             }
             
@@ -911,7 +920,9 @@ try {
            and  (totalLoanAmtOnLiveRegUnSecAcc  <>  unknown  and  totalLoanAmtOnLiveRegUnSecAcc  >  0))  then  {
           aBlazeApplicant.currUtilizationOnLiveRegUnSecAcc  =  (totalOSOnLiveRegUnSecAcc  /  totalLoanAmtOnLiveRegUnSecAcc) * 100;
         }
-        print("----> aBlazeApplicant.currUtilizationOnLiveRegUnSecAcc :: "aBlazeApplicant.currUtilizationOnLiveRegUnSecAcc);
+        print("----> aBlazeApplicant.noOfLiveRegUnSecAcc ::----------------------------> "aBlazeApplicant.noOfLiveRegUnSecAcc);
+        print("---------------------------------- aBlazeApplicant.currUtilizationOnLiveRegUnSecAccSegment------------------------------------------" aBlazeApplicant.currUtilizationOnLiveRegUnSecAccSegment);
+        
         
         if (aBlazeApplicant.noOfLiveRegUnSecAcc = 0) then {
           aBlazeApplicant.currUtilizationOnLiveRegUnSecAccSegment = "A.NO LIVE";

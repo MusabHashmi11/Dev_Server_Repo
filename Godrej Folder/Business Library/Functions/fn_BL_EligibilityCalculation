@@ -883,7 +883,7 @@ if(finalEligLoAmtGSTProgramOD is known)then
     print("foirForGrossRecipt---------" foirForGrossRecipt);
     print("-totalMonthlyOblGSTMethod--------------" totalMonthlyOblGSTMethod);
   if(incPerIndustryMargin is known and foirForGrossRecipt <>(unknown and unavailable) and totalMonthlyOblGSTMethod is known)then{
-	  eligEmiForGrossReceiptProgram =(incPerIndustryMargin * foirForGrossRecipt) -totalMonthlyOblGSTMethod;
+	  eligEmiForGrossReceiptProgram =(capGrAsPerGrossReceipt * (foirForGrossRecipt/100)) -totalMonthlyOblGSTMethod;
   }
   print("---->eligEmiForGrossReceiptProgram ::"eligEmiForGrossReceiptProgram);
   
@@ -980,7 +980,9 @@ if(finalEligLoAmtGSTProgramOD is known)then
 	}
 	print("---->rentalIncomeProgram ::"rentalIncomeProgram);
 	message.request.application.applicationAdditionalDetails.other.rentalIncomeProgram =rentalIncomeProgram as a string;
-	
+	print("ratePerMonth-------------" ratePerMonth);
+    print("multiplier-------------" multiplier);
+    print("divisor-------------"divisor);
    finalLoanEMI =(rentalIncomeProgram * ratePerMonth * multiplier) / divisor;
     print("----------------->FinalLoanEmi::"finalLoanEMI);
     emiFinOff is a real;
@@ -1019,7 +1021,7 @@ if(finalEligLoAmtGSTProgramOD is known)then
     }
    
      else if(eligibilityMethod =(ignoring case)"SEP - Income Method" and otherBuffer16 <> unknown and cashProfitSEP <> unknown)then{
-      finalFoir =((finalLoanEMI + otherBuffer16)/cashProfitSEP);
+      finalFoir =((rentalIncomeProgram+ otherBuffer16)/cashProfitSEP);
 	  print("---->SEP -FinalFoirIncome Method ::" finalFoir);
     }
      else if(eligibilityMethod =(ignoring case)"SEP - Banking Surrogate" )then{
