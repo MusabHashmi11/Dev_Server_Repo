@@ -863,9 +863,13 @@ try{
 			}
 			print("---->blazeDebtorsArray.count ::"aBlazeAccountAnalysis.blazeDebtorsArray.count);
 			
-			blazeTop10Counter =0;
+			itr =itr+1;	
+		}
+		
+		if(blazeData.blazeAccountAnalysisArray.count>1)then{
+			blazeCombinedTop10Counter is an integer initially 0;
 			//Initialising loop to add creditorConcentration
-			for each BlazeCreditor in blazeData.combinedCreditorsArray such that(it<>null and it<>unknown and blazeTop10Counter<10)do{
+			for each BlazeCreditor in blazeData.combinedCreditorsArray such that(it<>null and it<>unknown and blazeCombinedTop10Counter<10)do{
 				
 				aBlazeCreditor is some BlazeCreditor initially it as a BlazeCreditor;
 				
@@ -880,15 +884,15 @@ try{
 			   }
 			  
 			   fn_AppendCalculatedVariable(message, "CreditorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeCreditor.party","aBlazeCreditor.creditorFlag","math().round(aBlazeCreditor.creditorPercent, -2));
-			   blazeTop10Counter = blazeTop10Counter +1;
+			   blazeCombinedTop10Counter = blazeCombinedTop10Counter +1;
 			}
 			print("---->combinedCreditorsArray.count ::"blazeData.combinedCreditorsArray.count);
 			
 			//reinitallizing BlazeCounter  For Debtors Array
-			blazeTop10Counter = 0;
 			
+			blazeCombinedTop10Counter =0;
 			//Initialising loop to add DebtorConcentration 
-			for each BlazeDebtor in blazeData.combinedDebtorsArray such that(it<>null and it<>unknown and blazeTop10Counter < 10) do{
+			for each BlazeDebtor in blazeData.combinedDebtorsArray such that(it<>null and it<>unknown and blazeCombinedTop10Counter < 10) do{
 				aBlazeDebtor is some BlazeDebtor initially it as a BlazeDebtor;
 				
 				//Calculating Creditors Conditors for each Creditor
@@ -901,12 +905,12 @@ try{
 				else{
 				   aBlazeDebtor.debtorFlag = "Green";
 				}
-				blazeTop10Counter = blazeTop10Counter +1;
+				blazeCombinedTop10Counter = blazeCombinedTop10Counter +1;
 				fn_AppendCalculatedVariable(message, "DebtorConcentration", "real", productCode, applicantId, applicantType, "CustomerSupplier", aBlazeDebtor.party","aBlazeDebtor.debtorFlag","math().round(aBlazeDebtor.debtorPercent, -2));
 			}
 			print("---->ombinedDebtorsArray.count ::"blazeData.combinedDebtorsArray.count);
-			
 		}
+		
 	}
 }
 catch an Exception with {

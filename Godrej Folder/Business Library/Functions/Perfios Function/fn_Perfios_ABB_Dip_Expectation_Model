@@ -1007,7 +1007,7 @@ if(accountAnalysisCount>1) then {
 	
 	    //Calling Scorecard
 		aBBDinExpectationModelDecisionComb is some NdScoreModelReturnInfo initially a NdScoreModelReturnInfo;
-      fn_AppendCalculatedVariable(message, "balConsitencyBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model", balConsitencyBreachCount as a string);
+       fn_AppendCalculatedVariable(message, "balConsitencyBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model", balConsitencyBreachCount as a string);
 fn_AppendCalculatedVariable(message, "balanceTrendDifference", "real", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model", math().round(balanceTrendDifference, -4) as a string);
 fn_AppendCalculatedVariable(message, "cCBalConsistencyThresholdBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model", cCBalConsistencyThresholdBreachCount as a string);
 fn_AppendCalculatedVariable(message, "aCCBreachCount", "integer", productCode, applicantId, applicantType, "ABB_Dip_Expectation_Model", aCCBreachCount as a string);
