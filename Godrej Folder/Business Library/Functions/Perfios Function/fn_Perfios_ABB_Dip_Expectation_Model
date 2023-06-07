@@ -153,7 +153,8 @@ try{
 			    sumBalAvg =sumBalAvg +aMonthlyDetail.balAvg;
 			    abbDivisor =abbDivisor +1;
 		        first3MBufferCount =first3MBufferCount+1;
-			
+			 print("for account-->>>>>>>>>>>>>>>"i);
+                  print("aMonthlyDetail.balAvg---->>>>>>>>>>>"aMonthlyDetail.balAvg);
 			    //Condition for first 3months of last 12 objects/months
 			    if(first3MBufferCount<=3 and aMonthlyDetail.balAvg is known)then{
 				   first3MBalAvg =first3MBalAvg +aMonthlyDetail.balAvg;
@@ -205,7 +206,7 @@ try{
 	    print("---->last3MBalAvg After division ::"last3MBalAvg);
 	
 	    //Calcuting Differnce in percetage between first and last 3months of last 12Months
-	    balanceTrendDifference =(last3MBalAvg-first3MBalAvg)/(first3MBalAvg*100);
+	    balanceTrendDifference =((last3MBalAvg-first3MBalAvg)/first3MBalAvg)*100;
 	    print("---->balanceTrendDifference ::"balanceTrendDifference);
 	
 	    monthCounter =0;
@@ -769,7 +770,7 @@ try{
 	
 	    //Calculating Inward Cheque Bounces
 	    if(perfiosData.data.accountAnalysis[i].summaryInfo.total.inwChqBounces is known and perfiosData.data.accountAnalysis[i].summaryInfo.total.chqIssues is known and perfiosData.data.accountAnalysis[i].summaryInfo.total.chqIssues>0)then{
-            inwardChequeBounceRate =perfiosData.data.accountAnalysis[i].summaryInfo.total.inwChqBounces/perfiosData.data.accountAnalysis[i].summaryInfo.total.chqIssues;
+            inwardChequeBounceRate =(perfiosData.data.accountAnalysis[i].summaryInfo.total.inwChqBounces/perfiosData.data.accountAnalysis[i].summaryInfo.total.chqIssues)*100;
 			
 			// Calculation for Combined Variables
 			if(i=0) then {
@@ -936,7 +937,7 @@ if(accountAnalysisCount>1) then {
 	    print("---->last3MBalAvg After division ::"last3MBalAvg);
 	
 	    //Calcuting Differnce in percetage between first and last 3months of last 12Months
-	    balanceTrendDifference =(last3MBalAvg-first3MBalAvg)/(first3MBalAvg*100);
+	    balanceTrendDifference =((last3MBalAvg-first3MBalAvg)/first3MBalAvg)*100;
 	    print("---->balanceTrendDifference ::"balanceTrendDifference);
 	
 	    monthCounter =0;
@@ -1000,7 +1001,7 @@ if(accountAnalysisCount>1) then {
 		
 	    //Calculating Inward Cheque Bounces
 	    if(blazeAccountAnalysis.inwChqBounces is known and blazeAccountAnalysis.chqIssues is known and blazeAccountAnalysis.chqIssues>0)then{
-            inwardChequeBounceRate =blazeAccountAnalysis.inwChqBounces/blazeAccountAnalysis.chqIssues;
+            inwardChequeBounceRate =(blazeAccountAnalysis.inwChqBounces/blazeAccountAnalysis.chqIssues)*100;
         }
 	    print("---->inwardChequeBounceRate ::"inwardChequeBounceRate);
 	    //Variables Calculations Ends
