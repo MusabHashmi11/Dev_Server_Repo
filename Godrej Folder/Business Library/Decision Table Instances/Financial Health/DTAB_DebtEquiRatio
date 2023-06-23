@@ -2843,7 +2843,7 @@
      <instance-selection ref='binding'>
       <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='Q9Uekr'>
        <instance ref='value'>
-        <value><![CDATA[Air Transport & Allied Services ]]></value>
+        <value><![CDATA[Air Transport & Allied Services]]></value>
        </instance>
       </item>
      </instance-selection>
@@ -2935,7 +2935,7 @@
      <instance-selection ref='binding'>
       <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='7xfq3B'>
        <instance ref='value'>
-        <value><![CDATA[Air Transport & Allied Services ]]></value>
+        <value><![CDATA[Air Transport & Allied Services]]></value>
        </instance>
       </item>
      </instance-selection>
@@ -3027,7 +3027,7 @@
      <instance-selection ref='binding'>
       <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='46eH3q'>
        <instance ref='value'>
-        <value><![CDATA[Air Transport & Allied Services ]]></value>
+        <value><![CDATA[Air Transport & Allied Services]]></value>
        </instance>
       </item>
      </instance-selection>

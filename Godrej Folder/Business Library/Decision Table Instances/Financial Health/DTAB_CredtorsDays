@@ -3027,7 +3027,7 @@
      <instance-selection ref='binding'>
       <item template='HpCA3aezfvW7qaUftqvMmEgUmPL.Equal to' id='VEr9LA'>
        <instance ref='value'>
-        <value><![CDATA[Air Transport & Allied Services ]]></value>
+        <value><![CDATA[Air Transport & Allied Services]]></value>
        </instance>
       </item>
      </instance-selection>
