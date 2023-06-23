@@ -214,7 +214,7 @@ try{
 	        //Entering monthlyDetails Loop
 	        aMonthlyDetail is some MonthlyDetail initially it as a MonthlyDetail;
 	
-	        if(bufferTwelveMonthCounter<monthCounter)then{
+	        if(bufferTwelveMonthCounter<=monthCounter)then{
 		        if(aMonthlyDetail.balAvg<thresholdAbb)then{
 			        balConsitencyBreachCount =balConsitencyBreachCount+1;
 		        }
@@ -914,6 +914,7 @@ if(accountAnalysisCount>1) then {
 	        //Exiting BlazeMonthlyDetail Loop
 	    }
 	    print("---->sumBalAvg ::"sumBalAvg);
+		print("---------->Abb Divisor"abbDivisor);
 	
 	    //Clculating aBB
 	    if(abbDivisor <>0)then{
@@ -945,7 +946,7 @@ if(accountAnalysisCount>1) then {
 	        //Entering BlazeMonthlyDetail Loop
 	        aMonthlyDetail is some BlazeMonthlyDetail initially it as a BlazeMonthlyDetail;
 	
-	        if(bufferTwelveMonthCounter<monthCounter)then{
+	        if(bufferTwelveMonthCounter<=monthCounter)then{
 		        if(aMonthlyDetail.balAvg<thresholdAbb)then{
 			        balConsitencyBreachCount =balConsitencyBreachCount+1;
 		        }

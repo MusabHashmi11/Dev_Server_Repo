@@ -90,8 +90,16 @@ try{
 			sector is a string initially "";
 			print("---->aBlazeApplicant.sector ::"aBlazeApplicant.sector);
 			if(aBlazeApplicant.sector is known and aBlazeApplicant.sector <> "") then {
-				sector = DTAB_PennantSectorMapping(aBlazeApplicant.sector);
+				print("Entered if Condition------------");
+			Industry_SubSector_Instance(aBlazeApplicant);
+              sector=aBlazeApplicant.FHSector;
+              print("-------->>>>>>>>>>sector"sector);
+			
 			}
+          if(sector is equal to unavailable)then{
+            sector="Diversified";
+          }
+          
 			print("---->sector ::"sector);
 			
 			revenue is a real initially 0.0;
@@ -173,12 +181,12 @@ try{
 			DTAB_IntCoverageRatio(sector,scale);
 			DTAB_DebtSerCoverageRatio(sector,scale);
 			DTAB_DebtorsDays(sector,scale);
-			DTAB_CredtorsDays(sector,scale);
+			DTAB_CredtorsDays(scale,sector);
 			
 			print("---->BTCommonVar.termInput.blazeApplication.credtorsDaysMin ::"BTCommonVar.termInput.blazeApplication.credtorsDaysMin);
-			print("---->aBlazeApplication.credtorsDaysMin ::"BTCommonVar.termInput.blazeApplication.credtorsDaysMin);
+			print("---->aBlazeApplication.credtorsDaysMin ::"aBlazeApplication.credtorsDaysMin );
 			print("---->BTCommonVar.termInput.blazeApplication.credtorsDaysMax ::"BTCommonVar.termInput.blazeApplication.credtorsDaysMax);
-			print("---->aBlazeApplication.credtorsDaysMax ::"BTCommonVar.termInput.blazeApplication.credtorsDaysMax);
+			print("---->aBlazeApplication.credtorsDaysMax ::"aBlazeApplication.credtorsDaysMax );
 			
 			// :::::::::::::::::::::::::::::: Variables Color Set and Range Set:::::::::::::::::::::::::::::::::
 			

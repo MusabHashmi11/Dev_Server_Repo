@@ -1080,8 +1080,16 @@ if(message.request.application.applicationAdditionalDetails.buffer7 <> "")then{
 
 //Initialised dmaCode
 if(message.request.application.applicationAdditionalDetails.other.sblMet <>"" and  
-   BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.other.gblMet <>"")then{
-   dmaCode =(BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.other.gblMet as a real /message.request.application.applicationAdditionalDetails.other.sblMet as a real)*100;
+   BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.balanceTransfer.btLoanLanNo <>"")then{
+   dmaCode =(BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.balanceTransfer.btLoanLanNo as a real /message.request.application.applicationAdditionalDetails.other.sblMet as a real)*100;
+   }
+   
+   //assigning dmaCode to input variable btMob
+   if(dmaCode=(1/0)) then{
+	 message.request.application.applicationAdditionalDetails.balanceTransfer.btMob="Infinity";  
+   }
+   else if(dmaCode<>(1/0)) then{
+   message.request.application.applicationAdditionalDetails.balanceTransfer.btMob=dmaCode as a string;
    }
 
 //Initialised loanEligibility

@@ -57,7 +57,7 @@
 print("++++> Entering function :: fn_CalculatedVariables");
 
 // message.response.calculatedVariables
-if(message.invocation.decisionPoint <>(ignoring case)"CBR" and message.invocation.decisionPoint <>(ignoring case)"FHS")then{
+if(message.invocation.decisionPoint <>(ignoring case)"CBR")then{
 print("message.response.calculatedVariables.count = "message.response.calculatedVariables.count);
 calculatedVariablesArray is some array of CalculatedVariable initially an array of CalculatedVariable;
 print("Yaha pe galat hora hai sab kucch ::"calculatedVariablesArray.count);
@@ -155,8 +155,8 @@ if(aBlazeApplication.businessErrorsFlag = false) then {
       calculatedVariable35.entityType = "Application";
       calculatedVariable35.purpose = "AutoPopulate";
 	  if(message.request.application.applicationAdditionalDetails.buffer7 is known and message.request.application.applicationAdditionalDetails.buffer7 <>"") then {
-      value is some BigDecimal initially BigDecimal.newInstance(message.request.application.applicationAdditionalDetails.buffer7 as a real);
-      calculatedVariable35.fieldValue = fn_DecimalNumberPrecision(value as a string, precision);     
+      
+      calculatedVariable35.fieldValue =  message.request.application.applicationAdditionalDetails.buffer7;   
       }else{
       calculatedVariable35.fieldValue = "-1";
       }
@@ -262,6 +262,50 @@ if(aBlazeApplication.businessErrorsFlag = false) then {
 		calculatedVariable45.purpose = "AutoPopulate";
 		calculatedVariable45.fieldValue =aBlazeApplication.finalEligLoAmtGrossReceipt_SEP;
 		calculatedVariablesArray.append(calculatedVariable45);
+		
+		
+      calculatedVariable46 is some CalculatedVariable initially a CalculatedVariable;
+      calculatedVariable46.fieldName = "BT_MOB";
+      calculatedVariable46.fieldType = "Double";
+      calculatedVariable46.productCode = productCode; 
+      calculatedVariable46.entityId = applicationNumber;
+      calculatedVariable46.entityType = "Application";
+      calculatedVariable46.purpose = "AutoPopulate";
+	  if(message.request.application.applicationAdditionalDetails.balanceTransfer.btMob is known and message.request.application.applicationAdditionalDetails.balanceTransfer.btMob <>"") then {
+      if(message.request.application.applicationAdditionalDetails.balanceTransfer.btMob =(ignoring case)"Infinity")then{
+		 calculatedVariable46.fieldValue ="infinity";
+	  }
+	  else{
+	  value is some BigDecimal initially BigDecimal.newInstance(message.request.application.applicationAdditionalDetails.balanceTransfer.btMob as a real);
+      calculatedVariable46.fieldValue = fn_DecimalNumberPrecision(value as a string, precision);  
+	  }
+      }else{
+      calculatedVariable46.fieldValue = "-1";
+      }
+      print("----> balanceTransfer.btMob :: " message.request.application.applicationAdditionalDetails.balanceTransfer.btMob);
+    calculatedVariablesArray.append(calculatedVariable46);
+	  
+	  calculatedVariable47 is some CalculatedVariable initially a CalculatedVariable;
+      calculatedVariable47.fieldName = "DMA_CODE";
+      calculatedVariable47.fieldType = "Double";
+      calculatedVariable47.productCode = productCode; 
+      calculatedVariable47.entityId = applicationNumber;
+      calculatedVariable47.entityType = "Application";
+      calculatedVariable47.purpose = "AutoPopulate";
+	  if(message.request.application.loanBasicDetail.sourcingDetails.dmaCode is known and message.request.application.loanBasicDetail.sourcingDetails.dmaCode <>"") then {
+      if(message.request.application.loanBasicDetail.sourcingDetails.dmaCode =(ignoring case)"Infinity")then{
+		 calculatedVariable47.fieldValue ="infinity";
+	  }
+	  else{
+	  value is some BigDecimal initially BigDecimal.newInstance(message.request.application.loanBasicDetail.sourcingDetails.dmaCode as a real);
+      calculatedVariable47.fieldValue = fn_DecimalNumberPrecision(value as a string, precision);  
+	  }
+      }else{
+      calculatedVariable47.fieldValue = "-1";
+      }
+      print("---->sourcingDetails.dmaCode :: " message.request.application.loanBasicDetail.sourcingDetails.dmaCode);
+    calculatedVariablesArray.append(calculatedVariable47);
+	  
 
      //----------------------------------------------------BL Calculated Variables Ends --------------------------------------------------
   }

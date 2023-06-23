@@ -61,6 +61,146 @@
  </instance>
  <instance ref='rulesetInitialization'>
   <instance-list ref='newEntity'>
+   <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New local entity template' id='SIU28G'>
+    <instance ref='styleSheet'>
+    </instance>
+    <instance ref='comment'>
+     <value></value>
+    </instance>
+    <instance ref='entity'>
+     <value>Variable</value>
+    </instance>
+    <instance ref='name'>
+     <value>ele15Var</value>
+    </instance>
+    <instance ref='entitySrlType'>
+     <value>real</value>
+    </instance>
+    <instance ref='entityTemplateList'>
+     <value>QzixEYa1EHH8Jr6Fk8nhguBcZtu.New variable</value>
+    </instance>
+    <instance-selection ref='entityTemplate'>
+     <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New variable' id='Buo6I9'>
+      <instance ref='__ENTITY_PROPERTIES__VH__'>
+      </instance>
+      <instance ref='initialValue'>
+       <value>0</value>
+      </instance>
+     </item>
+    </instance-selection>
+   </item>
+   <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New local entity template' id='STpKSO'>
+    <instance ref='styleSheet'>
+    </instance>
+    <instance ref='comment'>
+     <value></value>
+    </instance>
+    <instance ref='entity'>
+     <value>Variable</value>
+    </instance>
+    <instance ref='name'>
+     <value>salesDept</value>
+    </instance>
+    <instance ref='entitySrlType'>
+     <value>real</value>
+    </instance>
+    <instance ref='entityTemplateList'>
+     <value>QzixEYa1EHH8Jr6Fk8nhguBcZtu.New variable</value>
+    </instance>
+    <instance-selection ref='entityTemplate'>
+     <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New variable' id='THCs7i'>
+      <instance ref='__ENTITY_PROPERTIES__VH__'>
+      </instance>
+      <instance ref='initialValue'>
+       <value>0</value>
+      </instance>
+     </item>
+    </instance-selection>
+   </item>
+   <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New local entity template' id='2JeJyZ'>
+    <instance ref='styleSheet'>
+    </instance>
+    <instance ref='comment'>
+     <value></value>
+    </instance>
+    <instance ref='entity'>
+     <value>Variable</value>
+    </instance>
+    <instance ref='name'>
+     <value>btMOB</value>
+    </instance>
+    <instance ref='entitySrlType'>
+     <value>real</value>
+    </instance>
+    <instance ref='entityTemplateList'>
+     <value>QzixEYa1EHH8Jr6Fk8nhguBcZtu.New variable</value>
+    </instance>
+    <instance-selection ref='entityTemplate'>
+     <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New variable' id='SdUapO'>
+      <instance ref='__ENTITY_PROPERTIES__VH__'>
+      </instance>
+      <instance ref='initialValue'>
+       <value>0</value>
+      </instance>
+     </item>
+    </instance-selection>
+   </item>
+   <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New local entity template' id='IvN3C9'>
+    <instance ref='styleSheet'>
+    </instance>
+    <instance ref='comment'>
+     <value></value>
+    </instance>
+    <instance ref='entity'>
+     <value>Variable</value>
+    </instance>
+    <instance ref='name'>
+     <value>topUp_Amount</value>
+    </instance>
+    <instance ref='entitySrlType'>
+     <value>real</value>
+    </instance>
+    <instance ref='entityTemplateList'>
+     <value>QzixEYa1EHH8Jr6Fk8nhguBcZtu.New variable</value>
+    </instance>
+    <instance-selection ref='entityTemplate'>
+     <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New variable' id='KXfW7S'>
+      <instance ref='__ENTITY_PROPERTIES__VH__'>
+      </instance>
+      <instance ref='initialValue'>
+       <value>0</value>
+      </instance>
+     </item>
+    </instance-selection>
+   </item>
+   <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New local entity template' id='3bbuMS'>
+    <instance ref='styleSheet'>
+    </instance>
+    <instance ref='comment'>
+     <value></value>
+    </instance>
+    <instance ref='entity'>
+     <value>Variable</value>
+    </instance>
+    <instance ref='name'>
+     <value>topUpLanNumber</value>
+    </instance>
+    <instance ref='entitySrlType'>
+     <value>real</value>
+    </instance>
+    <instance ref='entityTemplateList'>
+     <value>QzixEYa1EHH8Jr6Fk8nhguBcZtu.New variable</value>
+    </instance>
+    <instance-selection ref='entityTemplate'>
+     <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New variable' id='M4koRz'>
+      <instance ref='__ENTITY_PROPERTIES__VH__'>
+      </instance>
+      <instance ref='initialValue'>
+       <value></value>
+      </instance>
+     </item>
+    </instance-selection>
+   </item>
    <item template='QzixEYa1EHH8Jr6Fk8nhguBcZtu.New local entity template' id='8s7D5y'>
     <instance ref='styleSheet'>
     </instance>
@@ -905,12 +1045,6 @@ if(message.request.application.applicationAdditionalDetails.buffer7 <> "")then{
   additionalBuffer7 =BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.buffer7 as a real;
 }
 
-//Initialised dmaCode
-if(message.request.application.applicationAdditionalDetails.other.sblMet <>"" and  
-   BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.other.gblMet <>"")then{
-   dmaCode =(BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.other.gblMet as a real /message.request.application.applicationAdditionalDetails.other.sblMet as a real)*100;
-   }
-
 //Initialised loanEligibility
 print("---->LOANAMTOFFR ::"message.request.application.applicationAdditionalDetails.other.rentalIncomeProgram);
 print("---->MAXLOELIGINC ::"message.request.application.applicationAdditionalDetails.finalOffer.MAXLOELIGINC);
@@ -943,6 +1077,77 @@ itrDiff=((buffer21Date).subtractInMonths(buffer18Date).months);
   print("itrDiff1 :: "itrDiff );
 
 }
+
+//initialised btMOB
+print("---->message.request.application.applicationAdditionalDetails.balanceTransfer.btMob ::"message.request.application.applicationAdditionalDetails.balanceTransfer.btMob);
+if(BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.balanceTransfer.btLoanLanNo <>"" and 
+   BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.balanceTransfer.btLoanLanNo is known
+   and message.request.application.applicationAdditionalDetails.other.sblMet <>"" and 
+   message.request.application.applicationAdditionalDetails.other.sblMet is known)then{
+  btMOB =(BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.balanceTransfer.btLoanLanNo as a real/
+  message.request.application.applicationAdditionalDetails.other.sblMet as a real)*100;
+}
+print("---->btMOB ::"btMOB);
+
+//Initialised dmaCode
+if(message.request.application.applicationAdditionalDetails.other.sblMet <>"" and  
+   BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.other.gblMet <>"")then{
+   dmaCode =(BTCommonVar.termInput.blazeApplication.applicationAdditionalDetails.other.gblMet as a real /message.request.application.applicationAdditionalDetails.other.sblMet as a real)*100;
+   }
+   print("---->dmaCode ::"dmaCode);
+   
+   //assigning btMOB to input variable btMob
+   if(btMOB=(1/0)) then{
+	 message.request.application.applicationAdditionalDetails.balanceTransfer.btMob="Infinity";  
+   }
+   else if(btMOB<>(1/0)) then{
+   message.request.application.applicationAdditionalDetails.balanceTransfer.btMob=btMOB as a string;
+   }
+   print("---->btMobHandled::"message.request.application.applicationAdditionalDetails.balanceTransfer.btMob);
+
+	//assigning dmaCode to input variable btMob
+   if(dmaCode=(1/0)) then{
+	 message.request.application.loanBasicDetail.sourcingDetails.dmaCode="Infinity";  
+   }
+   else if(dmaCode<>(1/0)) then{
+   message.request.application.loanBasicDetail.sourcingDetails.dmaCode=dmaCode as a string;
+   }
+   print("---->dmaCode Handled::"message.request.application.loanBasicDetail.sourcingDetails.dmaCode);
+   
+   if(message.request.application.applicationAdditionalDetails.other.endusageoffunds<>"" and
+   message.request.application.applicationAdditionalDetails.other.endusageoffunds is known and
+   message.request.application.applicationAdditionalDetails.other.endusageoffunds =(ignoring case)"BANKINGSURROGATE")then{
+	   ele15Var =btMOB;
+   }else{
+	   ele15Var =dmaCode;
+   }
+   print("---->ele15Var ::"ele15Var);
+   
+   
+   //Initilized the itrDiff
+if(message.request.application.applicationAdditionalDetails.other.buffer21 is known and message.request.application.applicationAdditionalDetails.other.buffer18 is known)then{
+      buffer21Date is a date initially calendar().date(message.request.application.applicationAdditionalDetails.other.buffer21,"yyyy-MM-dd");
+     buffer18Date is a date initially calendar().date(message.request.application.applicationAdditionalDetails.other.buffer18,"yyyy-MM-dd");
+    print("itrDiff :: "buffer18Date );
+      print("itrDiff :: "buffer21Date );
+itrDiff=((buffer21Date).subtractInMonths(buffer18Date).months);
+  print("itrDiff1 :: "itrDiff );
+
+}
+print("---->message.request.application.applicationAdditionalDetails.balanceTransfer.topUpLanNo ::"message.request.application.applicationAdditionalDetails.balanceTransfer.topUpLanNo);
+if(message.request.application.applicationAdditionalDetails.balanceTransfer.topUpLanNo <>"" and 
+   message.request.application.applicationAdditionalDetails.balanceTransfer.topUpLanNo is known)then{
+  topUpLanNumber =message.request.application.applicationAdditionalDetails.balanceTransfer.topUpLanNo as a real;
+}
+print("---->topUpLanNumber ::"topUpLanNumber);
+
+print("---->message.request.application.loanBasicDetail.sourcingDetails.salesDepartment ::"message.request.application.loanBasicDetail.sourcingDetails.salesDepartment);
+if(message.request.application.loanBasicDetail.sourcingDetails.salesDepartment <>"" and 
+   message.request.application.loanBasicDetail.sourcingDetails.salesDepartment is known)then{
+  salesDept =message.request.application.loanBasicDetail.sourcingDetails.salesDepartment as a real;
+}
+print("---->salesDept ::"salesDept);
+
 
 print("++++>Exiting BL_ApplicationDeviations");]]></value>
   </instance>
@@ -2635,7 +2840,7 @@ message.response.responseDeviations.append(responseDeviation);]]></value>
    <instance ref='styleSheet'>
    </instance>
    <instance ref='ruleCondition'>
-    <value>{"rootGroup":{"exprs":[{"valueType":"boolean","elements":[{"valueType":"real","elements":[{"valueType":"real","name":"dmaCode","fqName":"dmaCode","externalType":"real","__meta_klass":"PropertyOperand"}],"exprType":0,"externalType":"real","__meta_klass":"Expr"},{"opValue":"is larger than or equal to","__meta_klass":"Operator"},{"valueType":"integer","elements":[{"valueType":"integer","instValue":"75","__meta_klass":"LiteralOperand"}],"exprType":0,"__meta_klass":"Expr"}],"exprType":0,"__meta_klass":"CompExpr"},{"valueType":"boolean","elements":[{"valueType":"real","elements":[{"valueType":"real","name":"dmaCode","fqName":"dmaCode","externalType":"real","__meta_klass":"PropertyOperand"}],"exprType":0,"externalType":"real","__meta_klass":"Expr"},{"opValue":"is smaller than","__meta_klass":"Operator"},{"valueType":"integer","elements":[{"valueType":"integer","instValue":"80","__meta_klass":"LiteralOperand"}],"exprType":0,"__meta_klass":"Expr"}],"exprType":0,"__meta_klass":"CompExpr"}],"subGroups":[],"operator":"and","__meta_klass":"ConditionGroup"},"ctr":0,"isVisible":true,"__meta_klass":"ConditionBuilderViewModel","__meta_version":"3.0"}</value>
+    <value>{"rootGroup":{"exprs":[{"valueType":"boolean","elements":[{"valueType":"real","elements":[{"valueType":"real","name":"ele15Var","fqName":"ele15Var","externalType":"real","__meta_klass":"PropertyOperand"}],"exprType":0,"externalType":"real","__meta_klass":"Expr"},{"opValue":"is larger than or equal to","__meta_klass":"Operator"},{"valueType":"integer","elements":[{"valueType":"integer","instValue":"75","__meta_klass":"LiteralOperand"}],"exprType":0,"__meta_klass":"Expr"}],"exprType":0,"__meta_klass":"CompExpr"},{"valueType":"boolean","elements":[{"valueType":"real","elements":[{"valueType":"real","name":"ele15Var","fqName":"ele15Var","externalType":"real","__meta_klass":"PropertyOperand"}],"exprType":0,"externalType":"real","__meta_klass":"Expr"},{"opValue":"is smaller than","__meta_klass":"Operator"},{"valueType":"integer","elements":[{"valueType":"integer","instValue":"80","__meta_klass":"LiteralOperand"}],"exprType":0,"__meta_klass":"Expr"}],"exprType":0,"__meta_klass":"CompExpr"}],"subGroups":[],"operator":"and","__meta_klass":"ConditionGroup"},"ctr":0,"isVisible":true,"__meta_klass":"ConditionBuilderViewModel","__meta_version":"3.0"}</value>
    </instance>
    <instance ref='ruleAction'>
     <value><![CDATA[responseDeviation = a ResponseDeviation;
@@ -2652,7 +2857,6 @@ responseDeviation.entityId=message.invocation.applicationNumber;
 responseDeviation.entityType="Application";
 responseDeviation.accountNo="";
 responseDeviation.recommendationText="";
-BTCommonVar.termInput.blazeApplication.loanBasicDetail.sourcingDetails.dmaCode = dmaCode as a string;
 message.response.responseDeviations.append(responseDeviation);]]></value>
    </instance>
   </item>

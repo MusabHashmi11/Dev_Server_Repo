@@ -195,7 +195,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 							aBlazeMonthlyDetail.totalInwEMIBounce = aMonthlyDetail.totalInwEMIBounce;
 						}
 						if(aMonthlyDetail.overdrawnInstances is known)then{
-							aBlazeMonthlyDetail.totalInwEMIBounce = aMonthlyDetail.overdrawnInstances;
+							aBlazeMonthlyDetail.overdrawnInstances = aMonthlyDetail.overdrawnInstances;
 						}
 					}
 					else { 
@@ -263,7 +263,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 		
 		// Calculate inward Cheque Bounce rate 
 		if(inwChqBounce is known and chqIssue is known and chqIssue>0)then{
-			inwardChqBncRate = math().round(inwChqBounce / chqIssue, -2);
+			inwardChqBncRate = math().round(inwChqBounce / chqIssue, -4);
 		}
 		// ################### Calculating Inward Cheque Bounces End ############################
 		
@@ -308,7 +308,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			penalChargesFlag = "Green,LT 1"
 		}
 		//Inward cheque Balance Flag
-		if(inwardChqBncRate >= 1)then{
+		if(inwardChqBncRate*100 >= 1)then{
 			inwardChqBncFlag = "Red,GTE 1%"
 		}
 		else{
@@ -383,7 +383,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100 >= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -459,7 +459,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100 >= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -535,7 +535,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100 >= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -611,7 +611,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100 >= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -688,7 +688,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100 >= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -764,7 +764,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//-------------------------------------------------------------------------------------------------------- Flag updation 
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100 >= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -840,7 +840,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//--------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100>= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -916,7 +916,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//-------------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100 >= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -993,7 +993,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//-------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100 >= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -1069,7 +1069,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			
 			//---------------------------------------------------------------------------------------------------------------Flag updation
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100 >= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -1146,7 +1146,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 			cashDepositToCredit = math().round(cashDepositToCredit/12,-2);
 			
 			//Average Utilization Flag
-			if(avgUtilization >= 95)then{
+			if(avgUtilization*100 >= 95)then{
 				avgUtilizationFlag = "Red,GTE 95%"
 			}
 			else{
@@ -1176,7 +1176,7 @@ if(perfiosData.data.accountAnalysis is known)then{
 		}
 		
 		fn_AppendCalculatedVariable(message, "avgUtilization", "real", productCode, applicantId, applicantType, "PoorBanking_"i, avgUtilization","avgUtilizationFlag);
-		fn_AppendCalculatedVariable(message, "cashDepositToCredit", "real", productCode, applicantId, applicantType, "PoorBanking_"i, cashDepositToCredit","cashDepositToCreditFlag);
+		fn_AppendCalculatedVariable(message, "cashDepositToCredit", "real", productCode, applicantId, applicantType, "PoorBanking_"i, cashDepositToCredit/100","cashDepositToCreditFlag);
 		fn_AppendCalculatedVariable(message, "businessCreditCount", "real", productCode, applicantId, applicantType, "PoorBanking_"i, businessCreditCount","businessCreditFlag);
 		fn_AppendCalculatedVariable(message,"businessDebitCount", "real", productCode, applicantId, applicantType, "PoorBanking_"i, businessDebitCount","businessDebitFlag);
 			
@@ -1222,7 +1222,7 @@ for each BlazeMonthlyDetail in blazeAccountAnalysis.blazeMonthlyDetailArray such
 	if(blazeAccountAnalysis.inwChqBounces is known and (blazeAccountAnalysis.chqIssues is known and blazeAccountAnalysis.chqIssues > 0)) then{
 		print("blazeAccountAnalysis.inwChqBounces--------------> "blazeAccountAnalysis.inwChqBounces);
 		print("blazeAccountAnalysis.chqIssues--------------> "blazeAccountAnalysis.chqIssues);
-		inwardChqBncRateTotal = math().round((blazeAccountAnalysis.inwChqBounces / blazeAccountAnalysis.chqIssues), -2);
+		inwardChqBncRateTotal = math().round((blazeAccountAnalysis.inwChqBounces / blazeAccountAnalysis.chqIssues), -4);
 	}
 	
 // ---------------------- BlazeMonthlyData loop Start -----------------------
@@ -1246,7 +1246,7 @@ for each BlazeMonthlyData in blazeAccountAnalysis.blazeMonthlyDataArray such tha
 // Calculate Total Limit Utilisation
 totalAverageLimitUtilization = math().round((totalAverageLimitUtilization/6),-2);
 //Calculate Total Cash Deposit
-totalCashDepositToTotalCreditPercent = math().round((totalCashDepositToTotalCreditPercent/12), -2);
+totalCashDepositToTotalCreditPercent = math().round((totalCashDepositToTotalCreditPercent/12), -3);
 
 //---------------------------- Flag Assignment --------------------------------
 //Abb Rate Flag
@@ -1257,7 +1257,7 @@ else{
   abbRateFlagTotal = "Green,GTE 1";
 }
 //Inward cheque Balance Flag
-if(inwardChqBncRateTotal >= 1)then{
+if(inwardChqBncRateTotal*100 >= 1)then{
 	inwardChqBncFlagTotal = "Red,GTE 1%"
 }
 else{
@@ -1271,7 +1271,7 @@ else{
 	bounceFlagTotal = "Green,LT 2"
 }
 //Total Average Utilization Flag
-if(totalAverageLimitUtilization >= 95)then{
+if(totalAverageLimitUtilization*100 >= 95)then{
   totalAverageLimitUtilizationFlag = "Red,GTE 95%"
 }
 else{
@@ -1318,7 +1318,7 @@ fn_AppendCalculatedVariable(message, "inwardChqBncRateTotal", "real", productCod
 fn_AppendCalculatedVariable(message, "bounceCountTotal", "real", productCode, applicantId, applicantType, "PoorBanking", bounceCountTotal","bounceFlagTotal);
 fn_AppendCalculatedVariable(message, "totalAverageLimitUtilization", "real", productCode, applicantId, applicantType, "PoorBanking", totalAverageLimitUtilization","totalAverageLimitUtilizationFlag);
 fn_AppendCalculatedVariable(message, "overDrawnCountTotal", "real", productCode, applicantId, applicantType, "PoorBanking", overDrawnCountTotal","overDrawnFlagTotal);
-fn_AppendCalculatedVariable(message, "totalCashDepositToTotalCreditPercent", "real", productCode, applicantId, applicantType, "PoorBanking", totalCashDepositToTotalCreditPercent","totalCashDepositToTotalCreditPercentFlag);
+fn_AppendCalculatedVariable(message, "totalCashDepositToTotalCreditPercent", "real", productCode, applicantId, applicantType, "PoorBanking", totalCashDepositToTotalCreditPercent/100","totalCashDepositToTotalCreditPercentFlag);
 fn_AppendCalculatedVariable(message, "penalChargesCountTotal", "real", productCode, applicantId, applicantType, "PoorBanking", penalChargesCountTotal","penalChargesFlagTotal);
 fn_AppendCalculatedVariable(message, "totalBusinessCreditCount", "real", productCode, applicantId, applicantType, "PoorBanking", totalBusinessCreditCount","totalBusinessCreditCountFlag);
 fn_AppendCalculatedVariable(message,"totalBusinessDebitCount", "real", productCode, applicantId, applicantType, "PoorBanking", totalBusinessDebitCount","totalBusinessDebitCountFlag);
@@ -1328,7 +1328,7 @@ print("inwardChqBncRateTotal----------------------------------->"inwardChqBncRat
 print("bounceCountTotal----------------------------------->"bounceCountTotal","bounceFlagTotal);
 print("totalAverageLimitUtilization----------------------------------->"totalAverageLimitUtilization","totalAverageLimitUtilizationFlag);
 print("overDrawnCountTotal----------------------------------->"overDrawnCountTotal","overDrawnFlagTotal);
-print("totalCashDepositToTotalCreditPercent----------------------------------->"totalCashDepositToTotalCreditPercent","totalCashDepositToTotalCreditPercentFlag);
+print("totalCashDepositToTotalCreditPercent----------------------------------->"totalCashDepositToTotalCreditPercent/100","totalCashDepositToTotalCreditPercentFlag);
 print("penalChargesCountTotal----------------------------------->"penalChargesCountTotal","penalChargesFlagTotal);
 print("totalBusinessCreditCount----------------------------------->"totalBusinessCreditCount","totalBusinessCreditCountFlag);
 print("totalBusinessDebitCount----------------------------------->"totalBusinessDebitCount","totalBusinessDebitCountFlag);
