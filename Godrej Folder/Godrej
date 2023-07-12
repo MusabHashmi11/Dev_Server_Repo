@@ -97,7 +97,7 @@
    <value></value>
   </instance>
   <instance ref='AdditionalClasspathEntries'>
-   <value>C:/Users/ghfl.fico/Downloads/log4j.jar;C:/Users/ghfl.fico/Downloads/postgresql-42.5.2.jar;C:/Users/ghfl.fico/Downloads/perfiosDB27-04.jar</value>
+   <value>C:/Users/ghfl.fico/Downloads/log4j.jar;C:/Users/ghfl.fico/Downloads/postgresql-42.5.2.jar;C:/Users/ghfl.fico/Downloads/perfiosDB10-08.jar</value>
   </instance>
   <instance ref='ProjectAdditionalExternalClasspath'>
    <value></value>
